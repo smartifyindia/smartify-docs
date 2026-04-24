@@ -1,6 +1,6 @@
 ---
 title: "Zigbee Shutter Module"
-description: "Your blinds open with the morning. They close before the afternoon heat sets in. You didn't touch them."
+description: "A single-channel Zigbee shutter controller designed for AC motorized curtains, roller blinds, and shutters. Provides interlocked directional outputs — Up, Down, and Stop — eliminating any possibility of simultaneous conflicting signals to the motor."
 ---
 
 ![Zigbee Shutter Module](/images/Zigbee%20Shutter%20Module.png)
@@ -9,27 +9,15 @@ description: "Your blinds open with the morning. They close before the afternoon
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">AC motor loads only. Not for DC motors. Must not be used as a lighting relay.</Callout>
 
-Your blinds open with the morning. They close before the afternoon heat sets in. You didn't touch them.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The Shutter Controller brings your motorized curtains, roller blinds, and shutters into your smart home — responding to schedules, conditions, or a single tap. One device, quietly managing the light and privacy of your space. Fits behind your current wall switch. Disappears into your home.
-
-## Technical Overview
+## Description
 
 A single-channel Zigbee shutter controller designed for AC motorized curtains, roller blinds, and shutters. Provides interlocked directional outputs — Up, Down, and Stop — eliminating any possibility of simultaneous conflicting signals to the motor.
 
 Installs behind the existing wall switch in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with full Home Assistant support, and integrates with Matter and Apple HomeKit via a compatible hub.
-
-Key Specifications
-- Channels: 1 motor channel
-- Control Type: Interlocked directional (Up / Down / Stop)
-- Max Load: 2A
-- Protocol: Zigbee 3.0
-- Compatible with: Home Assistant (native), Matter & Apple HomeKit (via hub)
-- Installation: Flush box or DIN rail
-
-⚠ Designed exclusively for AC motor loads. Not suitable for DC motors or use as a lighting relay.
 
 ## Specifications
 
@@ -51,14 +39,41 @@ Key Specifications
 | IP Rating | IP20 |
 | Installation Type | Behind Switch / DIN Rail |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+### Steps
+1. **Turn off the circuit breaker** for the affected circuit.
+2. Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+3. Connect wiring:
+   - **Live** → L input
+   - **Neutral** → N input
+   - **Load** → load output(s)
+4. Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+5. Replace the switch plate.
+6. Restore power. The device will blink — ready to pair.
+7. Pair with your Zigbee coordinator.
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹3,000 |
 | GST Rate | 18% |
 | HSN Code | 85365090 |
-
-> **Important:** AC motor loads only. Not for DC motors. Must not be used as a lighting relay.
-
-> **Requires:** Zigbee coordinator or hub

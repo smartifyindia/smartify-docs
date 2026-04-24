@@ -1,6 +1,6 @@
 ---
 title: "Zigbee mmWave Sensor (USB)"
-description: "It knows you're there. Even when you're still."
+description: "A USB-powered Zigbee mmWave presence sensor that detects fine motion and human presence using radar technology — without relying on traditional PIR sensing."
 ---
 
 ![Zigbee mmWave Sensor (USB)](/images/Zigbee%20mmWave%20Sensor%20%28USB%29.png)
@@ -9,25 +9,15 @@ description: "It knows you're there. Even when you're still."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not control electrical loads. Provides presence/motion signals for automation.</Callout>
 
-It knows you're there. Even when you're still.
+<Callout type="info">Requires: USB power adapter or USB power source. Zigbee coordinator or hub.</Callout>
 
-Traditional motion sensors miss you the moment you stop moving. The mmWave Sensor doesn't. It detects presence — not just movement — so your lights stay on, your climate stays comfortable, and your home keeps responding.
-
-## Technical Overview
+## Description
 
 A USB-powered Zigbee mmWave presence sensor that detects fine motion and human presence using radar technology — without relying on traditional PIR sensing.
 
 Enables accurate presence-based automations such as lighting control and HVAC triggers even when minimal movement occurs. USB power allows flexible placement where mains wiring is unavailable.
-
-Key Specifications
-- Protocol: Zigbee 3.0
-- Detection: mmWave radar (motion + presence)
-- Power: USB
-- Mounting: Flexible placement
-
-⚠ Does not control electrical loads. Provides presence/motion data for automation triggers.
 
 ## Specifications
 
@@ -43,14 +33,35 @@ Key Specifications
 | Operating Temperature | -10°C to +40°C |
 | Operating Humidity | 0%–95% RH (non-condensing) |
 
-## Pricing
+
+## Placement & Setup
+
+### Motion Sensor
+- Mount at 2–2.5m height, angled downward for best coverage.
+- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.
+- Detection angle: ~110°, range: ~7m.
+
+### mmWave Presence Sensor (USB & Ceiling)
+- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.
+- Ceiling mount: Install in the centre of the room, directly above the target zone.
+- USB variant: Connect to a USB-A power adapter; position near the area to monitor.
+- Configure sensitivity and detection zones in Home Assistant.
+
+### Contact Sensor
+- Attach the main sensor to the door/window frame and the magnet to the moving panel.
+- Align within 10mm for reliable open/close detection.
+- Battery-powered; typical life 1–2 years.
+
+### Vibration Sensor
+- Attach to surfaces you want to monitor (doors, windows, appliances).
+- Sensitive to physical shock and movement.
+- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹7,000 |
 | GST Rate | 18% |
 | HSN Code | 85319000 |
-
-> **Important:** Does not control electrical loads. Provides presence/motion signals for automation.
-
-> **Requires:** USB power adapter or USB power source. Zigbee coordinator or hub.

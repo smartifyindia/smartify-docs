@@ -1,6 +1,6 @@
 ---
 title: "TAC SH"
-description: "Open. Close. Stop. That's all you need."
+description: "A 3-button Zigbee shutter and curtain control switch with dedicated Open, Close, and Stop functions for AC motorized blinds and curtains up to 150W."
 ---
 
 ![TAC SH](/images/TAC%20Curtain%20Switch%20-%20White.png)
@@ -9,27 +9,15 @@ description: "Open. Close. Stop. That's all you need."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">AC motor loads only. Not suitable for use as a standard lighting switch. Materials: PP or AG glass. Colours: Black, White, Gold.</Callout>
 
-Open. Close. Stop. That's all you need.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The TAC SH gives your motorized blinds and curtains a dedicated, physical control — three buttons, completely intuitive, available in the finish that suits your space.
-
-## Technical Overview
+## Description
 
 A 3-button Zigbee shutter and curtain control switch with dedicated Open, Close, and Stop functions for AC motorized blinds and curtains up to 150W.
 
 Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.
-
-Key Specifications
-- Buttons: 3 (Open / Close / Stop)
-- Motor: AC curtain/blind, up to 150W
-- Protocol: Zigbee 3.0
-- Materials: PP or AG glass
-- Colours: Black, White, Gold
-- Installation: Wall-mounted
-
-⚠ AC motor loads only. Not suitable for use as a standard lighting switch.
 
 ## Specifications
 
@@ -47,14 +35,41 @@ Key Specifications
 | Working Temperature | -10°C to +60°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+### Steps
+1. **Turn off the circuit breaker** for the affected circuit.
+2. Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+3. Connect wiring:
+   - **Live** → L input
+   - **Neutral** → N input
+   - **Load** → load output(s)
+4. Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+5. Replace the switch plate.
+6. Restore power. The device will blink — ready to pair.
+7. Pair with your Zigbee coordinator.
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹17,750 |
 | GST Rate | 18% |
 | HSN Code | 85369090 |
-
-> **Important:** AC motor loads only. Not suitable for use as a standard lighting switch. Materials: PP or AG glass. Colours: Black, White, Gold.
-
-> **Requires:** Zigbee coordinator or hub

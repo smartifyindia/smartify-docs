@@ -1,6 +1,6 @@
 ---
 title: "Zigbee Motion Sensor + LUX Sensor"
-description: "The lights come on when you enter. Not when the sun is still up."
+description: "A Zigbee 3.0 combined motion and ambient light sensor that reports both occupancy and LUX readings to a Zigbee gateway or compatible hub for automation and control logic."
 ---
 
 ![Zigbee Motion Sensor + LUX Sensor](/images/Zigbee%20Motion%20Sensor.png)
@@ -9,25 +9,15 @@ description: "The lights come on when you enter. Not when the sun is still up."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not control electrical loads. Provides motion and LUX data for automation logic.</Callout>
 
-The lights come on when you enter. Not when the sun is still up.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The Motion + LUX Sensor reads both movement and light — so automations happen only when they should. It's the difference between a smart home that reacts and one that actually understands.
-
-## Technical Overview
+## Description
 
 A Zigbee 3.0 combined motion and ambient light sensor that reports both occupancy and LUX readings to a Zigbee gateway or compatible hub for automation and control logic.
 
 Enables intelligent automations based on both presence and light conditions — for example, activating lights only when motion is detected and ambient light is below a set threshold. Battery-powered with wall or ceiling mount.
-
-Key Specifications
-- Protocol: Zigbee 3.0
-- Detection: PIR motion + ambient light (LUX)
-- Power: Battery
-- Mounting: Wall or ceiling
-
-⚠ Does not control electrical loads. Provides sensor data for automation triggers.
 
 ## Specifications
 
@@ -49,14 +39,35 @@ Key Specifications
 | Operating Temperature | -10°C to +50°C |
 | Dimensions | ø52 × 46 mm (±1mm) |
 
-## Pricing
+
+## Placement & Setup
+
+### Motion Sensor
+- Mount at 2–2.5m height, angled downward for best coverage.
+- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.
+- Detection angle: ~110°, range: ~7m.
+
+### mmWave Presence Sensor (USB & Ceiling)
+- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.
+- Ceiling mount: Install in the centre of the room, directly above the target zone.
+- USB variant: Connect to a USB-A power adapter; position near the area to monitor.
+- Configure sensitivity and detection zones in Home Assistant.
+
+### Contact Sensor
+- Attach the main sensor to the door/window frame and the magnet to the moving panel.
+- Align within 10mm for reliable open/close detection.
+- Battery-powered; typical life 1–2 years.
+
+### Vibration Sensor
+- Attach to surfaces you want to monitor (doors, windows, appliances).
+- Sensitive to physical shock and movement.
+- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹4,250 |
 | GST Rate | 18% |
 | HSN Code | 85319000 |
-
-> **Important:** Does not control electrical loads. Provides motion and LUX data for automation logic.
-
-> **Requires:** Zigbee coordinator or hub

@@ -1,6 +1,6 @@
 ---
 title: "TOQ 4T"
-description: "Four touches. Your whole room."
+description: "A 4-button Zigbee capacitive touch panel for load switching, scene triggering, and dimming control in smart automation systems."
 ---
 
 ![TOQ 4T](/images/TOQ%20-%20Grey.png)
@@ -9,28 +9,15 @@ description: "Four touches. Your whole room."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">For loads above 4A use external SSR or contactor.</Callout>
 
-Four touches. Your whole room.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The TOQ 4T is a panel that disappears into your wall and lets your home respond at a touch. Four buttons. Any scene. Any load. Finished in glass, in the colour that suits your space.
-
-## Technical Overview
+## Description
 
 A 4-button Zigbee capacitive touch panel for load switching, scene triggering, and dimming control in smart automation systems.
 
 Each button operates independently and is configurable for toggle (bistable) or momentary (monostable) operation. Supports brightness control via compatible retrofit dimmer modules. Available in white or black glass with silver, gold, or black bezel options and configurable backlight colour.
-
-Key Specifications
-- Buttons: 4 capacitive touch
-- Relay: 10A per channel
-- Direct Load: Up to 4A per channel
-- Dimming: Via external retrofit dimmer
-- Finish: White/Black glass + Silver/Gold/Black bezel
-- Protocol: Zigbee 3.0
-- Installation: Wall-mounted
-
-⚠ For loads above 4A, use an external SSR or contactor for safe operation and longer relay life.
 
 ## Specifications
 
@@ -42,14 +29,31 @@ Key Specifications
 | Installation | Wall-mounted |
 | Compatibility | Zigbee automation platforms |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Standard flush box compatible with panel dimensions
+- Live, Neutral, Load wires
+- Zigbee coordinator within range
+
+### Steps
+1. Switch off the circuit breaker.
+2. Mount the backplate/box to the wall.
+3. Connect wiring per the channel labels on the panel.
+4. Snap or screw the panel into position.
+5. Restore power and pair with your Zigbee coordinator.
+6. Configure scenes and buttons in the Smartify or Home Assistant UI.
+
+### Notes
+- Touch panels must be grounded to avoid false triggers.
+- Ensure the panel is flush against the wall for reliable capacitive touch detection.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹10,930 |
 | GST Rate | 18% |
 | HSN Code | 85369090 |
-
-> **Important:** For loads above 4A use external SSR or contactor.
-
-> **Requires:** Zigbee coordinator or hub

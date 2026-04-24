@@ -1,6 +1,6 @@
 ---
 title: "Zigbee Vibration Sensor"
-description: "If something moves, you'll know."
+description: "A Zigbee 3.0 vibration sensor that detects movement, vibration, and tampering on doors, windows, safes, cabinets, and other surfaces, reporting events to a Zigbee gateway or compatible hub."
 ---
 
 ![Zigbee Vibration Sensor](/images/Zigbee%20Vibration%20Sensor.png)
@@ -9,25 +9,15 @@ description: "If something moves, you'll know."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not control electrical loads. Event notification only.</Callout>
 
-If something moves, you'll know.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-A knock on the safe. A window forced open. A cabinet disturbed. The Vibration Sensor catches what cameras miss — and tells you instantly, before anything else happens.
-
-## Technical Overview
+## Description
 
 A Zigbee 3.0 vibration sensor that detects movement, vibration, and tampering on doors, windows, safes, cabinets, and other surfaces, reporting events to a Zigbee gateway or compatible hub.
 
 Used for security monitoring, tamper alerts, and automation triggers. Battery-powered with surface mount installation.
-
-Key Specifications
-- Protocol: Zigbee 3.0
-- Detection: Vibration and motion
-- Power: Battery
-- Mounting: Surface mount (adhesive or screws)
-
-⚠ Event notification only — does not control electrical loads.
 
 ## Specifications
 
@@ -46,14 +36,35 @@ Key Specifications
 | Working Temperature | -10°C to +50°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Placement & Setup
+
+### Motion Sensor
+- Mount at 2–2.5m height, angled downward for best coverage.
+- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.
+- Detection angle: ~110°, range: ~7m.
+
+### mmWave Presence Sensor (USB & Ceiling)
+- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.
+- Ceiling mount: Install in the centre of the room, directly above the target zone.
+- USB variant: Connect to a USB-A power adapter; position near the area to monitor.
+- Configure sensitivity and detection zones in Home Assistant.
+
+### Contact Sensor
+- Attach the main sensor to the door/window frame and the magnet to the moving panel.
+- Align within 10mm for reliable open/close detection.
+- Battery-powered; typical life 1–2 years.
+
+### Vibration Sensor
+- Attach to surfaces you want to monitor (doors, windows, appliances).
+- Sensitive to physical shock and movement.
+- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹3,750 |
 | GST Rate | 18% |
 | HSN Code | 85319000 |
-
-> **Important:** Does not control electrical loads. Event notification only.
-
-> **Requires:** Zigbee coordinator or hub

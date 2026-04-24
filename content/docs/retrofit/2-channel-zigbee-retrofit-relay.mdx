@@ -1,6 +1,6 @@
 ---
 title: "2 Channel Zigbee Retrofit Relay"
-description: "Two switches. One module. Zero effort."
+description: "A dual-channel Zigbee switching relay that converts two standard mechanical switches into smart switches simultaneously — without replacing any existing hardware."
 ---
 
 ![2 Channel Zigbee Retrofit Relay](/images/Retrofit%20Relay.png)
@@ -9,27 +9,15 @@ description: "Two switches. One module. Zero effort."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">For loads above 4A per channel use external relay / SSR / contactor. Not a dimmer. Not dry contact.</Callout>
 
-Two switches. One module. Zero effort.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-Control two circuits from a single module hidden behind your existing switches. Lights in two rooms, a fan and a light — whatever the combination, each channel responds independently. Your walls stay the same. Your home gets smarter.
-
-## Technical Overview
+## Description
 
 A dual-channel Zigbee switching relay that converts two standard mechanical switches into smart switches simultaneously — without replacing any existing hardware.
 
 Each channel operates independently with direct load switching up to 4A. For loads above 4A per channel, an external relay, SSR, or contactor is required. Installs behind existing switches in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.
-
-Key Specifications
-- Channels: 2 (independent)
-- Max Switching: 5A per channel
-- Direct Load: Up to 4A per channel
-- Protocol: Zigbee 3.0
-- Compatible with: Home Assistant (native), Matter & Apple HomeKit (via hub)
-- Installation: Flush box or DIN rail
-
-⚠ Direct load switching only — not a dry contact output and not a dimmer.
 
 ## Specifications
 
@@ -52,14 +40,41 @@ Key Specifications
 | Max Radio Transmit Power | &lt;+10 dBm |
 | Installation Type | Behind Switch / DIN Rail |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+### Steps
+1. **Turn off the circuit breaker** for the affected circuit.
+2. Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+3. Connect wiring:
+   - **Live** → L input
+   - **Neutral** → N input
+   - **Load** → load output(s)
+4. Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+5. Replace the switch plate.
+6. Restore power. The device will blink — ready to pair.
+7. Pair with your Zigbee coordinator.
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹3,250 |
 | GST Rate | 18% |
 | HSN Code | 85365090 |
-
-> **Important:** For loads above 4A per channel use external relay / SSR / contactor. Not a dimmer. Not dry contact.
-
-> **Requires:** Zigbee coordinator or hub

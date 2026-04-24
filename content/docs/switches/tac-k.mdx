@@ -1,6 +1,6 @@
 ---
 title: "TAC K"
-description: "Turn to dim. Push to switch. That's it."
+description: "A Zigbee rotary smart dial for intuitive control of lighting brightness, colour temperature, and device groups. Supports up to 3 individual lights or 3 lighting groups via rotate and push interaction."
 ---
 
 ![TAC K](/images/TAC%20Remote%20Control%20-%20Grey.png)
@@ -9,26 +9,15 @@ description: "Turn to dim. Push to switch. That's it."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not switch electrical loads directly. Control interface only.</Callout>
 
-Turn to dim. Push to switch. That's it.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The TAC K makes lighting control physical again — but smarter. A single rotary dial that adjusts brightness, shifts colour temperature, and switches between rooms or groups. No screen. No menu. Just touch.
-
-## Technical Overview
+## Description
 
 A Zigbee rotary smart dial for intuitive control of lighting brightness, colour temperature, and device groups. Supports up to 3 individual lights or 3 lighting groups via rotate and push interaction.
 
 Rotate to adjust brightness or colour temperature. Push to switch between groups or trigger actions. Designed for wall-mounted installation.
-
-Key Specifications
-- Interface: Rotary + push
-- Control: Brightness, colour temperature, group switching
-- Scope: Up to 3 lights or groups
-- Protocol: Zigbee 3.0
-- Installation: Wall-mounted
-
-⚠ Does not switch electrical loads directly. Smart control interface only.
 
 ## Specifications
 
@@ -44,14 +33,33 @@ Key Specifications
 | Working Temperature | -10°C to +60°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Standard 2-module or 4-module flush box
+- Live, Neutral, and Load wires available at the switch location
+- Zigbee coordinator (gateway) within range
+
+### Steps
+1. **Turn off the circuit breaker** for the circuit you're working on.
+2. Remove the existing switch plate and pull out the wires.
+3. Connect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).
+4. Tuck the module into the flush box and fit the TAC switch plate.
+5. Restore power. The LED indicator will blink — the device is ready to pair.
+6. Open your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.
+7. Press and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.
+
+### Wiring Notes
+- Neutral wire is **required** for all TAC switches.
+- Maximum load per channel: see product specifications.
+- For ceiling fans, use the TAC F (fan speed controller variant).
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹34,000 |
 | GST Rate | 18% |
 | HSN Code | 85365090 |
-
-> **Important:** Does not switch electrical loads directly. Control interface only.
-
-> **Requires:** Zigbee coordinator or hub

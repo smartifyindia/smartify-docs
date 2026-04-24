@@ -402,10 +402,23 @@ def mdx_safe(s: str) -> str:
     return s.replace("<", "&lt;").replace(">", "&gt;")
 
 
-def product_page(p: dict) -> str:
+def strip_embedded_specs(text: str) -> str:
+    """Strip 'Key Specifications' bullet list and inline warnings from technical description.
+
+    The technical description in products.json embeds a spec list and ⚠ warnings
+    that duplicate the structured Specifications table. This strips everything from
+    the first 'Key Specifications' heading or '⚠' line onward.
+    """
+    for marker in ["\nKey Specifications", "\n⚠"]:
+        idx = text.find(marker)
+        if idx != -1:
+            text = text[:idx]
+    return text.strip()
+
+
+def product_page(p: dict, category_slug: str) -> str:
     """Generate MDX content for a single product page."""
     name = p["name"]
-    desc_consumer = p.get("description", {}).get("consumer", "")
     desc_technical = p.get("description", {}).get("technical", "")
     specs = p.get("specs", {})
     pricing = p.get("pricing", {})
@@ -416,17 +429,23 @@ def product_page(p: dict) -> str:
     device_type = p.get("device_type", "")
     img = image_path_for(p)
 
-    first_line = (desc_consumer.splitlines()[0] if desc_consumer else f"{name} — Smartify smart home product")
+    # Frontmatter — use first line of technical description (not marketing tagline)
+    tech_prose = strip_embedded_specs(desc_technical)
+    tech_first_line = (
+        tech_prose.splitlines()[0]
+        if tech_prose
+        else f"{name} — Smartify smart home product"
+    )
     frontmatter = f"""---
 title: {yaml_str(name)}
-description: {yaml_str(first_line)}
+description: {yaml_str(tech_first_line)}
 ---
 """
 
     # Hero image
     hero = f"\n![{name}]({img})\n" if img else ""
 
-    # Quick-info callouts
+    # Quick-info line
     quick = []
     if protocol:
         quick.append(f"**Protocol:** {protocol}")
@@ -434,27 +453,31 @@ description: {yaml_str(first_line)}
         quick.append(f"**Type:** {device_type}")
     if pricing.get("srp_inr"):
         quick.append(f"**SRP:** {inr(pricing['srp_inr'])}")
-    quick_str = "  ·  ".join(quick)
-    quick_block = f"\n{quick_str}\n" if quick_str else ""
+    quick_block = f"\n{'  ·  '.join(quick)}\n" if quick else ""
 
-    # Assistants
+    # Works with badges
     assistants_str = assistants_badges(assistants)
 
-    # Consumer description
-    consumer_section = ""
-    if desc_consumer:
-        consumer_section = f"\n## Overview\n\n{desc_consumer}\n"
+    # Callouts — moved to top, before any section headings
+    callouts = []
+    if limitations:
+        callouts.append(f'<Callout type="warn">{limitations}</Callout>')
+    if dependencies:
+        callouts.append(f'<Callout type="info">Requires: {dependencies}</Callout>')
+    callouts_section = ("\n" + "\n\n".join(callouts) + "\n") if callouts else ""
 
-    # Technical description
-    tech_section = ""
-    if desc_technical:
-        tech_section = f"\n## Technical Overview\n\n{desc_technical}\n"
+    # Description — technical prose only (embedded spec list stripped)
+    desc_section = f"\n## Description\n\n{tech_prose}\n" if tech_prose else ""
 
-    # Specs table
+    # Specifications table
     specs_str = specs_table(specs)
     specs_section = f"\n## Specifications\n\n{specs_str}\n" if specs_str else ""
 
-    # Pricing
+    # Installation — category guide on every product page (self-contained for installers)
+    install_guide = INSTALL_GUIDES.get(category_slug, "")
+    install_section = f"\n{install_guide}\n" if install_guide else ""
+
+    # Ordering (renamed from Pricing)
     pricing_rows = []
     if pricing.get("srp_inr"):
         pricing_rows.append(f"| SRP (incl. GST) | {inr(pricing['srp_inr'])} |")
@@ -462,28 +485,22 @@ description: {yaml_str(first_line)}
         pricing_rows.append(f"| GST Rate | {pricing['gst_rate']}% |")
     if pricing.get("hsn"):
         pricing_rows.append(f"| HSN Code | {pricing['hsn']} |")
-    pricing_section = ""
-    if pricing_rows:
-        pricing_section = "\n## Pricing\n\n| | |\n|---|---|\n" + "\n".join(pricing_rows) + "\n"
-
-    # Limitations + dependencies
-    notes = []
-    if limitations:
-        notes.append(f"> **Important:** {limitations}")
-    if dependencies:
-        notes.append(f"> **Requires:** {dependencies}")
-    notes_section = ("\n" + "\n\n".join(notes) + "\n") if notes else ""
+    ordering_section = (
+        "\n## Ordering\n\n| | |\n|---|---|\n" + "\n".join(pricing_rows) + "\n"
+        if pricing_rows
+        else ""
+    )
 
     return (
         frontmatter
         + hero
         + quick_block
         + assistants_str
-        + consumer_section
-        + tech_section
+        + callouts_section
+        + desc_section
         + specs_section
-        + pricing_section
-        + notes_section
+        + install_section
+        + ordering_section
     )
 
 
@@ -502,9 +519,12 @@ def category_index(slug: str, title: str, products: list[dict]) -> str:
         srp = p.get("pricing", {}).get("srp_inr")
         srp_str = f" — {inr(srp)}" if srp else ""
         link_slug = p.get("slug") or slugify(p["name"])
-        product_links.append(f"- [{p['name']}](./{link_slug}){srp_str}  \n  {desc}")
+        card_desc = f"{desc}{srp_str}" if srp_str else desc
+        product_links.append(
+            f'  <Card href="./{link_slug}" title="{p["name"]}">\n    {card_desc}\n  </Card>'
+        )
 
-    products_list = "\n".join(product_links)
+    products_cards = "<Cards>\n" + "\n".join(product_links) + "\n</Cards>"
 
     return f"""---
 title: {yaml_str(title)}
@@ -515,7 +535,7 @@ description: {yaml_str(overview)}
 
 ## Products in this category
 
-{products_list}
+{products_cards}
 
 {install_guide}
 """
@@ -656,7 +676,7 @@ def main():
         page_slugs = ["index"]
         for p in cat_products:
             p_slug = p.get("slug") or slugify(p["name"])
-            write_file(cat_dir / f"{p_slug}.mdx", product_page(p))
+            write_file(cat_dir / f"{p_slug}.mdx", product_page(p, slug))
             page_slugs.append(p_slug)
 
         # meta.json

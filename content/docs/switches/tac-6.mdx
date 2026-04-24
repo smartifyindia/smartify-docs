@@ -1,6 +1,6 @@
 ---
 title: "TAC 6"
-description: "Six scenes. One wall."
+description: "A 6-button Zigbee scene control switch for triggering scenes and automations within a Zigbee ecosystem. Contains no relays and does not switch electrical loads directly."
 ---
 
 ![TAC 6](/images/TAC%206%20Scene%20Switch%20-%20White.png)
@@ -9,27 +9,15 @@ description: "Six scenes. One wall."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">No relays. Does not switch electrical loads directly. Scene and automation control only.</Callout>
 
-Six scenes. One wall.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The TAC 6 is a scene controller — not a switch. Press once and an entire room responds. Morning scene, evening scene, away, welcome. Six possibilities on a single, elegant surface.
-
-## Technical Overview
+## Description
 
 A 6-button Zigbee scene control switch for triggering scenes and automations within a Zigbee ecosystem. Contains no relays and does not switch electrical loads directly.
 
 Each button is independently configurable for scene or automation triggers. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.
-
-Key Specifications
-- Buttons: 6
-- Function: Scene / automation triggers only
-- Protocol: Zigbee 3.0
-- Materials: PP or AG glass
-- Colours: Black, White, Gold
-- Installation: Wall-mounted
-
-⚠ No relay — does not switch electrical loads. Scene control only.
 
 ## Specifications
 
@@ -45,14 +33,33 @@ Key Specifications
 | Working Temperature | -10°C to +60°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Standard 2-module or 4-module flush box
+- Live, Neutral, and Load wires available at the switch location
+- Zigbee coordinator (gateway) within range
+
+### Steps
+1. **Turn off the circuit breaker** for the circuit you're working on.
+2. Remove the existing switch plate and pull out the wires.
+3. Connect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).
+4. Tuck the module into the flush box and fit the TAC switch plate.
+5. Restore power. The LED indicator will blink — the device is ready to pair.
+6. Open your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.
+7. Press and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.
+
+### Wiring Notes
+- Neutral wire is **required** for all TAC switches.
+- Maximum load per channel: see product specifications.
+- For ceiling fans, use the TAC F (fan speed controller variant).
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹21,250 |
 | GST Rate | 18% |
 | HSN Code | 85369090 |
-
-> **Important:** No relays. Does not switch electrical loads directly. Scene and automation control only.
-
-> **Requires:** Zigbee coordinator or hub

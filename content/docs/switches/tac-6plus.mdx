@@ -1,6 +1,6 @@
 ---
 title: "TAC 6+"
-description: "Load control and scenes. One switch."
+description: "A 6-button Zigbee smart switch with 4 load control buttons and 2 dedicated scene trigger buttons. Combines direct load switching with scene control on a single switch face."
 ---
 
 ![TAC 6+](/images/TAC%204%20Gang%206%20Scene%20Switch%20-%20White.png)
@@ -9,28 +9,15 @@ description: "Load control and scenes. One switch."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">10A total shared across load buttons. Scene buttons have no relay. For loads above 2A use external SSR. Materials: PP or AG glass. Colours: Black, White, Gold.</Callout>
 
-Load control and scenes. One switch.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-The TAC 6+ combines the practical with the experiential — four buttons that control circuits, two that set the scene. Everything your room needs, on a single surface.
-
-## Technical Overview
+## Description
 
 A 6-button Zigbee smart switch with 4 load control buttons and 2 dedicated scene trigger buttons. Combines direct load switching with scene control on a single switch face.
 
 The 4 load buttons share a 10A relay capacity; the 2 scene buttons contain no relay and trigger automations only. Available in PP or anti-glare glass in black, white, or gold.
-
-Key Specifications
-- Buttons: 4 load + 2 scene
-- Relay: 10A total (4 load buttons, shared)
-- Direct Load: Up to 2A per load
-- Scene Buttons: Trigger only (no relay)
-- Protocol: Zigbee 3.0
-- Materials: PP or AG glass
-- Colours: Black, White, Gold
-
-⚠ 10A total shared relay capacity across load buttons. For loads above 2A use external SSR or contactor.
 
 ## Specifications
 
@@ -48,14 +35,33 @@ Key Specifications
 | Working Temperature | -10°C to +60°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Standard 2-module or 4-module flush box
+- Live, Neutral, and Load wires available at the switch location
+- Zigbee coordinator (gateway) within range
+
+### Steps
+1. **Turn off the circuit breaker** for the circuit you're working on.
+2. Remove the existing switch plate and pull out the wires.
+3. Connect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).
+4. Tuck the module into the flush box and fit the TAC switch plate.
+5. Restore power. The LED indicator will blink — the device is ready to pair.
+6. Open your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.
+7. Press and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.
+
+### Wiring Notes
+- Neutral wire is **required** for all TAC switches.
+- Maximum load per channel: see product specifications.
+- For ceiling fans, use the TAC F (fan speed controller variant).
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹21,250 |
 | GST Rate | 18% |
 | HSN Code | 85369090 |
-
-> **Important:** 10A total shared across load buttons. Scene buttons have no relay. For loads above 2A use external SSR. Materials: PP or AG glass. Colours: Black, White, Gold.
-
-> **Requires:** Zigbee coordinator or hub

@@ -1,6 +1,6 @@
 ---
 title: "Zigbee Gateway (Matter)"
-description: "One home. Every ecosystem."
+description: "A wired smart home gateway that bridges Zigbee 3.0 and Matter protocols, enabling unified control across both ecosystems through a single stable Ethernet connection."
 ---
 
 ![Zigbee Gateway (Matter)](/images/Zigbee%20Gateway%20%28Matter%29.png)
@@ -9,26 +9,15 @@ description: "One home. Every ecosystem."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not control electrical loads. Cross-protocol bridging requires Matter-compatible ecosystem.</Callout>
 
-One home. Every ecosystem.
+<Callout type="info">Requires: Wired Ethernet router connection</Callout>
 
-Zigbee devices. Matter devices. Apple HomeKit. The Matter Gateway connects them all — no friction, no switching between apps. Your home speaks one language, even when your devices don't.
-
-## Technical Overview
+## Description
 
 A wired smart home gateway that bridges Zigbee 3.0 and Matter protocols, enabling unified control across both ecosystems through a single stable Ethernet connection.
 
 Supports up to 128 devices and provides device pairing, cross-protocol bridging, scene automation, and remote control. Enables integration with Matter-enabled applications and Apple HomeKit via Matter.
-
-Key Specifications
-- Protocols: Zigbee 3.0 + Matter (IP / Thread bridge)
-- Network: Wired Ethernet (LAN)
-- Capacity: Up to 128 devices
-- Compatibility: Matter apps, Apple HomeKit (via Matter)
-- Installation: Indoor, fixed LAN connection
-
-⚠ Does not control electrical loads. Acts as a communication and bridging layer only.
 
 ## Specifications
 
@@ -46,14 +35,36 @@ Key Specifications
 | Storage Temperature | -20°C to +60°C |
 | Storage Humidity | 5%–90% RH (non-condensing) |
 
-## Pricing
+
+## Setup
+
+### Wired Gateway
+1. Connect via Ethernet to your router or switch.
+2. Power via USB-C.
+3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).
+4. Begin pairing Zigbee devices.
+
+### Matter Gateway (Convergia)
+1. Connect via Ethernet.
+2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.
+3. All Zigbee child devices appear automatically in the Matter fabric.
+
+### VRV Gateway
+Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).
+- Connect the RS-485 port to the VRV indoor unit or centralised controller.
+- Configure address and baud rate per your VRV system documentation.
+
+### DALI Gateway
+Bridges Zigbee to DALI-2 lighting systems.
+- Connect DALI bus terminals to the DALI line.
+- Each gateway supports up to 64 DALI addresses.
+- Configure via Home Assistant DALI integration.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹15,250 |
 | GST Rate | 18% |
 | HSN Code | 85176290 |
-
-> **Important:** Does not control electrical loads. Cross-protocol bridging requires Matter-compatible ecosystem.
-
-> **Requires:** Wired Ethernet router connection

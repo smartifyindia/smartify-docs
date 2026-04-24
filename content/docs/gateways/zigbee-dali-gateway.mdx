@@ -1,6 +1,6 @@
 ---
 title: "Zigbee DALI Gateway"
-description: "Architectural lighting. Smart precision."
+description: "A Zigbee to DALI protocol gateway that integrates DALI lighting systems into a Zigbee-based smart automation ecosystem. Supports up to 64 DALI nodes with DT8 compatibility for tunable white and RGBW control."
 ---
 
 ![Zigbee DALI Gateway](/images/Zigbee%20DALI%20Gateway.png)
@@ -9,26 +9,15 @@ description: "Architectural lighting. Smart precision."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not power lighting loads directly. Communicates with DALI drivers over the bus only.</Callout>
 
-Architectural lighting. Smart precision.
+<Callout type="info">Requires: Zigbee coordinator or hub. Existing DALI bus installation.</Callout>
 
-DALI lighting systems were built for professional environments — precise, flexible, professional-grade. The DALI Gateway brings that precision into your smart ecosystem, giving you scene control, tunable white, and RGBW automation through the same interface as everything else.
-
-## Technical Overview
+## Description
 
 A Zigbee to DALI protocol gateway that integrates DALI lighting systems into a Zigbee-based smart automation ecosystem. Supports up to 64 DALI nodes with DT8 compatibility for tunable white and RGBW control.
 
 Translates Zigbee commands into DALI control signals for switching, dimming, grouping, scene control, and tunable white/RGBW operation. DIN rail or panel-mounted installation.
-
-Key Specifications
-- Wireless: Zigbee 3.0
-- Interface: DALI Bus (2-wire)
-- Capacity: Up to 64 DALI nodes
-- DALI Type: DT8 (tunable white / RGBW)
-- Installation: DIN rail / panel
-
-⚠ Does not power lighting loads directly. Communicates with DALI drivers over the bus. Existing DALI installation required.
 
 ## Specifications
 
@@ -50,14 +39,36 @@ Key Specifications
 | Built-in Battery & RTC | Yes |
 | Dimensions (L × W × H) | 110 × 53 × 65 mm |
 
-## Pricing
+
+## Setup
+
+### Wired Gateway
+1. Connect via Ethernet to your router or switch.
+2. Power via USB-C.
+3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).
+4. Begin pairing Zigbee devices.
+
+### Matter Gateway (Convergia)
+1. Connect via Ethernet.
+2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.
+3. All Zigbee child devices appear automatically in the Matter fabric.
+
+### VRV Gateway
+Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).
+- Connect the RS-485 port to the VRV indoor unit or centralised controller.
+- Configure address and baud rate per your VRV system documentation.
+
+### DALI Gateway
+Bridges Zigbee to DALI-2 lighting systems.
+- Connect DALI bus terminals to the DALI line.
+- Each gateway supports up to 64 DALI addresses.
+- Configure via Home Assistant DALI integration.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹1,00,000 |
 | GST Rate | 18% |
 | HSN Code | 85371010 |
-
-> **Important:** Does not power lighting loads directly. Communicates with DALI drivers over the bus only.
-
-> **Requires:** Zigbee coordinator or hub. Existing DALI bus installation.

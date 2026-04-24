@@ -1,6 +1,6 @@
 ---
 title: "1 Channel Zigbee Retrofit Dimmer"
-description: "The right light. Always."
+description: "A single-channel Zigbee phase-cut dimmer module designed to retrofit any standard wall switch with intelligent brightness control — no switch replacement required."
 ---
 
 ![1 Channel Zigbee Retrofit Dimmer](/images/Retrofit%20Dimmer.png)
@@ -9,27 +9,15 @@ description: "The right light. Always."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Compatible with dimmable loads only. Not a 0-10V controller. Does not function as a simple on/off relay.</Callout>
 
-The right light. Always.
+<Callout type="info">Requires: Zigbee coordinator or hub. Dimmable fixtures or drivers required.</Callout>
 
-Bright for the morning. Warm for the evening. The Dimmer learns when you want a room to feel different — and adjusts without you asking. Fits behind your existing switch. Works with your existing lights.
-
-## Technical Overview
+## Description
 
 A single-channel Zigbee phase-cut dimmer module designed to retrofit any standard wall switch with intelligent brightness control — no switch replacement required.
 
 Supports trailing and leading edge phase-cut dimming up to 200W for compatible dimmable lighting fixtures and drivers. Installs behind the existing switch in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.
-
-Key Specifications
-- Channels: 1
-- Max Load: 200W
-- Dimming Type: Phase-Cut (Trailing/Leading edge)
-- Protocol: Zigbee 3.0
-- Compatible with: Home Assistant (native), Matter & Apple HomeKit (via hub)
-- Installation: Flush box or DIN rail
-
-⚠ For use with dimmable fixtures and drivers only. Not a 0-10V controller and cannot function as a plain on/off relay.
 
 ## Specifications
 
@@ -51,14 +39,41 @@ Key Specifications
 | Max Radio Transmit Power | &lt;+10 dBm |
 | Installation Type | Behind Switch / DIN Rail |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+### Steps
+1. **Turn off the circuit breaker** for the affected circuit.
+2. Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+3. Connect wiring:
+   - **Live** → L input
+   - **Neutral** → N input
+   - **Load** → load output(s)
+4. Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+5. Replace the switch plate.
+6. Restore power. The device will blink — ready to pair.
+7. Pair with your Zigbee coordinator.
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹3,000 |
 | GST Rate | 18% |
 | HSN Code | 85365090 |
-
-> **Important:** Compatible with dimmable loads only. Not a 0-10V controller. Does not function as a simple on/off relay.
-
-> **Requires:** Zigbee coordinator or hub. Dimmable fixtures or drivers required.

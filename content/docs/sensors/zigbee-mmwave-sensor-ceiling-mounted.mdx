@@ -1,6 +1,6 @@
 ---
 title: "Zigbee mmWave Sensor (Ceiling Mounted)"
-description: "A room that knows when it's occupied."
+description: "A ceiling-mounted, mains-powered Zigbee mmWave presence sensor designed for accurate occupancy detection across a full room. Detects micro-movements for continuous presence sensing — not just initial motion."
 ---
 
 ![Zigbee mmWave Sensor (Ceiling Mounted)](/images/Zigbee%20mmWave%20Sensor%20%28Ceiling%20Mounted%29.png)
@@ -9,25 +9,15 @@ description: "A room that knows when it's occupied."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">Does not control electrical loads. Provides presence/motion signals for automation.</Callout>
 
-A room that knows when it's occupied.
+<Callout type="info">Requires: Mains wiring at ceiling mount point. Zigbee coordinator or hub.</Callout>
 
-The Ceiling mmWave Sensor watches the whole room — not a narrow cone. It detects presence, not just motion, so every automation responds to whether someone is actually there. Not whether they waved.
-
-## Technical Overview
+## Description
 
 A ceiling-mounted, mains-powered Zigbee mmWave presence sensor designed for accurate occupancy detection across a full room. Detects micro-movements for continuous presence sensing — not just initial motion.
 
 Ideal for lighting control, HVAC triggers, and occupancy-based automation in residential and commercial spaces. Ceiling mount provides optimal coverage.
-
-Key Specifications
-- Protocol: Zigbee 3.0
-- Detection: mmWave radar (motion + presence)
-- Power: Mains powered
-- Mounting: Ceiling mount
-
-⚠ Does not control electrical loads. Provides presence/motion data for automation triggers.
 
 ## Specifications
 
@@ -45,14 +35,35 @@ Key Specifications
 | Target Disappearance Delay Time | 0.5s–25 min (min. 15s recommended) |
 | Light Sensing Range | 0–2000 Lux |
 
-## Pricing
+
+## Placement & Setup
+
+### Motion Sensor
+- Mount at 2–2.5m height, angled downward for best coverage.
+- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.
+- Detection angle: ~110°, range: ~7m.
+
+### mmWave Presence Sensor (USB & Ceiling)
+- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.
+- Ceiling mount: Install in the centre of the room, directly above the target zone.
+- USB variant: Connect to a USB-A power adapter; position near the area to monitor.
+- Configure sensitivity and detection zones in Home Assistant.
+
+### Contact Sensor
+- Attach the main sensor to the door/window frame and the magnet to the moving panel.
+- Align within 10mm for reliable open/close detection.
+- Battery-powered; typical life 1–2 years.
+
+### Vibration Sensor
+- Attach to surfaces you want to monitor (doors, windows, appliances).
+- Sensitive to physical shock and movement.
+- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹10,375 |
 | GST Rate | 18% |
 | HSN Code | 85319000 |
-
-> **Important:** Does not control electrical loads. Provides presence/motion signals for automation.
-
-> **Requires:** Mains wiring at ceiling mount point. Zigbee coordinator or hub.

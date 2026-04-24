@@ -1,6 +1,6 @@
 ---
 title: "TAC F"
-description: "Your fan. Fully in control."
+description: "A Zigbee smart fan control panel for ceiling fans up to 150W. Provides on/off and speed control with a dedicated fan control interface."
 ---
 
 ![TAC F](/images/TAC%20Fan%20Speed%20Controller.png)
@@ -9,27 +9,15 @@ description: "Your fan. Fully in control."
 
 **Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
 
-## Overview
+<Callout type="warn">For ceiling fans within rated load capacity (150W) only. Materials: PP or AG glass. Colours: Black, White, Gold.</Callout>
 
-Your fan. Fully in control.
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
 
-Speed, on, off — from the wall or from anywhere. The TAC F gives your ceiling fan the same smart control as every other device in your home.
-
-## Technical Overview
+## Description
 
 A Zigbee smart fan control panel for ceiling fans up to 150W. Provides on/off and speed control with a dedicated fan control interface.
 
 Integrates with the Zigbee automation ecosystem. Available in PP or anti-glare glass in black, white, or gold.
-
-Key Specifications
-- Control: Fan on/off + speed
-- Fan Load: Up to 150W
-- Protocol: Zigbee 3.0
-- Materials: PP or AG glass
-- Colours: Black, White, Gold
-- Installation: Wall-mounted
-
-⚠ For ceiling fans within rated load (150W) only.
 
 ## Specifications
 
@@ -47,14 +35,33 @@ Key Specifications
 | Working Temperature | -10°C to +60°C |
 | Working Humidity | ≤95% RH (non-condensing) |
 
-## Pricing
+
+## Installation
+
+### Requirements
+- Standard 2-module or 4-module flush box
+- Live, Neutral, and Load wires available at the switch location
+- Zigbee coordinator (gateway) within range
+
+### Steps
+1. **Turn off the circuit breaker** for the circuit you're working on.
+2. Remove the existing switch plate and pull out the wires.
+3. Connect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).
+4. Tuck the module into the flush box and fit the TAC switch plate.
+5. Restore power. The LED indicator will blink — the device is ready to pair.
+6. Open your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.
+7. Press and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.
+
+### Wiring Notes
+- Neutral wire is **required** for all TAC switches.
+- Maximum load per channel: see product specifications.
+- For ceiling fans, use the TAC F (fan speed controller variant).
+
+
+## Ordering
 
 | | |
 |---|---|
 | SRP (incl. GST) | ₹6,250 |
 | GST Rate | 18% |
 | HSN Code | 85369090 |
-
-> **Important:** For ceiling fans within rated load capacity (150W) only. Materials: PP or AG glass. Colours: Black, White, Gold.
-
-> **Requires:** Zigbee coordinator or hub
