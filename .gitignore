@@ -16,6 +16,10 @@ dist/
 # Fumadocs generated
 .source/
 
+# OpenNext / Cloudflare build output
+.open-next/
+.wrangler/
+
 # OS
 .DS_Store
 
