@@ -339,12 +339,13 @@ def inr(amount: int) -> str:
 
 
 def image_path_for(product: dict) -> str | None:
-    """Return the public path to the product's hero image."""
+    """Return the public path to the product's hero image (URL-encoded)."""
+    from urllib.parse import quote
     hero = product.get("images", {}).get("hero", "")
     if not hero:
         return None
     filename = Path(hero).name
-    return f"/images/{filename}"
+    return f"/images/{quote(filename)}"
 
 
 def specs_table(specs: dict) -> str:
@@ -457,8 +458,6 @@ description: {yaml_str(first_line)}
     pricing_rows = []
     if pricing.get("srp_inr"):
         pricing_rows.append(f"| SRP (incl. GST) | {inr(pricing['srp_inr'])} |")
-    if pricing.get("dealer_price_inr"):
-        pricing_rows.append(f"| Dealer Price | {inr(pricing['dealer_price_inr'])} |")
     if pricing.get("gst_rate"):
         pricing_rows.append(f"| GST Rate | {pricing['gst_rate']}% |")
     if pricing.get("hsn"):
