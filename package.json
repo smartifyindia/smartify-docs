@@ -8,7 +8,7 @@
     "cf:build": "npx @opennextjs/cloudflare@latest build",
     "start": "next start",
     "preview": "npm run cf:build && npx wrangler pages dev",
-    "deploy": "CLOUDFLARE_ACCOUNT_ID=b9f8db8151b55e4e33b0190fd0805f38 npm run cf:build && npx wrangler pages deploy .open-next/assets --project-name=smartify-docs --commit-dirty=true",
+    "deploy": "CLOUDFLARE_ACCOUNT_ID=b9f8db8151b55e4e33b0190fd0805f38 npm run cf:build && npx wrangler deploy",
     "postinstall": "fumadocs-mdx"
   },
   "dependencies": {
