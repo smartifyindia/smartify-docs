@@ -1,0 +1,11 @@
+{
+  "title": "Gateways & Hubs",
+  "pages": [
+    "index",
+    "zigbee-gateway-wired",
+    "zigbee-gateway-matter",
+    "convergia",
+    "zigbee-vrv-gateway",
+    "zigbee-dali-gateway"
+  ]
+}

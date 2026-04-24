@@ -1,0 +1,37 @@
+---
+title: "LED Controllers"
+description: "Zigbee LED controllers for CV RGB+CCT and CCT LED strips. Full colour and tunable white control via Home Assistant."
+---
+
+Zigbee LED controllers for CV RGB+CCT and CCT LED strips. Full colour and tunable white control via Home Assistant.
+
+## Products in this category
+
+- [LED Controller (CV-RGB+CCT)](./led-controller-cv-rgbpluscct) — ₹9,247  
+  Every colour. Every white. One controller.
+- [LED Controller (CC-CCT)](./led-controller-cc-cct) — ₹8,247  
+  Warm in the evening. Crisp in the morning.
+
+
+## Wiring
+
+### CV RGB+CCT Controller
+- **R, G, B** → respective colour channels of your LED strip
+- **WW, CW** → warm white and cool white channels
+- **12V / 24V** → match your strip's voltage
+- Maximum load: check product specifications per channel
+
+### CV CCT Controller
+- **WW, CW** → warm and cool white channels
+- Enables smooth colour temperature tuning from warm to cool white
+
+### Setup
+1. Wire the controller per the diagram above.
+2. Connect to power.
+3. Pair with your Zigbee coordinator.
+4. In Home Assistant, the light entity will expose colour temperature and brightness controls.
+
+### Tips
+- Use a power supply rated at ≥1.2× the total LED strip wattage.
+- Run separate power supplies for runs longer than 5m to avoid voltage drop.
+

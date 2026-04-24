@@ -1,0 +1,8 @@
+{
+  "title": "LED Controllers",
+  "pages": [
+    "index",
+    "led-controller-cv-rgbpluscct",
+    "led-controller-cc-cct"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "title": "Sensors",
+  "pages": [
+    "index",
+    "zigbee-contact-sensor",
+    "zigbee-motion-sensor-plus-lux-sensor",
+    "zigbee-vibration-sensor",
+    "zigbee-mmwave-sensor-usb",
+    "zigbee-mmwave-sensor-ceiling-mounted"
+  ]
+}

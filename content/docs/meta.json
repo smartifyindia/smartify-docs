@@ -1,0 +1,13 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "switches",
+    "panels",
+    "retrofit",
+    "sensors",
+    "gateways",
+    "ir-blasters",
+    "led-controllers"
+  ]
+}

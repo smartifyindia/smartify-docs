@@ -1,0 +1,15 @@
+{
+  "title": "Retrofit Relays & Dimmers",
+  "pages": [
+    "index",
+    "1-channel-zigbee-retrofit-relay",
+    "1-channel-zigbee-retrofit-relay-40a",
+    "2-channel-zigbee-retrofit-relay",
+    "1-channel-zigbee-retrofit-dimmer",
+    "2-channel-zigbee-retrofit-dimmer",
+    "zigbee-shutter-module",
+    "analog-0-10v-zigbee-dimmer",
+    "led-controller-cv-dimmer",
+    "tac-sh"
+  ]
+}

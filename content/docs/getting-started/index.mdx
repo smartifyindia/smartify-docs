@@ -1,0 +1,39 @@
+---
+title: "Getting Started"
+description: "Introduction to the Smartify ecosystem — what you need to get started with smart home automation."
+---
+
+# Getting Started with Smartify
+
+## What is Smartify?
+
+Smartify is a Zigbee 3.0 smart home automation platform designed and sold in India.
+The product range covers in-wall switches, touch panels, retrofit modules, sensors, gateways, IR blasters, and LED controllers.
+
+## What you need
+
+| Component | Description |
+|---|---|
+| **Zigbee Gateway** | The coordinator that all devices connect to. Required for every installation. |
+| **Switches / Panels / Sensors** | The devices you want to automate. Mix and match from the catalog. |
+| **Smart Home Platform** | Home Assistant (recommended), or Apple HomeKit / Google Home / Alexa via the gateway. |
+| **Internet connection** | Only needed for cloud integrations. Home Assistant runs fully local. |
+
+## Recommended setup
+
+1. **Start with a gateway** — the [Zigbee Gateway (Wired)](../gateways/zigbee-gateway-wired) is the most versatile option for Home Assistant users.
+2. **Install Home Assistant** on a Raspberry Pi, NUC, or VM. [Home Assistant installation guide →](https://www.home-assistant.io/installation/)
+3. **Add the Zigbee integration** in Home Assistant (ZHA or Zigbee2MQTT).
+4. **Pair your devices** — follow the installation guide in each product's page.
+5. **Build automations** using Home Assistant's automation editor.
+
+## Network requirements
+
+- All Zigbee devices create a **mesh network** — the more mains-powered devices, the stronger the mesh.
+- Sensors and battery-powered devices are end devices and do not extend the mesh.
+- Gateways require **2.4GHz WiFi or Ethernet**. 5GHz is not supported.
+
+## Support
+
+- [Smartify website →](https://smartify.in)
+- [Home Assistant community forums →](https://community.home-assistant.io/)

@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Map Smartify teal (#0FABBB) to Fumadocs CSS variables */
+    --primary: 188 84% 40%;    /* HSL for #0FABBB */
+    --primary-foreground: 0 0% 100%;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans antialiased;
+  }
+}
+
+@layer components {
+  /* Override Fumadocs accent with Smartify teal */
+  .fd-sidebar {
+    border-right-color: rgb(229 231 235);
+  }
+
+  /* Product spec table styling */
+  .specs-table th {
+    @apply text-sm font-medium text-gray-600 bg-gray-50;
+  }
+
+  .specs-table td {
+    @apply text-sm text-gray-900;
+  }
+}
