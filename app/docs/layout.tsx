@@ -14,8 +14,8 @@ export default function Layout({ children }: { children: ReactNode }) {
           </span>
         ),
         url: '/docs',
-        links: [{ text: 'smartify.in', url: 'https://smartify.in', external: true }],
       }}
+      links={[{ text: 'smartify.in', url: 'https://smartify.in', external: true }]}
       sidebar={{
         banner: (
           <div className="rounded-lg border border-[#0FABBB]/20 bg-[#0FABBB]/5 px-3 py-2 text-xs text-[#0FABBB]">
