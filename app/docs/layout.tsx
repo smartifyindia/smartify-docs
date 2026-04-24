@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { source } from '@/lib/source';
+import Image from 'next/image';
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
@@ -8,19 +9,12 @@ export default function Layout({ children }: { children: ReactNode }) {
       tree={source.pageTree}
       nav={{
         title: (
-          <span className="flex items-center gap-2 font-semibold text-[#0FABBB]">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-              <path
-                d="M10 2L3 7v11h5v-6h4v6h5V7L10 2z"
-                fill="#0FABBB"
-                stroke="#0FABBB"
-                strokeWidth="0.5"
-              />
-            </svg>
-            Smartify Docs
+          <span className="flex items-center gap-2">
+            <Image src="/logo.png" alt="Smartify" width={120} height={32} className="h-7 w-auto" />
           </span>
         ),
         url: '/docs',
+        links: [{ text: 'smartify.in', url: 'https://smartify.in', external: true }],
       }}
       sidebar={{
         banner: (

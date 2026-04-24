@@ -5,17 +5,17 @@ import Image from 'next/image';
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
     ...defaultMdxComponents,
-    // Override img for product images
+    // Override img for product images — handles both string URLs and StaticImport objects
     img: ({ src, alt, ...props }) => {
-      if (!src || typeof src !== 'string') return null;
+      if (!src) return null;
       return (
-        <span className="block my-6 rounded-xl overflow-hidden border border-gray-100 bg-gray-50">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={src}
-            alt={alt ?? ''}
-            className="w-full max-w-sm mx-auto object-contain p-4"
-          />
+        <span className="block my-6 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
+          {typeof src === 'string' ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={src} alt={alt ?? ''} className="w-full max-w-sm mx-auto object-contain p-4" />
+          ) : (
+            <Image src={src} alt={alt ?? ''} className="w-full max-w-sm mx-auto object-contain p-4" />
+          )}
         </span>
       );
     },
