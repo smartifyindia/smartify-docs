@@ -520,8 +520,9 @@ def category_index(slug: str, title: str, products: list[dict]) -> str:
         srp_str = f" — {inr(srp)}" if srp else ""
         link_slug = p.get("slug") or slugify(p["name"])
         card_desc = f"{desc}{srp_str}" if srp_str else desc
+        safe_title = p["name"].replace('"', "&quot;")
         product_links.append(
-            f'  <Card href="./{link_slug}" title="{p["name"]}">\n    {card_desc}\n  </Card>'
+            f'  <Card href="./{link_slug}" title="{safe_title}">\n    {card_desc}\n  </Card>'
         )
 
     products_cards = "<Cards>\n" + "\n".join(product_links) + "\n</Cards>"
