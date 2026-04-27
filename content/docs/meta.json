@@ -2,12 +2,21 @@
   "pages": [
     "index",
     "getting-started",
+    "why-smartify",
+    "---Products---",
     "switches",
     "panels",
     "retrofit",
     "sensors",
     "gateways",
     "ir-blasters",
-    "led-controllers"
+    "led-controllers",
+    "---Support---",
+    "support",
+    "warranty",
+    "---For Installers---",
+    "for-installers",
+    "---Smartify Pro---",
+    "smartify-pro"
   ]
 }
