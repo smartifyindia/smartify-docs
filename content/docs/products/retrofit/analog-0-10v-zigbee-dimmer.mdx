@@ -1,0 +1,92 @@
+---
+title: "Analog 0-10V Zigbee Dimmer"
+description: "A single-channel Zigbee 0-10V analog dimming controller designed to integrate with LED drivers and lighting systems that accept a 0-10V dimming input signal."
+---
+
+![Analog 0-10V Zigbee Dimmer](/images/Analog%200-10V%20Zigbee%20Dimmer.png)
+
+**Protocol:** Zigbee 3.0  ·  **Type:** 0-10V Analog Dimmer Controller  ·  **SRP:** ₹4,250
+
+**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
+
+<Callout type="warn">Does not switch or dim high-voltage loads directly. Control signal output only.</Callout>
+
+<Callout type="info">Requires: Zigbee coordinator or hub. Compatible 0-10V LED drivers required.</Callout>
+
+## Description
+
+A single-channel Zigbee 0-10V analog dimming controller designed to integrate with LED drivers and lighting systems that accept a 0-10V dimming input signal.
+
+Outputs a low-voltage 0-10V control signal — it does not switch or dim mains voltage directly. Designed for DIN rail or panel installation. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.
+
+## Specifications
+
+| Specification | Value |
+|---|---|
+| Channels | 1 |
+| Max Switching | 0-10V control signal |
+| Recommended Load | Compatible 0-10V LED drivers |
+| Installation | DIN rail / electrical panel |
+| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |
+| Input Voltage | AC100–240V 50Hz/60Hz |
+| Output Voltage | 0–10V DC Max. 20mA |
+| Dimming Type | 0–10V |
+| Operation Frequency | 2.412GHz–2.484GHz |
+| Operation Temperature | -10°C to +40°C |
+| Protocol | Zigbee 3.0 |
+| Dimensions (W × D × H) | 39 × 39 × 18 mm |
+| IP Rating | IP20 |
+
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+<Steps>
+<Step>
+**Turn off the circuit breaker** for the affected circuit.
+</Step>
+<Step>
+Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+</Step>
+<Step>
+Connect wiring:
+- **Live** → L input
+- **Neutral** → N input
+- **Load** → load output(s)
+</Step>
+<Step>
+Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+</Step>
+<Step>
+Replace the switch plate.
+</Step>
+<Step>
+Restore power. The device will blink — ready to pair.
+</Step>
+<Step>
+Pair with your Zigbee coordinator.
+</Step>
+</Steps>
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
+
+| | |
+|---|---|
+| SRP (incl. GST) | ₹4,250 |
+| GST Rate | 18% |
+| HSN Code | 85365090 |

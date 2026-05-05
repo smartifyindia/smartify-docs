@@ -1,5 +1,7 @@
 {
   "title": "Smartify Pro",
+  "description": "Platform guide for professionals",
+  "root": true,
   "pages": [
     "index",
     "getting-started",

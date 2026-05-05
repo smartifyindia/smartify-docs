@@ -4,7 +4,11 @@ import { RootProvider } from 'fumadocs-ui/provider';
 import { Inter } from 'next/font/google';
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600', '700'] });
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-inter',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://docs.smartify.in'),
@@ -76,8 +80,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
-      <body className={inter.className}>
-        <RootProvider>{children}</RootProvider>
+      <body className={inter.variable}>
+        <RootProvider theme={{ defaultTheme: 'light', disableTransitionOnChange: true }}>{children}</RootProvider>
       </body>
     </html>
   );

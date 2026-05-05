@@ -1,0 +1,21 @@
+{
+  "title": "Products",
+  "description": "Smart home device catalog and guides",
+  "root": true,
+  "pages": [
+    "index",
+    "getting-started",
+    "why-smartify",
+    "---Catalog---",
+    "switches",
+    "panels",
+    "retrofit",
+    "sensors",
+    "gateways",
+    "ir-blasters",
+    "led-controllers",
+    "---Support---",
+    "support",
+    "warranty"
+  ]
+}

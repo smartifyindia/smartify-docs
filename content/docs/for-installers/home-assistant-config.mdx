@@ -1,0 +1,67 @@
+---
+title: "Home Assistant Config"
+description: "YAML examples and ZHA / Zigbee2MQTT configuration for Smartify installations."
+---
+
+## ZHA (Zigbee Home Automation)
+
+ZHA is built into Home Assistant — no additional software needed. Recommended for most installations.
+
+**Enable:** Settings &rarr; Devices &amp; Services &rarr; Add Integration &rarr; Zigbee Home Automation
+
+Select the gateway's serial port or IP address and click Submit.
+
+### Channel selection
+
+```yaml
+# configuration.yaml
+zha:
+  zigpy_config:
+    network:
+      channel: 15   # avoid channels 1, 6, 11 which overlap common WiFi bands
+```
+
+### Automation example — motion-triggered light
+
+```yaml
+alias: "Motion — Living Room Light On"
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: "on"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.living_room_switch
+```
+
+## Zigbee2MQTT
+
+Zigbee2MQTT exposes devices over MQTT and gives more control over device configuration.
+
+Install via the **Zigbee2MQTT add-on** in Home Assistant. Minimal `configuration.yaml`:
+
+```yaml
+serial:
+  port: /dev/ttyUSB0
+advanced:
+  network_key: GENERATE
+  pan_id: GENERATE
+frontend:
+  enabled: true
+```
+
+### Permit join via MQTT
+
+```bash
+mosquitto_pub -t zigbee2mqtt/bridge/request/permit_join -m '{"value": true, "time": 60}'
+```
+
+## Useful automations
+
+| Automation | Trigger | Action |
+|---|---|---|
+| Away mode | No motion for 10 min | Turn off all lights |
+| Morning scene | Time 07:00 | Lights at 40% |
+| AC control | Temp sensor &gt; 28°C | IR blaster: AC on 24°C |
+| Night mode | Time 22:00 | Dim all lights to 10% |

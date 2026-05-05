@@ -1,0 +1,66 @@
+---
+title: "Gateway Selection"
+description: "Which Smartify gateway to specify for each installation type — standard, HomeKit, HVAC, commercial DALI, and on-premise."
+---
+
+Every Smartify installation requires at least one gateway. All gateways act as Zigbee coordinators and support up to **128 Zigbee devices** per gateway.
+
+## Choosing the Right Gateway
+
+| Scenario | Recommended Gateway |
+|---|---|
+| Standard home automation (Home Assistant / Alexa / Google) | Zigbee Gateway (Wired) |
+| Apple HomeKit integration | Zigbee Gateway (Matter) |
+| Large home (&gt;128 devices) | Multiple Zigbee Gateways (Wired) |
+| VRV / VRF HVAC control | Zigbee VRV Gateway |
+| KNX + Zigbee + local on-premise | Convergia |
+| Commercial DALI lighting | Zigbee DALI Gateway |
+
+## Gateway Details
+
+### Zigbee Gateway (Wired)
+
+The standard coordinator for most residential installations.
+
+- Connects via **Ethernet or 2.4GHz WiFi** (5GHz not supported)
+- Supports **ZHA** (Zigbee Home Automation) and **Zigbee2MQTT**
+- Capacity: 128 Zigbee devices
+- Integrates with Home Assistant, Amazon Alexa, Google Home
+
+### Zigbee Gateway (Matter)
+
+Same as the Wired gateway plus Matter bridge — exposes Zigbee devices natively to **Apple HomeKit**, Google Home (Matter), and Amazon Alexa (Matter).
+
+- Requires iOS 16+ / HomePod mini or Apple TV 4K as Matter controller
+- All Zigbee devices appear as native HomeKit accessories
+
+### Convergia
+
+On-premise local gateway for premium installations.
+
+- Runs locally — **no internet required for automation**
+- Protocols: **Zigbee + KNX + WiFi + Matter**
+- Use for: luxury residential, hospitality, offices with KNX infrastructure
+- Includes local UI for configuration and scene management
+
+### Zigbee VRV Gateway
+
+Bridges Zigbee to **VRV/VRF HVAC systems** (Daikin, Mitsubishi, Hitachi, etc.).
+
+- Enables thermostat-style control of centralised AC from Home Assistant
+- Required for any installation with VRV/VRF indoor units
+
+### Zigbee DALI Gateway
+
+For **commercial lighting** with DALI ballasts and drivers.
+
+- Controls DALI-addressed fixtures individually or in groups
+- Use in offices, retail, hospitality where DALI infrastructure already exists
+
+## Scaling Beyond 128 Devices
+
+Add a second (or third) gateway on the same Zigbee channel with different PAN IDs. In Home Assistant, each gateway is a separate ZHA/Z2M integration instance.
+
+<Callout type="info">
+  Pair mains-powered devices (switches, relays, panels) before battery sensors. Every mains device extends the Zigbee mesh — a dense mesh improves reliability for sensors at the edges.
+</Callout>

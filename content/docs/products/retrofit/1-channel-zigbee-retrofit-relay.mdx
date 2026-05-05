@@ -1,0 +1,93 @@
+---
+title: "1 Channel Zigbee Retrofit Relay"
+description: "A single-channel Zigbee switching relay designed to retrofit any standard mechanical switch into a smart switch — no rewiring, no hardware replacement."
+---
+
+![1 Channel Zigbee Retrofit Relay](/images/Retrofit%20Relay.png)
+
+**Protocol:** Zigbee 3.0  ·  **Type:** Switching Relay  ·  **SRP:** ₹3,000
+
+**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
+
+<Callout type="warn">For loads above 4A use external relay / SSR / contactor</Callout>
+
+<Callout type="info">Requires: Zigbee coordinator or hub</Callout>
+
+## Description
+
+A single-channel Zigbee switching relay designed to retrofit any standard mechanical switch into a smart switch — no rewiring, no hardware replacement.
+
+Installs behind the existing wall switch in a flush box or on DIN rail. Supports direct load switching up to 4A; for loads between 4A and 10A, an external relay, SSR, or contactor is required. Communicates natively over Zigbee 3.0 with full Home Assistant support, and integrates with Matter and Apple HomeKit via a compatible hub.
+
+## Specifications
+
+| Specification | Value |
+|---|---|
+| Channels | 1 |
+| Max Switching | 10A |
+| Recommended Load | Up to 4A |
+| Installation | Flush box or DIN rail |
+| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |
+| Voltage | 90–250V AC |
+| Max Current | 10A |
+| Wireless Protocol | Zigbee 3.0 |
+| Operating Temperature | -10°C to +40°C |
+| Max Case Temperature (Tc) | +80°C |
+| Wireless Range | ≤200m (open field) |
+| Dimensions | 52 × 47 × 18 mm |
+| IP Rating | IP20 |
+| Installation Type | Behind Switch / DIN Rail |
+
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+<Steps>
+<Step>
+**Turn off the circuit breaker** for the affected circuit.
+</Step>
+<Step>
+Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+</Step>
+<Step>
+Connect wiring:
+- **Live** → L input
+- **Neutral** → N input
+- **Load** → load output(s)
+</Step>
+<Step>
+Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+</Step>
+<Step>
+Replace the switch plate.
+</Step>
+<Step>
+Restore power. The device will blink — ready to pair.
+</Step>
+<Step>
+Pair with your Zigbee coordinator.
+</Step>
+</Steps>
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
+
+| | |
+|---|---|
+| SRP (incl. GST) | ₹3,000 |
+| GST Rate | 18% |
+| HSN Code | 85365090 |

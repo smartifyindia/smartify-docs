@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { MDXComponents } from 'mdx/types';
 import React from 'react';
-import { notFound } from 'next/navigation';
+import { notFound, redirect } from 'next/navigation';
 import { DocsPage, DocsBody, DocsDescription, DocsTitle } from 'fumadocs-ui/page';
 import { getMDXComponents } from '@/mdx-components';
 import { source } from '@/lib/source';
@@ -57,6 +57,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Page({ params }: Props) {
   const { slug } = await params;
+
+  if (!slug || slug.length === 0) {
+    redirect('/docs/products');
+  }
+
   const page = source.getPage(slug);
 
   if (!page) notFound();

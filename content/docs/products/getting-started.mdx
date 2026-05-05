@@ -1,0 +1,50 @@
+---
+title: "Getting Started"
+description: "Introduction to the Smartify ecosystem — what you need to get started with smart home automation."
+---
+
+## What you need
+
+| Component | Description |
+|---|---|
+| **Zigbee Gateway** | The coordinator that all devices connect to. Required for every installation. |
+| **Switches / Panels / Sensors** | The devices you want to automate. Mix and match from the catalog. |
+| **Smart Home Platform** | Home Assistant (recommended), or Apple HomeKit / Google Home / Alexa via the gateway. |
+| **Internet connection** | Only needed for cloud integrations. Home Assistant runs fully local. |
+
+## Setup
+
+<Steps>
+<Step>
+### Choose a gateway
+The [Zigbee Gateway (Wired)](../gateways/zigbee-gateway-wired) is the most versatile option.
+For Matter-native setups, use the [Convergia](../gateways/convergia).
+</Step>
+<Step>
+### Install Home Assistant
+Run on a Raspberry Pi, NUC, or VM. [Home Assistant installation →](https://www.home-assistant.io/installation/)
+</Step>
+<Step>
+### Add the Zigbee integration
+In Home Assistant: **Settings → Devices &amp; Services → Add Integration → Zigbee Home Automation (ZHA)** or Zigbee2MQTT.
+</Step>
+<Step>
+### Pair your devices
+Power on each device. Follow the pairing instructions on its product page.
+</Step>
+<Step>
+### Build automations
+Use Home Assistant's automation editor to trigger devices by time, sensor state, or scene.
+</Step>
+</Steps>
+
+## Zigbee Network Notes
+
+- All Zigbee devices create a **mesh network** — the more mains-powered devices, the stronger the mesh.
+- Sensors and battery-powered devices are end devices and do not extend the mesh.
+- Gateways require **2.4GHz WiFi or Ethernet**. 5GHz is not supported.
+
+## Resources
+
+- [Smartify website →](https://smartify.in)
+- [Home Assistant community forums →](https://community.home-assistant.io/)

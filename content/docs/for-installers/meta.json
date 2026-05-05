@@ -1,0 +1,14 @@
+{
+  "title": "Installation Guides",
+  "description": "Wiring, pairing, and configuration guides",
+  "root": true,
+  "pages": [
+    "index",
+    "gateway-selection",
+    "wiring-reference",
+    "pairing-and-reset",
+    "home-assistant-config",
+    "estimate-workflow",
+    "dealer-onboarding"
+  ]
+}

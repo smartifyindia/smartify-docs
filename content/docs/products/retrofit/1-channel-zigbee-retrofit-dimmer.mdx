@@ -1,0 +1,94 @@
+---
+title: "1 Channel Zigbee Retrofit Dimmer"
+description: "A single-channel Zigbee phase-cut dimmer module designed to retrofit any standard wall switch with intelligent brightness control — no switch replacement required."
+---
+
+![1 Channel Zigbee Retrofit Dimmer](/images/Retrofit%20Dimmer.png)
+
+**Protocol:** Zigbee 3.0  ·  **Type:** Phase-Cut Dimmer  ·  **SRP:** ₹3,000
+
+**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`
+
+<Callout type="warn">Compatible with dimmable loads only. Not a 0-10V controller. Does not function as a simple on/off relay.</Callout>
+
+<Callout type="info">Requires: Zigbee coordinator or hub. Dimmable fixtures or drivers required.</Callout>
+
+## Description
+
+A single-channel Zigbee phase-cut dimmer module designed to retrofit any standard wall switch with intelligent brightness control — no switch replacement required.
+
+Supports trailing and leading edge phase-cut dimming up to 200W for compatible dimmable lighting fixtures and drivers. Installs behind the existing switch in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.
+
+## Specifications
+
+| Specification | Value |
+|---|---|
+| Channels | 1 |
+| Max Switching | 200W |
+| Recommended Load | Dimmable fixtures / drivers only |
+| Installation | Flush box or DIN rail |
+| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |
+| Voltage | 90–250V AC |
+| Max Power | 100W × 2CH (220V) |
+| Wireless Protocol | Zigbee 3.0 |
+| Operating Temperature | 0°C to +40°C |
+| Case Temperature (Tc) | +80°C Max |
+| Dimensions | 40 × 40 × 18 mm |
+| IP Rating | IP20 |
+| Frequency Band | 2.405–2.480 GHz |
+| Max Radio Transmit Power | &lt;+10 dBm |
+| Installation Type | Behind Switch / DIN Rail |
+
+
+## Installation
+
+### Requirements
+- Existing wall switch in a flush box (≥ 60mm depth recommended)
+- Live, Neutral, and Load wires in the flush box
+- Zigbee coordinator within range
+
+<Steps>
+<Step>
+**Turn off the circuit breaker** for the affected circuit.
+</Step>
+<Step>
+Remove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.
+</Step>
+<Step>
+Connect wiring:
+- **Live** → L input
+- **Neutral** → N input
+- **Load** → load output(s)
+</Step>
+<Step>
+Fit the module into the flush box. Use DIN rail adapters for panel board installation.
+</Step>
+<Step>
+Replace the switch plate.
+</Step>
+<Step>
+Restore power. The device will blink — ready to pair.
+</Step>
+<Step>
+Pair with your Zigbee coordinator.
+</Step>
+</Steps>
+
+### Load Limits
+- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.
+- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.
+- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.
+
+### Shutter Module
+The shutter module controls motorised curtains, blinds, and shutters:
+- **M1, M2** → motor up/down terminals
+- Configure travel time in your coordinator for accurate position reporting.
+
+
+## Ordering
+
+| | |
+|---|---|
+| SRP (incl. GST) | ₹3,000 |
+| GST Rate | 18% |
+| HSN Code | 85365090 |

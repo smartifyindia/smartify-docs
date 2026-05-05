@@ -15,7 +15,8 @@ from collections import defaultdict
 SCRIPT_DIR = Path(__file__).parent
 PRODUCTS_JSON = Path("/Users/abhi/Github/Smartify/smartify-product-catalog/products.json")
 IMAGES_SRC = Path("/Users/abhi/Github/Smartify/smartify-product-catalog/images")
-CONTENT_DIR = SCRIPT_DIR / "content" / "docs"
+DOCS_DIR = SCRIPT_DIR / "content" / "docs"
+CONTENT_DIR = DOCS_DIR / "products"
 PUBLIC_IMAGES = SCRIPT_DIR / "public" / "images"
 
 # ── Category mapping ───────────────────────────────────────────────────────────
@@ -522,7 +523,7 @@ def category_index(slug: str, title: str, products: list[dict]) -> str:
         card_desc = f"{desc}{srp_str}" if srp_str else desc
         safe_title = p["name"].replace('"', "&quot;")
         product_links.append(
-            f'  <Card href="./{link_slug}" title="{safe_title}">\n    {card_desc}\n  </Card>'
+            f'  <Card href="/docs/{slug}/{link_slug}" title="{safe_title}">\n    {card_desc}\n  </Card>'
         )
 
     products_cards = "<Cards>\n" + "\n".join(product_links) + "\n</Cards>"
@@ -544,39 +545,45 @@ description: {yaml_str(overview)}
 
 def top_level_index(by_category: dict) -> str:
     """Generate the top-level docs/index.mdx welcome page."""
-    cat_links = []
+    card_items = []
     for slug, data in sorted(by_category.items(), key=lambda x: x[1]["order"]):
-        cat_links.append(
-            f"- **[{data['title']}](./{slug})** — {CATEGORY_OVERVIEW.get(slug, '')}"
+        safe_title = data["title"].replace('"', "&quot;")
+        desc = CATEGORY_OVERVIEW.get(slug, "")
+        card_items.append(
+            f'  <Card href="./{slug}" title="{safe_title}">\n    {desc}\n  </Card>'
         )
-    cat_list = "\n".join(cat_links)
+    cards_block = "<Cards>\n" + "\n".join(card_items) + "\n</Cards>"
 
     return f"""---
-title: "Smartify Documentation"
-description: "Technical documentation, installation guides, and product specs for Smartify smart home automation products."
+title: "Intro"
+description: "Technical documentation for Smartify — specs, wiring guides, and integration references for every product in the catalog."
 ---
 
-# Welcome to Smartify Docs
+This is the technical documentation for **Smartify** — a Zigbee 3.0 smart home platform built for Indian homes.
 
-Smartify is a Zigbee-based smart home automation platform built for the Indian market.
-This documentation covers every product in the catalog — specs, wiring guides, and integration references.
+## What's in these docs
 
-## Product Categories
+| Section | What you'll find |
+|---|---|
+| [Getting Started](./getting-started) | Gateway setup, Home Assistant install, first device pairing |
+| [Why Smartify](./why-smartify) | How Zigbee compares to WiFi switches, platform independence, Indian market fit |
+| [Products](#products) | Specs, wiring, and integration details for every device in the catalog |
+| [Support](./support) | Troubleshooting, contact info, community links |
+| [Warranty](./warranty) | 5-year warranty terms and how to make a claim |
+| [For Installers](./for-installers) | Pairing & reset procedures, Home Assistant config, wiring reference, dealer onboarding |
 
-{cat_list}
+## Products
 
-## Ecosystem
+{cards_block}
 
-All Smartify products use **Zigbee 3.0** and integrate natively with:
+## Compatible Platforms
 
-- **Home Assistant** — local, no cloud, full control
-- **Apple HomeKit** (via Matter hub)
-- **Amazon Alexa** (via hub)
-- **Google Home** (via hub)
+All Smartify devices use **Zigbee 3.0**. Supported platforms:
 
-## Getting Started
-
-New to Smartify? Start with the [Getting Started guide](./getting-started).
+- **Home Assistant** — local control, no cloud required (recommended)
+- **Apple HomeKit** — via Matter-compatible gateway
+- **Amazon Alexa** — via gateway
+- **Google Home** — via gateway
 """
 
 
@@ -585,13 +592,6 @@ def getting_started() -> str:
 title: "Getting Started"
 description: "Introduction to the Smartify ecosystem — what you need to get started with smart home automation."
 ---
-
-# Getting Started with Smartify
-
-## What is Smartify?
-
-Smartify is a Zigbee 3.0 smart home automation platform designed and sold in India.
-The product range covers in-wall switches, touch panels, retrofit modules, sensors, gateways, IR blasters, and LED controllers.
 
 ## What you need
 
@@ -602,24 +602,708 @@ The product range covers in-wall switches, touch panels, retrofit modules, senso
 | **Smart Home Platform** | Home Assistant (recommended), or Apple HomeKit / Google Home / Alexa via the gateway. |
 | **Internet connection** | Only needed for cloud integrations. Home Assistant runs fully local. |
 
-## Recommended setup
+## Setup
 
-1. **Start with a gateway** — the [Zigbee Gateway (Wired)](../gateways/zigbee-gateway-wired) is the most versatile option for Home Assistant users.
-2. **Install Home Assistant** on a Raspberry Pi, NUC, or VM. [Home Assistant installation guide →](https://www.home-assistant.io/installation/)
-3. **Add the Zigbee integration** in Home Assistant (ZHA or Zigbee2MQTT).
-4. **Pair your devices** — follow the installation guide in each product's page.
-5. **Build automations** using Home Assistant's automation editor.
+<Steps>
+<Step>
+### Choose a gateway
+The [Zigbee Gateway (Wired)](../gateways/zigbee-gateway-wired) is the most versatile option.
+For Matter-native setups, use the [Convergia](../gateways/convergia).
+</Step>
+<Step>
+### Install Home Assistant
+Run on a Raspberry Pi, NUC, or VM. [Home Assistant installation →](https://www.home-assistant.io/installation/)
+</Step>
+<Step>
+### Add the Zigbee integration
+In Home Assistant: **Settings → Devices &amp; Services → Add Integration → Zigbee Home Automation (ZHA)** or Zigbee2MQTT.
+</Step>
+<Step>
+### Pair your devices
+Power on each device. Follow the pairing instructions on its product page.
+</Step>
+<Step>
+### Build automations
+Use Home Assistant's automation editor to trigger devices by time, sensor state, or scene.
+</Step>
+</Steps>
 
-## Network requirements
+## Zigbee Network Notes
 
 - All Zigbee devices create a **mesh network** — the more mains-powered devices, the stronger the mesh.
 - Sensors and battery-powered devices are end devices and do not extend the mesh.
 - Gateways require **2.4GHz WiFi or Ethernet**. 5GHz is not supported.
 
-## Support
+## Resources
 
 - [Smartify website →](https://smartify.in)
 - [Home Assistant community forums →](https://community.home-assistant.io/)
+"""
+
+
+def why_smartify() -> str:
+    return """---
+title: "Why Smartify"
+description: "How Smartify compares to typical WiFi smart home products — protocol, reliability, and ecosystem."
+---
+
+## Zigbee vs WiFi
+
+| | Smartify (Zigbee 3.0) | Typical WiFi switches |
+|---|---|---|
+| **Protocol** | Zigbee 3.0 mesh | WiFi (2.4GHz) |
+| **Cloud dependency** | None — works fully local via Home Assistant | Requires vendor cloud; breaks if cloud goes down |
+| **Mesh range** | Self-healing mesh — every mains device extends coverage | Point-to-point — dead zones common in large homes |
+| **Network load** | Separate Zigbee radio — zero WiFi congestion | Adds every device to your WiFi router |
+| **Interoperability** | Open standard — works with Home Assistant, HomeKit, Alexa, Google | Locked to vendor app; cross-brand automations unreliable |
+| **Wiring** | Fits standard Indian 3-module flush boxes — no new wiring | Same, but often requires neutral wire |
+| **Retrofit** | Relay and dimmer modules fit behind existing switches | Limited retrofit options |
+| **Longevity** | Zigbee 3.0 is a decade-old open standard with broad support | Vendor may discontinue app or cloud service |
+
+## Platform independence
+
+Smartify devices are not tied to any vendor cloud or app. Because they use the open Zigbee 3.0 standard, you can control them with:
+
+- **Home Assistant** — fully local, no subscription, unlimited automations
+- **Apple HomeKit** — via Matter-compatible Convergia gateway
+- **Amazon Alexa / Google Home** — via gateway
+
+If a platform stops supporting a feature, you can switch to another without replacing hardware.
+
+## Built for Indian homes
+
+- All switches fit **standard 3-module and 4-module flush boxes** used across India — no custom boxes or special backboxes
+- Neutral wire is **not required** for switch modules — works in older wiring layouts
+- Retrofit relays and dimmers fit **behind existing switches** — no visible hardware change
+- Tested for **230V / 50Hz** mains with Indian load profiles (fans, geysers, AC units)
+"""
+
+
+def support_page() -> str:
+    return """---
+title: "Support"
+description: "Get help with Smartify products — technical support, troubleshooting, and contact information."
+---
+
+## Contact Support
+
+- **Email:** support@smartify.in
+- **Website:** [smartify.in/contact](https://smartify.in/contact)
+- **WhatsApp:** Available via the website
+
+## Troubleshooting
+
+Before contacting support, check:
+
+1. **Device not pairing** — ensure the gateway is in pairing mode and the device has been factory reset. See [Pairing & Reset](./for-installers/pairing-and-reset) for per-device procedures.
+2. **Device offline** — check Zigbee mesh coverage. Mains-powered devices extend the mesh; battery devices do not.
+3. **Gateway unreachable** — verify 2.4GHz WiFi or Ethernet connection. 5GHz is not supported.
+
+## Community
+
+- [Home Assistant community forums →](https://community.home-assistant.io/)
+- [Home Assistant Zigbee docs →](https://www.home-assistant.io/integrations/zha/)
+"""
+
+
+def warranty_page() -> str:
+    return """---
+title: "Warranty"
+description: "Smartify product warranty terms and how to make a warranty claim."
+---
+
+## Coverage
+
+All Smartify products carry a **5-year warranty** from the date of purchase against manufacturing defects.
+
+**Covered:**
+- Hardware failure under normal operating conditions
+- Factory defects in materials or workmanship
+
+**Not covered:**
+- Physical damage, water ingress, or incorrect installation
+- Damage from voltage surges or wiring faults
+- Products modified outside Smartify-authorised channels
+
+## Making a Claim
+
+1. Email **support@smartify.in** with your order number and a description of the issue
+2. Attach proof of purchase — invoice or order confirmation
+3. Smartify support will confirm eligibility and arrange replacement or repair
+
+## Contact
+
+- **Email:** support@smartify.in
+- **Website:** [smartify.in/contact](https://smartify.in/contact)
+"""
+
+
+def for_installers_index() -> str:
+    return """---
+title: "For Installers"
+description: "Technical reference for Smartify installation professionals — gateway selection, wiring, pairing, Home Assistant config, and dealer onboarding."
+---
+
+Technical reference for installation professionals. Use [**pro.smartify.in**](https://pro.smartify.in) to create estimates, manage leads, and access dealer pricing.
+
+<Cards>
+  <Card href="./gateway-selection" title="Gateway Selection">
+    Which Smartify gateway to specify for each installation type — standard, HomeKit, HVAC, commercial DALI, and on-premise.
+  </Card>
+  <Card href="./wiring-reference" title="Wiring Reference">
+    Load ratings, wiring diagrams, and compatibility notes for switches, retrofit relays, dimmers, and shutter modules.
+  </Card>
+  <Card href="./pairing-and-reset" title="Pairing &amp; Reset">
+    Zigbee pairing modes and factory reset procedures for every Smartify device category.
+  </Card>
+  <Card href="./home-assistant-config" title="Home Assistant Config">
+    ZHA and Zigbee2MQTT configuration, channel selection, and automation examples.
+  </Card>
+  <Card href="./estimate-workflow" title="Estimate Workflow">
+    Step-by-step guide to creating a smart home estimate on pro.smartify.in — property details, device selection, and PDF generation.
+  </Card>
+  <Card href="./dealer-onboarding" title="Dealer Onboarding">
+    Partnership tiers, onboarding steps, lead subscription model, and how to get started on pro.smartify.in.
+  </Card>
+</Cards>
+"""
+
+
+def for_installers_pairing() -> str:
+    return """---
+title: "Pairing & Reset"
+description: "Zigbee pairing modes and factory reset procedures for Smartify devices."
+---
+
+Most Smartify devices enter pairing mode when **powered on for the first time** or immediately after a factory reset. The gateway must be in pairing/permit-join mode before powering on the device.
+
+## TAC Smart Switches
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Power on — enters pairing mode automatically if not previously paired |
+| **Factory reset** | Press and hold the top button for **10 seconds** until the LED flashes rapidly |
+
+## TOQ Touch Panels
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Power on — enters pairing mode automatically if not previously paired |
+| **Factory reset** | Press and hold the reset pinhole for **5 seconds** |
+
+## Retrofit Relays & Dimmers
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Power on — enters pairing mode automatically if not previously paired |
+| **Factory reset** | Press the reset button **5 times rapidly** within 3 seconds |
+
+## Sensors (Contact, Motion, Vibration)
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Insert battery — enters pairing mode automatically |
+| **Factory reset** | Remove battery, hold reset button, reinsert battery while holding, release after 5 seconds |
+
+## mmWave Sensors
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Power on — enters pairing mode automatically if not previously paired |
+| **Factory reset** | Press and hold reset button for **10 seconds** |
+
+## IR Blasters
+
+| Action | Procedure |
+|---|---|
+| **Pair** | Power on — enters pairing mode automatically if not previously paired |
+| **Factory reset** | Press reset button **3 times** within 2 seconds |
+
+## Tips
+
+- If a device does not appear in ZHA/Z2M within 60 seconds, factory reset and retry.
+- Pair devices close to the gateway first, then move to final location.
+- Pair mains-powered devices (switches, relays) before battery sensors — they extend the mesh.
+"""
+
+
+def for_installers_ha_config() -> str:
+    return """---
+title: "Home Assistant Config"
+description: "YAML examples and ZHA / Zigbee2MQTT configuration for Smartify installations."
+---
+
+## ZHA (Zigbee Home Automation)
+
+ZHA is built into Home Assistant — no additional software needed. Recommended for most installations.
+
+**Enable:** Settings &rarr; Devices &amp; Services &rarr; Add Integration &rarr; Zigbee Home Automation
+
+Select the gateway's serial port or IP address and click Submit.
+
+### Channel selection
+
+```yaml
+# configuration.yaml
+zha:
+  zigpy_config:
+    network:
+      channel: 15   # avoid channels 1, 6, 11 which overlap common WiFi bands
+```
+
+### Automation example — motion-triggered light
+
+```yaml
+alias: "Motion — Living Room Light On"
+trigger:
+  - platform: state
+    entity_id: binary_sensor.living_room_motion
+    to: "on"
+action:
+  - service: light.turn_on
+    target:
+      entity_id: light.living_room_switch
+```
+
+## Zigbee2MQTT
+
+Zigbee2MQTT exposes devices over MQTT and gives more control over device configuration.
+
+Install via the **Zigbee2MQTT add-on** in Home Assistant. Minimal `configuration.yaml`:
+
+```yaml
+serial:
+  port: /dev/ttyUSB0
+advanced:
+  network_key: GENERATE
+  pan_id: GENERATE
+frontend:
+  enabled: true
+```
+
+### Permit join via MQTT
+
+```bash
+mosquitto_pub -t zigbee2mqtt/bridge/request/permit_join -m '{"value": true, "time": 60}'
+```
+
+## Useful automations
+
+| Automation | Trigger | Action |
+|---|---|---|
+| Away mode | No motion for 10 min | Turn off all lights |
+| Morning scene | Time 07:00 | Lights at 40% |
+| AC control | Temp sensor &gt; 28°C | IR blaster: AC on 24°C |
+| Night mode | Time 22:00 | Dim all lights to 10% |
+"""
+
+
+def for_installers_wiring() -> str:
+    return """---
+title: "Wiring Reference"
+description: "Load ratings, wiring diagrams, and compatibility notes for Smartify switches, retrofit relays, dimmers, LED controllers, and shutter modules."
+---
+
+<Callout type="info">
+  All TAC smart switches and retrofit relays work **without a neutral wire** — Live and Load only. TOQ panels require neutral.
+</Callout>
+
+## Load Ratings
+
+| Device | Rating | Notes |
+|---|---|---|
+| TAC standard switch (1–6G) | 10A / 2300W per channel | Shared L input, separate output per gang |
+| TAC HL heavy-load switch | 16A / 3680W | Pumps, geysers, high-draw loads |
+| TAC F fan switch | 1A / 230W | Fan speed control only |
+| Retrofit relay 1Ch (standard) | 4A | Behind existing switch, no rewiring |
+| Retrofit relay 1Ch (heavy) | 40A | Pumps, geysers, HVAC compressors |
+| Retrofit relay 2Ch | 4A per channel | 2 independent circuits, 1 module |
+| Retrofit dimmer 1Ch | 200W resistive / 100W LED | Phase-cut — dimmable loads only |
+| 0–10V dimmer | — | Commercial LED drivers with 0–10V input |
+| Shutter module | 5A / 1150W | AC motors with end-stop protection only |
+| TAC SH shutter switch | 5A | Premium wall-switch shutter control |
+
+## TAC Smart Switches
+
+No neutral required. Each gang has its own output terminal; all share a single L input.
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L — shared input]
+  L --> L1[L1 — Load 1]
+  L --> L2[L2 — Load 2]
+  L --> L3[L3 — Load 3\nmulti-gang only]
+```
+
+## Retrofit Relay
+
+Installs **behind the existing wall switch** — no rewiring, no new backbox. The existing switch toggles locally; Zigbee overrides it remotely.
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L — input]
+  SW([Existing Switch]) --> S1[S1 — local toggle]
+  L --> RL{{Retrofit Relay}}
+  S1 --> RL
+  RL --> L1[L1 — Load output]
+```
+
+**Standard (4A)** — lighting, fans, general loads.
+**Heavy-duty (40A)** — pumps, geysers, AC compressors, high-inrush motors.
+
+## Retrofit Dimmer
+
+<Callout type="warn">
+  Phase-cut dimming only. **Not compatible** with non-dimmable LED drivers, fluorescent fixtures, or motors.
+</Callout>
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L — input]
+  L --> DIM{{Retrofit Dimmer}}
+  DIM --> L1[L1 — Dimmable Load]
+```
+
+- Minimum load: **5W**
+- Maximum load: **200W resistive / 100W dimmable LED**
+- Dimmable LED drivers must be explicitly rated for phase-cut dimming
+
+### 0–10V Dimmer
+
+For **commercial LED drivers** with a 0–10V control input (common in offices, retail, hospitality).
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L — power input]
+  L --> DIM{{0-10V Dimmer}}
+  DIM --> L1[L1 — switched output]
+  DIM --> DP[DIM+ / DIM−\n0–10V signal]
+  L1 --> LED([LED Driver])
+  DP --> LED
+```
+
+## LED Controllers
+
+### CV-RGB+CCT (Constant Voltage)
+
+For 12V or 24V LED strip lights. Controls RGB colour + warm/cool colour temperature simultaneously.
+
+```mermaid
+flowchart LR
+  PS([12V / 24V DC PSU]) --> CTRL{{CV-RGB+CCT\nController}}
+  CTRL --> R[R — Red]
+  CTRL --> G[G — Green]
+  CTRL --> B[B — Blue]
+  CTRL --> WW[WW — Warm White]
+  CTRL --> CW[CW — Cool White]
+```
+
+### CC-CCT (Constant Current)
+
+For current-fed LED fixtures and commercial downlights (350 mA / 500 mA / 700 mA).
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> CTRL{{CC-CCT\nController}}
+  CTRL --> FIX([LED Fixture\n350 / 500 / 700 mA])
+```
+
+## Shutter / Blind Module
+
+<Callout type="warn">
+  AC motors only. Motor **must have built-in end-stop protection** — do not use with motors lacking end-stops.
+</Callout>
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L — input]
+  L --> SH{{Shutter Module}}
+  SH --> L1[L1 — Motor Up]
+  SH --> L2[L2 — Motor Down]
+```
+
+The module detects end-stop via current sensing. Configure travel time in the Zigbee coordinator after installation.
+
+## TOQ Touch Panels
+
+TOQ panels **replace** the existing switch backbox. They require a **neutral wire** in addition to Live.
+
+```mermaid
+flowchart LR
+  ML([Mains Live]) --> L[L]
+  N([Neutral]) --> NT[N]
+  L --> TOQ{{TOQ Panel}}
+  NT --> TOQ
+  TOQ --> L1[L1 — Load 1]
+  TOQ --> L2[L2 — Load 2\nmulti-output variants]
+```
+
+Available in 1-gang, 2-gang, and 3-gang backbox form factors.
+"""
+
+
+def for_installers_gateway_selection() -> str:
+    return """---
+title: "Gateway Selection"
+description: "Which Smartify gateway to specify for each installation type — standard, HomeKit, HVAC, commercial DALI, and on-premise."
+---
+
+Every Smartify installation requires at least one gateway. All gateways act as Zigbee coordinators and support up to **128 Zigbee devices** per gateway.
+
+## Choosing the Right Gateway
+
+| Scenario | Recommended Gateway |
+|---|---|
+| Standard home automation (Home Assistant / Alexa / Google) | Zigbee Gateway (Wired) |
+| Apple HomeKit integration | Zigbee Gateway (Matter) |
+| Large home (&gt;128 devices) | Multiple Zigbee Gateways (Wired) |
+| VRV / VRF HVAC control | Zigbee VRV Gateway |
+| KNX + Zigbee + local on-premise | Convergia |
+| Commercial DALI lighting | Zigbee DALI Gateway |
+
+## Gateway Details
+
+### Zigbee Gateway (Wired)
+
+The standard coordinator for most residential installations.
+
+- Connects via **Ethernet or 2.4GHz WiFi** (5GHz not supported)
+- Supports **ZHA** (Zigbee Home Automation) and **Zigbee2MQTT**
+- Capacity: 128 Zigbee devices
+- Integrates with Home Assistant, Amazon Alexa, Google Home
+
+### Zigbee Gateway (Matter)
+
+Same as the Wired gateway plus Matter bridge — exposes Zigbee devices natively to **Apple HomeKit**, Google Home (Matter), and Amazon Alexa (Matter).
+
+- Requires iOS 16+ / HomePod mini or Apple TV 4K as Matter controller
+- All Zigbee devices appear as native HomeKit accessories
+
+### Convergia
+
+On-premise local gateway for premium installations.
+
+- Runs locally — **no internet required for automation**
+- Protocols: **Zigbee + KNX + WiFi + Matter**
+- Use for: luxury residential, hospitality, offices with KNX infrastructure
+- Includes local UI for configuration and scene management
+
+### Zigbee VRV Gateway
+
+Bridges Zigbee to **VRV/VRF HVAC systems** (Daikin, Mitsubishi, Hitachi, etc.).
+
+- Enables thermostat-style control of centralised AC from Home Assistant
+- Required for any installation with VRV/VRF indoor units
+
+### Zigbee DALI Gateway
+
+For **commercial lighting** with DALI ballasts and drivers.
+
+- Controls DALI-addressed fixtures individually or in groups
+- Use in offices, retail, hospitality where DALI infrastructure already exists
+
+## Scaling Beyond 128 Devices
+
+Add a second (or third) gateway on the same Zigbee channel with different PAN IDs. In Home Assistant, each gateway is a separate ZHA/Z2M integration instance.
+
+<Callout type="info">
+  Pair mains-powered devices (switches, relays, panels) before battery sensors. Every mains device extends the Zigbee mesh — a dense mesh improves reliability for sensors at the edges.
+</Callout>
+"""
+
+
+def for_installers_estimate_workflow() -> str:
+    return """---
+title: "Estimate Workflow"
+description: "Step-by-step guide to creating a smart home estimate on pro.smartify.in — property details, AI device selection, and PDF generation."
+---
+
+Estimates are created in [**pro.smartify.in**](https://pro.smartify.in) using a 3-phase workflow. The output is a professional itemised quote with GST breakdown, ready to share with the client.
+
+## Phase 1 — Property Details
+
+<Steps>
+<Step>
+### Select or create a client contact
+Search existing contacts or add a new one (name, phone, email).
+</Step>
+<Step>
+### Enter property details
+- **Property type:** Studio/1RK, 1BHK–7BHK+, Villa, Penthouse, Commercial
+- **Carpet area** (sqft)
+- **Construction status:** Pre-construction, Under Construction, Constructed, Under Renovation
+</Step>
+<Step>
+### Upload floor plan (optional)
+Upload a JPG or PNG floor plan. The AI analyses it to detect rooms and suggest device placement. You can adjust room polygons manually.
+</Step>
+<Step>
+### Select automation categories
+Choose which systems to include:
+- Security &amp; Safety (sensors, presence detection)
+- Comfort &amp; Climate (fans, AC, VRV)
+- Lighting &amp; Atmosphere (dimmers, LED strips, motorised blinds)
+- Energy Efficiency (retrofit relays, smart switching)
+- Smart Living (wall switches, touch panels, IR control)
+</Step>
+<Step>
+### Set technology preferences
+- Protocol: Zigbee, Matter, KNX, WiFi, etc.
+- Brand preferences (Smartify + 25 other brands supported)
+- Expert installation toggle
+</Step>
+</Steps>
+
+## Phase 2 — Device Selection
+
+<Steps>
+<Step>
+### AI recommendation (optional)
+Enable AI analysis to get an automatic device list based on property type, carpet area, and selected categories. The AI suggests SKUs, quantities, and room placement.
+</Step>
+<Step>
+### Review and adjust
+Browse the suggested list room by room. Add, remove, or change quantities. You can also search the full catalog manually and add any device.
+</Step>
+<Step>
+### Add custom items
+Add non-catalog items (third-party devices, accessories, labour) as custom line items.
+</Step>
+</Steps>
+
+## Phase 3 — Report Generation
+
+The platform automatically:
+
+1. Fetches live pricing from the product catalog
+2. Applies your org-level dealer pricing (up to 30% off MRP)
+3. Calculates GST per item (rates: 5%, 12%, 18%, or 28% depending on HSN code)
+4. Scores the project across 5 automation categories (0–5 stars each)
+5. Generates a full PDF with itemised BOM, GST summary, and installation notes
+
+## Sharing the Estimate
+
+- **PDF share link** — send to client via WhatsApp or email directly from the platform
+- **Status tracking** — move estimates through: Draft → Sent → Quoted → Won / Lost
+- **Lead lock-in** — sharing an estimate with a client triggers 30-day lead exclusivity (prevents another installer from claiming the same lead)
+
+## Pricing Rules
+
+| Rule | Detail |
+|---|---|
+| Max dealer discount | 30% off MRP (Smartify products) |
+| GST | Calculated per item based on HSN code |
+| Custom items | Manually set price + GST rate |
+| Estimate range | Low / Medium / High based on device mix |
+"""
+
+
+def for_installers_dealer() -> str:
+    return """---
+title: "Dealer Onboarding"
+description: "Partnership tiers, onboarding steps, and the lead subscription model for Smartify installers."
+---
+
+## Smartify Pro — Installer Platform
+
+[**pro.smartify.in**](https://pro.smartify.in) gives registered dealers access to:
+
+- AI-powered smart home estimate builder
+- Full product catalog with dealer pricing (up to 30% off MRP)
+- Lead pipeline from Smartify's customer portals
+- PDF estimate generation and client sharing
+- Team management and CRM integrations (Zoho, Zapier, Make, Google Sheets, WhatsApp)
+
+## Partnership Tiers
+
+| | Franchisee Partner | Multi-brand Partner |
+|---|---|---|
+| **Annual fee** | ₹30,000 | ₹60,000 |
+| **Commission** | 7.5% | 15% |
+| **ROI guarantee** | — | Yes |
+| **Demo kit** | Required (purchase) | Not required |
+| **Training** | Required | — |
+| **Uncovered locations** | Free leads | Free leads |
+| **Qualification fee** | ₹2,500 | ₹2,500 |
+
+## Onboarding Steps
+
+<Steps>
+<Step>
+### Phone verification
+Register at [pro.smartify.in](https://pro.smartify.in). Verify your phone number via OTP.
+</Step>
+<Step>
+### Choose partnership type
+Select Franchisee or Multi-brand Partner based on your business model.
+</Step>
+<Step>
+### Business details
+Enter company name, GST number, address, and contact information.
+</Step>
+<Step>
+### Select service categories
+Choose which automation categories you specialise in (Security, Lighting, Climate, etc.).
+</Step>
+<Step>
+### Select serviceable locations
+Pick the cities and pin codes you serve. Demand scoring is shown per location.
+</Step>
+<Step>
+### Pay qualification fee
+₹2,500 qualification fee to activate your account.
+</Step>
+<Step>
+### Account active
+Dashboard, estimate builder, and lead pipeline are immediately available.
+</Step>
+</Steps>
+
+## Lead Subscription Model
+
+Leads come from Smartify's customer portals and are distributed to registered installers in the relevant area.
+
+### Location demand tiers
+
+| Demand | Cities | Cost per lead |
+|---|---|---|
+| Uncovered | Any unsubscribed city | 0 credits (free) |
+| Low | Kolkata, Jaipur, Lucknow, Patna, etc. | 10 credits |
+| Medium | Hyderabad, Pune, Ahmedabad, Chennai, Kochi | 45 credits |
+| High | Mumbai, Delhi, Bangalore | 120 credits |
+
+### Monthly lead volume tiers
+
+| Tier | Leads/month | Annual cost |
+|---|---|---|
+| Base | 6 (uncovered only) | Free |
+| Tier 1 | 12 | ₹1,20,000/year |
+| Tier 2 | 20 | ₹2,40,000/year |
+| Tier 3 | 30 | ₹3,60,000/year |
+| Tier 4 | 42 | ₹4,80,000/year |
+| Tier 5 | 56 | ₹6,00,000/year |
+
+### Boost campaigns (one-time paid lead batches)
+
+| Spend | Expected leads |
+|---|---|
+| ₹5,000 | 7–12 |
+| ₹10,000 | 15–25 |
+| ₹15,000 | 20–35 |
+| ₹20,000 | 30–50 |
+| ₹25,000 | 35–60 |
+| ₹30,000 | 45–75 |
+
+### Lead rules
+
+- **Lock-in:** Sharing an estimate with a client triggers 30-day exclusivity — no other installer can claim that lead
+- **Referral:** Unused leads can be referred back for credit
+- **Conversion minimum:** 15% conversion rate required to access additional leads
+- **Pipeline cap:** Max 15 active pipeline leads per installer
+
+## Contact
+
+For dealer enquiries: **sales@smartify.in**
 """
 
 
@@ -657,11 +1341,11 @@ def main():
 
     # ── Write getting-started ──────────────────────────────────────────────────
     print("\nWriting getting-started…")
-    write_file(CONTENT_DIR / "getting-started" / "index.mdx", getting_started())
-    write_file(
-        CONTENT_DIR / "getting-started" / "meta.json",
-        json.dumps({"title": "Getting Started", "pages": ["index"]}, indent=2),
-    )
+    write_file(CONTENT_DIR / "getting-started.mdx", getting_started())
+
+    # ── Write why-smartify ─────────────────────────────────────────────────────
+    print("\nWriting why-smartify…")
+    write_file(CONTENT_DIR / "why-smartify.mdx", why_smartify())
 
     # ── Write category pages ───────────────────────────────────────────────────
     for slug, data in sorted(by_slug.items(), key=lambda x: x[1]["order"]):
@@ -684,21 +1368,67 @@ def main():
         meta = {"title": title, "pages": page_slugs}
         write_file(cat_dir / "meta.json", json.dumps(meta, indent=2))
 
-    # ── Write top-level meta.json ──────────────────────────────────────────────
-    top_pages = ["index", "getting-started"] + [
-        s for s, _ in sorted(by_slug.items(), key=lambda x: x[1]["order"])
-    ]
-    # Deduplicate while preserving order
-    seen = set()
-    top_pages_dedup = []
-    for p in top_pages:
-        if p not in seen:
-            seen.add(p)
-            top_pages_dedup.append(p)
+    # ── Write support / warranty ───────────────────────────────────────────────
+    print("\nWriting support & warranty…")
+    write_file(CONTENT_DIR / "support.mdx", support_page())
+    write_file(CONTENT_DIR / "warranty.mdx", warranty_page())
 
+    # ── Write for-installers ───────────────────────────────────────────────────
+    print("\nWriting for-installers…")
+    fi_dir = DOCS_DIR / "for-installers"
+    write_file(fi_dir / "index.mdx", for_installers_index())
+    write_file(fi_dir / "gateway-selection.mdx", for_installers_gateway_selection())
+    write_file(fi_dir / "wiring-reference.mdx", for_installers_wiring())
+    write_file(fi_dir / "pairing-and-reset.mdx", for_installers_pairing())
+    write_file(fi_dir / "home-assistant-config.mdx", for_installers_ha_config())
+    write_file(fi_dir / "estimate-workflow.mdx", for_installers_estimate_workflow())
+    write_file(fi_dir / "dealer-onboarding.mdx", for_installers_dealer())
+    write_file(
+        fi_dir / "meta.json",
+        json.dumps({
+            "title": "Installation Guides",
+            "description": "Wiring, pairing, and configuration guides",
+            "root": True,
+            "pages": [
+                "index",
+                "gateway-selection",
+                "wiring-reference",
+                "pairing-and-reset",
+                "home-assistant-config",
+                "estimate-workflow",
+                "dealer-onboarding",
+            ],
+        }, indent=2),
+    )
+
+    # ── Write products meta.json ──────────────────────────────────────────────
+    product_slugs = [s for s, _ in sorted(by_slug.items(), key=lambda x: x[1]["order"])]
+    products_pages = [
+        "index",
+        "getting-started",
+        "why-smartify",
+        "---Catalog---",
+        *product_slugs,
+        "---Support---",
+        "support",
+        "warranty",
+    ]
     write_file(
         CONTENT_DIR / "meta.json",
-        json.dumps({"pages": top_pages_dedup}, indent=2),
+        json.dumps({
+            "title": "Products",
+            "description": "Smart home device catalog and guides",
+            "root": True,
+            "pages": products_pages,
+        }, indent=2),
+    )
+
+    # ── Write root meta.json ──────────────────────────────────────────────────
+    write_file(
+        DOCS_DIR / "meta.json",
+        json.dumps({
+            "pages": ["products", "for-installers", "smartify-pro"],
+        }, indent=2),
     )
     print("\n✓ All MDX files written")
 
