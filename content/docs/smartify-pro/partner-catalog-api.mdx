@@ -1,0 +1,144 @@
+---
+title: "Partner Catalog API"
+description: "Use the Partner Catalog API to submit product create, update, and delete requests for admin approval."
+---
+
+Use this API when your organization needs to sync products into the Smartify Pro catalog from an external system.
+
+## How it works
+
+Every partner mutation is moderated:
+
+1. Submit product request via API key.
+2. Request is stored with status **PENDING**.
+3. Smartify admin **approves** or **rejects**.
+4. Only approved requests update the Pro catalog.
+
+## Prerequisites
+
+- Partner catalog API access enabled by Smartify admin.
+- Eligible organization status (paid-active or approved co-branded partner).
+- A generated **Partner Catalog API key** from:
+  - **Settings → Apps → Partner Catalog API**
+
+<Callout>
+Partner catalog API keys are separate from affiliate lead-sharing keys.
+</Callout>
+
+## Authentication
+
+Use header:
+
+```http
+X-API-Key: sk_live_pcat_...
+```
+
+Do not use Bearer token auth for partner submission endpoints.
+
+## Endpoints
+
+Base URL:
+
+```text
+https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1
+```
+
+### Submit new product
+
+```http
+POST /api/partner-catalog/products
+```
+
+### Submit update request
+
+```http
+PUT /api/partner-catalog/products/{partner_sku}
+```
+
+### Submit delete request
+
+```http
+DELETE /api/partner-catalog/products/{partner_sku}
+```
+
+### List your submissions
+
+```http
+GET /api/partner-catalog/products
+```
+
+Optional query:
+
+- `status=PENDING|APPROVED|REJECTED`
+
+## Request payload examples
+
+### Create
+
+```bash
+curl -X POST "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: sk_live_pcat_xxxxx" \
+  -d '{
+    "partner_sku": "PARTNER-SKU-101",
+    "name": "4 Gang Scene Switch",
+    "brand": "Partner Brand",
+    "category": ["Switches"],
+    "protocol": ["Zigbee 3.0"],
+    "technology": ["Wireless"],
+    "pricing": { "mrp": 6200, "selling_price": 5900 }
+  }'
+```
+
+### Update
+
+```bash
+curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/PARTNER-SKU-101" \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: sk_live_pcat_xxxxx" \
+  -d '{
+    "product": {
+      "name": "4 Gang Scene Switch (Rev B)",
+      "brand": "Partner Brand",
+      "category": ["Switches"],
+      "protocol": ["Zigbee 3.0"],
+      "technology": ["Wireless"],
+      "pricing": { "mrp": 6400, "selling_price": 6100 }
+    }
+  }'
+```
+
+### Delete
+
+```bash
+curl -X DELETE "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/PARTNER-SKU-101" \
+  -H "X-API-Key: sk_live_pcat_xxxxx"
+```
+
+### List submissions
+
+```bash
+curl -X GET "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products?status=PENDING" \
+  -H "X-API-Key: sk_live_pcat_xxxxx"
+```
+
+## Response behavior
+
+- Create/update/delete submission endpoints return `202 Accepted`.
+- Submission object includes:
+  - `status`: `PENDING`, `APPROVED`, or `REJECTED`
+  - `operation`: `CREATE`, `UPDATE`, or `DELETE`
+  - `partner_sku`, `org_id`, and `catalog_sku`
+
+## Approval lifecycle
+
+- **APPROVED**:
+  - Catalog is updated.
+  - Product record includes provenance fields such as:
+    - `source = PARTNER`
+    - `partner_org_id`
+    - `partner_sku`
+- **REJECTED**:
+  - Catalog remains unchanged.
+  - Rejection reason is stored in submission metadata.
+
