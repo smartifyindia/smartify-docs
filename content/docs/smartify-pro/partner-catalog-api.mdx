@@ -71,7 +71,9 @@ Optional query:
 
 - `status=PENDING|APPROVED|REJECTED`
 
-## Request payload examples
+## Request payload examples (sample product)
+
+The examples below use one of Smartify's own catalog products and a consistent partner SKU.
 
 ### Create
 
@@ -80,30 +82,30 @@ curl -X POST "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/par
   -H "Content-Type: application/json" \
   -H "X-API-Key: sk_live_pcat_xxxxx" \
   -d '{
-    "partner_sku": "PARTNER-SKU-101",
+    "partner_sku": "SMARTIFY-4GSS-001",
     "name": "4 Gang Scene Switch",
-    "brand": "Partner Brand",
+    "brand": "Smartify",
     "category": ["Switches"],
     "protocol": ["Zigbee 3.0"],
     "technology": ["Wireless"],
-    "pricing": { "mrp": 6200, "selling_price": 5900 }
+    "pricing": { "mrp": 4999, "selling_price": 4599 }
   }'
 ```
 
 ### Update
 
 ```bash
-curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/PARTNER-SKU-101" \
+curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/SMARTIFY-4GSS-001" \
   -H "Content-Type: application/json" \
   -H "X-API-Key: sk_live_pcat_xxxxx" \
   -d '{
     "product": {
       "name": "4 Gang Scene Switch (Rev B)",
-      "brand": "Partner Brand",
+      "brand": "Smartify",
       "category": ["Switches"],
       "protocol": ["Zigbee 3.0"],
       "technology": ["Wireless"],
-      "pricing": { "mrp": 6400, "selling_price": 6100 }
+      "pricing": { "mrp": 5199, "selling_price": 4799 }
     }
   }'
 ```
@@ -111,7 +113,7 @@ curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/part
 ### Delete
 
 ```bash
-curl -X DELETE "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/PARTNER-SKU-101" \
+curl -X DELETE "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/SMARTIFY-4GSS-001" \
   -H "X-API-Key: sk_live_pcat_xxxxx"
 ```
 
@@ -128,7 +130,21 @@ curl -X GET "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/part
 - Submission object includes:
   - `status`: `PENDING`, `APPROVED`, or `REJECTED`
   - `operation`: `CREATE`, `UPDATE`, or `DELETE`
-  - `partner_sku`, `org_id`, and `catalog_sku`
+  - `partner_sku` and `catalog_sku`
+
+## Review process (user-facing)
+
+- **PENDING**
+  - Your request is received and waiting for Smartify admin review.
+  - Product changes are not visible in catalog/inventory yet.
+
+- **APPROVED**
+  - Your request is accepted.
+  - The product create/update/delete is applied in Pro catalog.
+
+- **REJECTED**
+  - Your request is not applied to Pro catalog.
+  - A rejection reason may be returned in the submission record (for example: missing required fields, invalid price data, duplicate or mismatched SKU).
 
 ## Approval lifecycle
 
@@ -141,4 +157,3 @@ curl -X GET "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/part
 - **REJECTED**:
   - Catalog remains unchanged.
   - Rejection reason is stored in submission metadata.
-
