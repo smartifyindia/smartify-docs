@@ -13,8 +13,11 @@ from collections import defaultdict
 
 # ── Paths ──────────────────────────────────────────────────────────────────────
 SCRIPT_DIR = Path(__file__).parent
-PRODUCTS_JSON = Path("/Users/abhi/Github/Smartify/smartify-product-catalog/products.json")
-IMAGES_SRC = Path("/Users/abhi/Github/Smartify/smartify-product-catalog/images")
+# SMARTIFY_CATALOG_DIR points the generator at another checkout of the catalog
+# repo (e.g. a git worktree) without editing this file.
+CATALOG_DIR = Path(os.environ.get("SMARTIFY_CATALOG_DIR", "/Users/abhi/Github/Smartify/smartify-product-catalog"))
+PRODUCTS_JSON = CATALOG_DIR / "products.json"
+IMAGES_SRC = CATALOG_DIR / "images"
 DOCS_DIR = SCRIPT_DIR / "content" / "docs"
 CONTENT_DIR = DOCS_DIR / "products"
 PUBLIC_IMAGES = SCRIPT_DIR / "public" / "images"
@@ -607,7 +610,7 @@ description: "Introduction to the Smartify ecosystem — what you need to get st
 <Steps>
 <Step>
 ### Choose a gateway
-The [Zigbee Gateway (Wired)](../gateways/zigbee-gateway-wired) is the most versatile option.
+The [Core LAN](../gateways/zigbee-gateway-wired) is the most versatile option.
 For Matter-native setups, use the [Convergia](../gateways/convergia).
 </Step>
 <Step>
@@ -1054,16 +1057,16 @@ Every Smartify installation requires at least one gateway. All gateways act as Z
 
 | Scenario | Recommended Gateway |
 |---|---|
-| Standard home automation (Home Assistant / Alexa / Google) | Zigbee Gateway (Wired) |
-| Apple HomeKit integration | Zigbee Gateway (Matter) |
+| Standard home automation (Home Assistant / Alexa / Google) | Core LAN |
+| Apple HomeKit integration | Core Matter |
 | Large home (&gt;128 devices) | Multiple Zigbee Gateways (Wired) |
-| VRV / VRF HVAC control | Zigbee VRV Gateway |
+| VRV / VRF HVAC control | Core VRV |
 | KNX + Zigbee + local on-premise | Convergia |
-| Commercial DALI lighting | Zigbee DALI Gateway |
+| Commercial DALI lighting | Core DALI |
 
 ## Gateway Details
 
-### Zigbee Gateway (Wired)
+### Core LAN
 
 The standard coordinator for most residential installations.
 
@@ -1072,7 +1075,7 @@ The standard coordinator for most residential installations.
 - Capacity: 128 Zigbee devices
 - Integrates with Home Assistant, Amazon Alexa, Google Home
 
-### Zigbee Gateway (Matter)
+### Core Matter
 
 Same as the Wired gateway plus Matter bridge — exposes Zigbee devices natively to **Apple HomeKit**, Google Home (Matter), and Amazon Alexa (Matter).
 
@@ -1088,14 +1091,14 @@ On-premise local gateway for premium installations.
 - Use for: luxury residential, hospitality, offices with KNX infrastructure
 - Includes local UI for configuration and scene management
 
-### Zigbee VRV Gateway
+### Core VRV
 
 Bridges Zigbee to **VRV/VRF HVAC systems** (Daikin, Mitsubishi, Hitachi, etc.).
 
 - Enables thermostat-style control of centralised AC from Home Assistant
 - Required for any installation with VRV/VRF indoor units
 
-### Zigbee DALI Gateway
+### Core DALI
 
 For **commercial lighting** with DALI ballasts and drivers.
 
