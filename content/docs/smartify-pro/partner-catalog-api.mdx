@@ -6,7 +6,7 @@ description: "Submit eligible open-stack automation products and unused accessor
 The Partner Catalog API lets approved, active partners submit products from their external catalog. Every create, replacement, and deletion requires Smartify admin approval before it changes the Pro catalog.
 
 <Callout>
-This guide describes the version 2 approval and eligibility changes. Deploy the matching API and admin frontend together before partners use the new contract. Stock sync, quantity availability, follow-ups, and compatibility-answer tools are later milestones.
+This guide describes the version 2.1 brand-scoped approval, stock sync, and availability contract. Deploy the matching API and admin frontend together before partners use the new contract. Follow-up aggregation and compatibility-answer tools remain later milestones.
 </Callout>
 
 [Download the OpenAPI specification](/openapi/partner-catalog.openapi.json).
@@ -172,4 +172,108 @@ Eligibility errors include reason codes such as `UNUSED_REQUIRED`, `BOX_PACKED_R
 
 Release both `SmartifyPro_ManageDevices` and `Smartify_Pro_ManageUsers` with the admin frontend. Existing partners need reviewed brand grants before generating keys or submitting new products; their own-brand profile selection is not migrated into authorization automatically.
 
-The Lambda role needs DynamoDB transaction permissions on the product and organization tables. Its deployment archive must include `listingEligibility.mjs` and `partnerCatalogStore.mjs`. Release the updated admin screen with the API; old admin clients do not provide the required revision or evidence confirmation. No stock sync endpoint is introduced by this approval milestone.
+The Lambda role needs DynamoDB transaction permissions on the product and organization tables. Its deployment archive must include `listingEligibility.mjs` and `partnerCatalogStore.mjs`. Release the updated admin screen with the API; old admin clients do not provide the required revision or evidence confirmation. The stock endpoints below require the coordinated ManageDevices, BusinessPortal, and MCP release.
+
+
+## Stock sync setup
+
+Stock sync is available **only for approved partner catalog products with approved managed inventory offers**. The supplier must retain active Catalog API brand rights and an active Business distributor membership. Business’s existing authorized-brand policy still applies; a Pro catalog approval does not automatically authorize a new brand for Business sales.
+
+1. Submit the product and obtain Smartify catalog approval.
+2. Create the inventory offer through `POST /business/inventory-offers`, using the product’s canonical catalog SKU as `productId`. The approved partner catalog is now included in the Business catalog when its brand is eligible. Only the originating partner can manage this stock pool.
+3. Upload the required brand authorization letter, submit the offer, and have Smartify approve it in the existing Business review queue. Partner offers require this review even when the partner owns the brand; stock sync cannot approve an offer.
+4. Read availability or the Business catalog to obtain the offer’s current `version`, then sync stock.
+
+Existing offers without managed on-hand/reservation counters return `STOCK_MIGRATION_REQUIRED`; they are not reset automatically. Do not reconstruct reservations from an eventually consistent order index while accepting orders.
+
+## Upload stock
+
+```http
+POST /api/partner-catalog/stock-sync
+X-API-Key: <your-partner-catalog-key>
+Content-Type: application/json
+```
+
+Cognito clients, including MCP, use `POST /partner-catalog/stock-sync` with the existing Bearer ID token. Cognito mutations require the organization owner/admin role. Organization identity comes from the key or authenticated account, never the request body.
+
+```json
+{
+  "clientRequestId": "warehouse-sync-0001",
+  "items": [{
+    "partnerSku": "AC-100",
+    "onHandUnits": 20,
+    "sourceUpdatedAt": "2026-10-14T09:00:00Z",
+    "expectedVersion": 3
+  }]
+}
+```
+
+`onHandUnits` is an **absolute count allocated to this Smartify offer**, including the units reserved by Smartify orders. Exclude stock committed to other sales channels before supplying this count. It is neither an increment nor the entire unallocated warehouse inventory. The API subtracts Smartify’s reservations once; submitting an already-subtracted quantity would subtract them twice.
+
+A snapshot must be newer than both the previous accepted snapshot and the last Smartify dispatch. Delayed observations captured before a dispatch return `STALE_VERSION_OR_SNAPSHOT`, even when the caller supplies the current offer version.
+
+Source time must be the actual stock observation time with a timezone; do not substitute the upload time to make old inventory appear fresh. Counts are safe integers from 0 to 1,000,000. A batch contains 1–100 unique normalized partner SKUs. Omitted SKUs are unchanged.
+
+A `200` response contains per-item `updated`, `rejected`, or `conflict` outcomes. **Completed does not mean every item succeeded.** Each result includes its canonical catalog SKU, offer version where applicable, available units when verified, and a reason code for failures.
+
+Reuse the same request ID and original content to retrieve the recorded outcome without applying stock twice, including after an interrupted batch. Reusing the ID with changed content returns `409`. Recorded failures also replay; a corrective retry needs a new request ID, current offer version, and a later source snapshot.
+
+Stock updates and their receipts are atomic per item. They condition on the offer version and current product/organization approval. A reservation, dispatch, catalog change, suspension, or brand revocation that races the upload prevents an overwrite. Other valid items in the batch can still complete.
+
+If reported stock falls below existing reservations, the item returns `BELOW_RESERVED_STOCK` and the pool’s availability becomes unknown. Existing reservations remain intact. Reconcile the inventory discrepancy and send a later, valid snapshot to restore known availability.
+
+Typical reason codes: `PRODUCT_NOT_APPROVED`, `OFFER_NOT_APPROVED`, `STOCK_MIGRATION_REQUIRED`, `STALE_VERSION_OR_SNAPSHOT`, `CONCURRENT_CHANGE`, and `BELOW_RESERVED_STOCK`.
+
+## Read sync results
+
+```http
+GET /api/partner-catalog/stock-sync/{clientRequestId}
+X-API-Key: <your-partner-catalog-key>
+```
+
+MCP/Cognito route: `GET /partner-catalog/stock-sync/{clientRequestId}`. Results are scoped to the caller’s organization. Status is `processing` when some receipts are missing, otherwise `completed`. An interrupted request is resumed by sending its original body and ID again. The API does not poll an external warehouse or run a background sync job.
+
+## Check a requested quantity
+
+```http
+POST /api/partner-catalog/availability
+X-API-Key: <your-partner-catalog-key>
+Content-Type: application/json
+```
+
+```json
+{
+  "items": [{ "sku": "<canonical-catalog-SKU-from-approval>", "quantity": 18 }]
+}
+```
+
+Use the **canonical catalog SKU**, not a partner-local SKU. Requests contain 1–50 unique SKUs with positive integer quantities up to 1,000,000. API-key reads cover that organization’s approved products. Active authenticated partners can use `POST /partner-catalog/availability` to check approved sellers’ products through MCP.
+
+| Result | Meaning |
+| --- | --- |
+| `available` | Verified sellable units cover the requested quantity |
+| `partial` | Some verified units are available; `shortfall` gives the missing quantity |
+| `unavailable` | No eligible approved offer/product, or verified zero stock |
+| `unknown` | Stock verification is missing, older than 24 hours, inconsistent, or quarantined |
+
+For example, 20 allocated on-hand units with 5 reserved leaves 15 sellable. A request for 18 returns `partial`, `available: 15`, and `shortfall: 3`. Unknown stock returns null quantities; it is not confirmed available and is not silently treated as zero stock.
+
+The response includes observation time, source timestamp, and current offer version. It does not combine suppliers, reserve units, promise delivery, or place an order. Checkout rechecks approval and stock transactionally. Cancellation releases a managed reservation once; dispatch deducts its units from on-hand and reserved counts together.
+
+## MCP tools
+
+- `sync_stock`: upload the organization’s stock with request ID, source timestamp, and expected version; inspect all per-item outcomes.
+- `get_sync_status`: read recorded outcomes without retrying or changing stock.
+- `check_availability`: compare exact canonical approved catalog SKUs with requested quantities; unknown remains unknown.
+
+The Worker uses the existing authenticated API client. No Catalog API key needs to be pasted into chat. Deploy the Worker and refresh the client’s tool discovery after the API routes are available.
+
+## Stock route rollout
+
+The OpenAPI specification is the authoritative route/input/output contract. `scripts/configure_partner_stock_api.mjs` in the API repository derives the six new routes from it; its default is a read-only dry run. The explicit apply mode requires API ID, Cognito authorizer ID, and ManageDevices Lambda ARN, configures methods/integrations/invoke permissions, and never creates a stage deployment.
+
+ManageDevices needs access to its product/request records, organization approval conditions, Users `UserIdIndex`, and the Business commerce table’s stock offer records. BusinessPortal gains scoped conditional reads on product and organization records for checkout. Review IAM and package all new runtime modules before releasing. The runtime packager dereferences the shared policy/service symlinks into regular files inside the BusinessPortal archive.
+
+### Replacing an approved product
+
+Managed offer approval binds the brand and exact approved catalog submission revision. A newly approved replacement stops stock sync, availability, and new checkout through the old offer. Complete or cancel its existing reservations, then call `POST /business/inventory-offers` again for the canonical SKU. With no reservations, this resets the offer to draft with the reviewed brand and GST rate. Upload a fresh authorization letter and obtain Smartify offer approval before syncing a new snapshot. Stock upload cannot approve or bypass this review.

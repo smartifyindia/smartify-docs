@@ -2,8 +2,8 @@
   "openapi": "3.0.3",
   "info": {
     "title": "Smartify Partner Catalog API",
-    "version": "2.0.0",
-    "description": "Approval and eligibility milestone. Contract for source changes; deploy with the matching admin frontend. Stock sync and availability endpoints are not part of this version."
+    "version": "2.1.0",
+    "description": "Brand-scoped catalog approval, approved partner stock sync, and quantity-based availability. Sync requires an approved catalog product and approved managed inventory offer; does not approve products or offers."
   },
   "servers": [
     {
@@ -892,6 +892,582 @@
           }
         }
       }
+    },
+    "/partner-catalog/stock-sync": {
+      "post": {
+        "operationId": "syncPartnerStock",
+        "security": [
+          {
+            "PartnerBearer": []
+          }
+        ],
+        "description": "Absolute per-item sync, preserving reservations. Only approved partner products, approved managed offers, active seller membership, and verified brand rights qualify. Completed batches may contain failures. Replays return recorded outcomes, including failures; use a new request ID and current version for a corrective retry. Omissions never zero stock. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "cognito",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockSyncRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/partner-catalog/stock-sync/{clientRequestId}": {
+      "get": {
+        "operationId": "getPartnerStockSyncStatus",
+        "security": [
+          {
+            "PartnerBearer": []
+          }
+        ],
+        "description": "Read only the caller organization\u2019s durable per-item receipts. A processing request can be resumed with the same original request content. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "cognito",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clientRequestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 80,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/partner-catalog/availability": {
+      "post": {
+        "operationId": "checkPartnerQuantityAvailability",
+        "security": [
+          {
+            "PartnerBearer": []
+          }
+        ],
+        "description": "Read-only check of exact canonical approved partner catalog SKUs. API-key calls are scoped to the key organization; Cognito reads may check approved sellers. A quantity is unknown when verification is missing, older than 24 hours, or inconsistent. Does not reserve stock, aggregate other sellers, promise delivery, or place orders. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "cognito",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvailabilityRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/partner-catalog/stock-sync": {
+      "post": {
+        "operationId": "syncPartnerStockWithApiKey",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Absolute per-item sync, preserving reservations. Only approved partner products, approved managed offers, active seller membership, and verified brand rights qualify. Completed batches may contain failures. Replays return recorded outcomes, including failures; use a new request ID and current version for a corrective retry. Omissions never zero stock. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "partner_api_key",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StockSyncRequest"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/partner-catalog/stock-sync/{clientRequestId}": {
+      "get": {
+        "operationId": "getPartnerStockSyncStatusWithApiKey",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Read only the caller organization\u2019s durable per-item receipts. A processing request can be resumed with the same original request content. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "partner_api_key",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StockSyncResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "clientRequestId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 80,
+              "pattern": "^[A-Za-z0-9_-]+$"
+            }
+          }
+        ]
+      }
+    },
+    "/api/partner-catalog/availability": {
+      "post": {
+        "operationId": "checkPartnerQuantityAvailabilityWithApiKey",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Read-only check of exact canonical approved partner catalog SKUs. API-key calls are scoped to the key organization; Cognito reads may check approved sellers. A quantity is unknown when verification is missing, older than 24 hours, or inconsistent. Does not reserve stock, aggregate other sellers, promise delivery, or place orders. Managed offer approval must match the current brand and exact approved catalog submission revision. A replacement requires renewed offer review after existing reservations are resolved.",
+        "x-smartify-lambda": "SmartifyPro_ManageDevices",
+        "x-smartify-auth": "partner_api_key",
+        "responses": {
+          "200": {
+            "description": "Per-item result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AvailabilityResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid body, IDs, quantities, timestamps, or duplicate SKUs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner inactive or role unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Sync request not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Request ID reused with different content",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected storage error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvailabilityRequest"
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -905,6 +1481,12 @@
         "type": "http",
         "scheme": "bearer",
         "bearerFormat": "Cognito JWT"
+      },
+      "PartnerBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Cognito ID JWT",
+        "description": "Authenticated active partner; owner/admin role required for stock mutation. Organization is server-derived."
       }
     },
     "schemas": {
@@ -1495,6 +2077,257 @@
           "updated_at": {
             "type": "string",
             "format": "date-time"
+          }
+        }
+      },
+      "StockSyncItem": {
+        "type": "object",
+        "required": [
+          "partnerSku",
+          "onHandUnits",
+          "sourceUpdatedAt",
+          "expectedVersion"
+        ],
+        "properties": {
+          "partnerSku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1024,
+            "description": "Your own partner SKU, normalized to uppercase"
+          },
+          "onHandUnits": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 1000000,
+            "description": "Absolute units allocated to this Smartify offer, including its Smartify reservations, excluding quantities committed to other channels. Never a delta or global warehouse total."
+          },
+          "sourceUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Actual allocated-stock observation time with timezone, not upload time; must be newer than both the previous snapshot and the last Smartify dispatch, and not in the future."
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9007199254740991,
+            "description": "Current approved offer version from availability or the previous sync result"
+          }
+        }
+      },
+      "StockSyncRequest": {
+        "type": "object",
+        "required": [
+          "clientRequestId",
+          "items"
+        ],
+        "properties": {
+          "clientRequestId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 80,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/StockSyncItem"
+            }
+          }
+        }
+      },
+      "StockSyncReceipt": {
+        "type": "object",
+        "required": [
+          "clientRequestId",
+          "partnerSku",
+          "status",
+          "processedAt"
+        ],
+        "properties": {
+          "clientRequestId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 80,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "partnerSku": {
+            "type": "string"
+          },
+          "catalogSku": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "updated",
+              "rejected",
+              "conflict"
+            ]
+          },
+          "reasonCode": {
+            "type": "string"
+          },
+          "version": {
+            "type": "integer",
+            "nullable": true
+          },
+          "availableUnits": {
+            "type": "integer",
+            "nullable": true
+          },
+          "onHandUnits": {
+            "type": "integer"
+          },
+          "expectedVersion": {
+            "type": "integer"
+          },
+          "sourceUpdatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "processedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "StockSyncResult": {
+        "type": "object",
+        "required": [
+          "clientRequestId",
+          "status",
+          "items"
+        ],
+        "properties": {
+          "clientRequestId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 80,
+            "pattern": "^[A-Za-z0-9_-]+$"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "completed",
+              "processing"
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/StockSyncReceipt"
+            }
+          }
+        }
+      },
+      "AvailabilityRequest": {
+        "type": "object",
+        "required": [
+          "items"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 50,
+            "items": {
+              "type": "object",
+              "required": [
+                "sku",
+                "quantity"
+              ],
+              "properties": {
+                "sku": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 200,
+                  "description": "Exact canonical approved partner catalog SKU, not a partner-local SKU"
+                },
+                "quantity": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 1000000
+                }
+              }
+            }
+          }
+        }
+      },
+      "AvailabilityItem": {
+        "type": "object",
+        "required": [
+          "sku",
+          "requested",
+          "status",
+          "available",
+          "shortfall",
+          "checkedAt"
+        ],
+        "properties": {
+          "sku": {
+            "type": "string"
+          },
+          "requested": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "partial",
+              "unavailable",
+              "unknown"
+            ]
+          },
+          "available": {
+            "type": "integer",
+            "nullable": true
+          },
+          "shortfall": {
+            "type": "integer",
+            "nullable": true
+          },
+          "version": {
+            "type": "integer",
+            "nullable": true
+          },
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sourceUpdatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "AvailabilityResult": {
+        "type": "object",
+        "required": [
+          "checkedAt",
+          "items",
+          "reservesStock"
+        ],
+        "properties": {
+          "checkedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "reservesStock": {
+            "type": "boolean",
+            "enum": [
+              false
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AvailabilityItem"
+            }
           }
         }
       }
