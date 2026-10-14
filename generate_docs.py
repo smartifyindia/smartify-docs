@@ -1450,3 +1450,9 @@ def main():
 
 if __name__ == "__main__":
     main()
+    # Keep the moderated partner API guide reproducible alongside generated product pages.
+    guide_root = Path(__file__).resolve().parent
+    guide_source = guide_root / "guides" / "partner-catalog-api.mdx"
+    guide_target = guide_root / "content" / "docs" / "smartify-pro" / "partner-catalog-api.mdx"
+    guide_target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(guide_source, guide_target)

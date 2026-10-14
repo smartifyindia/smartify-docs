@@ -1,0 +1,175 @@
+---
+title: "Partner Catalog API"
+description: "Submit eligible open-stack automation products and unused accessories for Smartify approval."
+---
+
+The Partner Catalog API lets approved, active partners submit products from their external catalog. Every create, replacement, and deletion requires Smartify admin approval before it changes the Pro catalog.
+
+<Callout>
+This guide describes the version 2 approval and eligibility changes. Deploy the matching API and admin frontend together before partners use the new contract. Stock sync, quantity availability, follow-ups, and compatibility-answer tools are later milestones.
+</Callout>
+
+[Download the OpenAPI specification](/openapi/partner-catalog.openapi.json).
+
+## Who can submit
+
+Your organization needs Catalog API access enabled by Smartify **for each approved brand/make**, and either paid-active partnership qualification or approved co-branded partner eligibility. Suspended, disabled, banned, closed, cancelled, and expired organizations cannot submit or publish products, including co-branded partners.
+
+Brand/make is mandatory on every product. Smartify can approve a brand owner or an authorized distributor/supplier after reviewing its ownership or authorization evidence. Selecting brands in your partner profile does not grant catalog rights. A key is scoped to your organization’s approved brand grants; a new brand needs another Smartify grant. Removing a grant blocks future submissions and publication approvals for that brand.
+
+Generate a Partner Catalog API key in **Settings → Apps → Partner Catalog API**. These keys are separate from affiliate keys. Use `X-API-Key` for partner endpoints; never paste keys into a chat or product description. Admin endpoints use Cognito Bearer authentication and require the `smartify_admins` group.
+
+Base URL: `https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1`.
+
+## Products that qualify
+
+All submitted goods must be **unused and box-packed**. Used, refurbished, demo, unboxed, or undocumented goods do not qualify under this policy.
+
+Automation devices need documented support for an approved open stack: **Z-Wave, Zigbee, KNX, or Matter**. Wi-Fi, Bluetooth, Thread, Ethernet, voice-assistant support, or a proprietary app alone does not establish open-stack eligibility. Matter over Wi-Fi or Thread can qualify through documented Matter support. Additional standards need an explicit Smartify policy change.
+
+Supporting accessories can qualify without an open protocol: for example curtain tracks, motors, and lights used in an automation installation. They must also be unused and box-packed, explain their automation use, and supply documentation. A generic accessory category does not establish eligibility.
+
+Supply a document identifier and section that Smartify can inspect. This is an evidence reference, not a compatibility guarantee. Smartify verifies the evidence and declarations during review. Approval in Pro does not by itself authorize a brand for the Business marketplace or create a sellable stock offer.
+
+## Submit a product
+
+```http
+POST /api/partner-catalog/products
+Content-Type: application/json
+X-API-Key: <your-partner-catalog-key>
+```
+
+```json
+{
+  "partner_sku": "AC-100",
+  "name": "Zigbee Relay",
+  "brand": "Partner Brand",
+  "category": ["Switches"],
+  "protocol": ["Zigbee 3.0"],
+  "technology": ["Wireless"],
+  "pricing": { "mrp": 4999, "selling_price": 4599 },
+  "eligibility": {
+    "kind": "automation_device",
+    "condition": "unused",
+    "packaging": "box_packed",
+    "openStandards": ["Zigbee"],
+    "evidence": [{ "documentId": "relay-installation-manual", "section": "Supported coordinators" }]
+  }
+}
+```
+
+For a curtain track, use this eligibility declaration with the product's full name, pricing, and specifications:
+
+```json
+{
+  "kind": "automation_accessory",
+  "condition": "unused",
+  "packaging": "box_packed",
+  "openStandards": [],
+  "automationUse": "Track designed for a compatible automated curtain motor",
+  "evidence": [{ "documentId": "track-installation-manual", "section": "Motor mounting compatibility" }]
+}
+```
+
+Success returns `202 Accepted` with `submission.status = PENDING`, a unique `submission_id`, and a numeric `revision` beginning at 1. **Accepted means queued for review, not listed.**
+
+New `partner_sku` identities are at most 80 characters. Previously accepted legacy identities remain usable for replacement, deletion, and review without renaming. It is uppercased and whitespace becomes hyphens; letters, digits, dots, underscores and hyphens are allowed. Pricing amounts must be finite and nonnegative. Include MRP or selling price; dealer price may be omitted or null. Device declarations need a supported standard; accessory declarations need a nonblank `automationUse`. Evidence contains 1–10 entries.
+
+## Replace or delete
+
+```http
+PUT /api/partner-catalog/products/{partner_sku}
+```
+
+Send the complete replacement product, including `eligibility`, either directly or inside a `product` object. This is a complete replacement request, not a partial patch. Resubmission creates a new ID/revision and preserves earlier revisions. An existing approved catalog product is unchanged until approval of the replacement.
+
+```http
+DELETE /api/partner-catalog/products/{partner_sku}
+```
+
+Deletion also returns `202` and needs review. It does not immediately remove the catalog product. Resubmitting a SKU supersedes the current pending review target; the admin must refresh and review the new revision. This version does not implement client-request idempotency: retrying a successful mutation creates another revision.
+
+## Read submissions and history
+
+```http
+GET /api/partner-catalog/products?status=PENDING
+GET /api/partner-catalog/products?history=true
+```
+
+The response has `items` and `count`. Status can be `PENDING`, `APPROVED`, or `REJECTED`. History mode returns revision records instead of the current pointers. Partners can read only submissions owned by their key's organization. Invalid status filters return `400`.
+
+## Admin approval
+
+```http
+GET /devices/partner-submissions?status=PENDING
+Authorization: Bearer <admin-cognito-id-token>
+```
+
+Manage brand scope in the admin dashboard’s **Brands** action for the organization. Verify the rights documentation, approve the brand/make and relationship, and enable Catalog API access. Each product still needs its own approval in the product review queue.
+
+```http
+POST /profile/admin/partner-catalog-access
+Authorization: Bearer <admin-cognito-id-token>
+Content-Type: application/json
+```
+
+```json
+{
+  "org_id": "<partner-organization-id>",
+  "catalog_api_approved": true,
+  "catalog_brand_grants": [{
+    "brand": "Partner Brand",
+    "relationship": "authorized_supplier",
+    "evidence": [{ "documentId": "brand-authorization-letter", "section": "Distribution rights" }]
+  }]
+}
+```
+
+Use `brand_owner` for verified ownership, or `authorized_supplier` for a verified distributor/supplier. The grant list is a complete replacement. Remove a brand to revoke its scope; to remove all brands, send an empty list with access disabled. The server stamps reviewer/time. Access cannot be enabled without at least one verified brand. Key generation also requires a verified brand grant. Admins can approve a pending deletion for cleanup even after that brand’s publication rights are revoked.
+
+The queue includes the submitted payload, ID/revision, and `previous_approved_product` for comparison. Review the referenced documentation, actual integration prerequisites, unused/box-packed declarations, and accessory automation use before approving.
+
+```http
+POST /devices/partner-submissions/{org_id}/{partner_sku}/approve
+Authorization: Bearer <admin-cognito-id-token>
+Content-Type: application/json
+```
+
+```json
+{
+  "submission_id": "<id-returned-by-the-queue>",
+  "revision": 1,
+  "evidence_reviewed": true
+}
+```
+
+For a deletion, confirmation means the admin verified the deletion request. Approval rechecks current organization eligibility, brand authorization, and product declarations before publication. The decision, revision history, and catalog change are atomic. A changed/already-reviewed submission returns `409`; refresh the queue before deciding again.
+
+Rejection uses `/reject` with the same ID/revision and a required nonblank `reason` of at most 1000 characters:
+
+```json
+{
+  "submission_id": "<id-returned-by-the-queue>",
+  "revision": 1,
+  "reason": "Please supply the manual section documenting the required gateway."
+}
+```
+
+Legacy pending products without eligibility declarations must be resubmitted before approval. Legacy records without a revision can be rejected using revision `0`; their previous data is preserved in history. Previously published catalog products are not automatically migrated or requalified by this release.
+
+## Errors and rollout
+
+| Status | Meaning |
+| --- | --- |
+| 400 | Invalid JSON, invalid filter/SKU, missing review identity/confirmation, or blank rejection reason |
+| 401 | Invalid partner key or missing authenticated identity |
+| 403 | Catalog API disabled, organization ineligible, brand not authorized, or reviewer lacks admin access |
+| 404 | Submission not found |
+| 409 | Concurrent submission/catalog/eligibility change or already-reviewed revision |
+| 422 | Ineligible product, missing evidence, or invalid product/pricing data |
+
+Eligibility errors include reason codes such as `UNUSED_REQUIRED`, `BOX_PACKED_REQUIRED`, `OPEN_STANDARD_REQUIRED`, `UNSUPPORTED_OPEN_STANDARD`, `AUTOMATION_USE_REQUIRED`, and `DOCUMENTATION_EVIDENCE_REQUIRED`.
+
+Release both `SmartifyPro_ManageDevices` and `Smartify_Pro_ManageUsers` with the admin frontend. Existing partners need reviewed brand grants before generating keys or submitting new products; their own-brand profile selection is not migrated into authorization automatically.
+
+The Lambda role needs DynamoDB transaction permissions on the product and organization tables. Its deployment archive must include `listingEligibility.mjs` and `partnerCatalogStore.mjs`. Release the updated admin screen with the API; old admin clients do not provide the required revision or evidence confirmation. No stock sync endpoint is introduced by this approval milestone.

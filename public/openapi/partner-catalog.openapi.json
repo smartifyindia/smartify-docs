@@ -1,0 +1,1503 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Smartify Partner Catalog API",
+    "version": "2.0.0",
+    "description": "Approval and eligibility milestone. Contract for source changes; deploy with the matching admin frontend. Stock sync and availability endpoints are not part of this version."
+  },
+  "servers": [
+    {
+      "url": "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1"
+    }
+  ],
+  "paths": {
+    "/api/partner-catalog/products": {
+      "get": {
+        "operationId": "listPartnerCatalogSubmissions",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "APPROVED",
+                "REJECTED"
+              ]
+            }
+          },
+          {
+            "name": "history",
+            "in": "query",
+            "schema": {
+              "type": "boolean",
+              "default": false
+            },
+            "description": "Include revision history instead of current pointers."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Submission records; admin responses include the currently published product for comparison",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "submitPartnerProduct",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Submit an eligible product for human review. A 202 response does not publish a listing. Resubmission creates a new revision; client retries create another revision in this release. Brand/make is mandatory and must match an active Smartify-approved organization brand grant.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Queued PENDING submission",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionAccepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/partner-catalog/products/{partner_sku}": {
+      "parameters": [
+        {
+          "name": "partner_sku",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Existing normalized partner SKU, including legacy identities. New identities submitted through the API are restricted to 80 characters and letters, digits, dot, underscore or hyphen."
+          }
+        }
+      ],
+      "put": {
+        "operationId": "submitPartnerProductReplacement",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Submit a complete replacement product, not a partial patch. Existing approved data stays unchanged until this revision is approved.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateProduct"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Queued PENDING replacement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionAccepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "submitPartnerProductDeletion",
+        "security": [
+          {
+            "PartnerApiKey": []
+          }
+        ],
+        "description": "Queue deletion for review; does not immediately delete the catalog record.",
+        "responses": {
+          "202": {
+            "description": "Queued PENDING deletion",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionAccepted"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/partner-submissions": {
+      "get": {
+        "operationId": "listAdminCatalogSubmissions",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "PENDING",
+                "APPROVED",
+                "REJECTED"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Submission records; admin responses include the currently published product for comparison",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SubmissionList"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/partner-submissions/{org_id}/{partner_sku}/approve": {
+      "parameters": [
+        {
+          "name": "org_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "partner_sku",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Existing normalized partner SKU, including legacy identities. New identities submitted through the API are restricted to 80 characters and letters, digits, dot, underscore or hyphen."
+          }
+        }
+      ],
+      "post": {
+        "operationId": "approvePartnerCatalogSubmission",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "description": "Requires Cognito smartify_admins group. Decision, revision history and catalog publication are atomic. Approval rechecks organization and product eligibility. Legacy products without declarations must be resubmitted. An already-pending DELETE can be approved by a platform admin for cleanup after publication access or brand grants are revoked; ownership and transaction guards remain.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApproveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Decision recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/devices/partner-submissions/{org_id}/{partner_sku}/reject": {
+      "parameters": [
+        {
+          "name": "org_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "partner_sku",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Existing normalized partner SKU, including legacy identities. New identities submitted through the API are restricted to 80 characters and letters, digits, dot, underscore or hyphen."
+          }
+        }
+      ],
+      "post": {
+        "operationId": "rejectPartnerCatalogSubmission",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "description": "Requires Cognito smartify_admins group. Decision, revision history and catalog publication are atomic. Approval rechecks organization and product eligibility. Legacy products without declarations must be resubmitted.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RejectRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Decision recorded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReviewResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid API key or missing identity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Partner no longer eligible, or admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Submission not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Submission, catalog or eligibility changed; refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Product fails listing eligibility or price validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Unexpected server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/profile/admin/partner-catalog-access": {
+      "post": {
+        "operationId": "setPartnerCatalogBrandAccess",
+        "security": [
+          {
+            "AdminBearer": []
+          }
+        ],
+        "description": "Requires smartify_admins. Smartify verifies ownership or authorized-supplier evidence for each brand. Brand names selected by a partner in their profile do not grant access. Enabling access requires at least one verified grant. Removing a grant prevents future submissions and approvals for that brand. Server stamps reviewer and time.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CatalogBrandAccessRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Catalog brand access saved",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CatalogBrandAccessResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Missing organization or access flag",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Admin role required",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Organization not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Organization changed, refresh before retry",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid/duplicate brand grant or missing authorization evidence",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "PartnerApiKey": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      },
+      "AdminBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Cognito JWT"
+      }
+    },
+    "schemas": {
+      "ListingEligibility": {
+        "type": "object",
+        "required": [
+          "kind",
+          "condition",
+          "packaging",
+          "openStandards",
+          "evidence"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "automation_device",
+              "automation_accessory"
+            ]
+          },
+          "condition": {
+            "type": "string",
+            "enum": [
+              "unused"
+            ]
+          },
+          "packaging": {
+            "type": "string",
+            "enum": [
+              "box_packed"
+            ]
+          },
+          "openStandards": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "Zigbee",
+                "Zigbee 3.0",
+                "Z-Wave",
+                "Z-Wave Plus",
+                "KNX",
+                "KNX TP",
+                "KNX IP",
+                "Matter",
+                "Matter over Thread",
+                "Matter over Wi-Fi"
+              ]
+            },
+            "description": "Devices require at least one approved open standard. Accessories may use an empty array. Transport or cloud-app compatibility alone does not qualify."
+          },
+          "automationUse": {
+            "type": "string",
+            "maxLength": 1000,
+            "description": "Required, nonblank automation-use justification for accessories."
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "required": [
+                "documentId",
+                "section"
+              ],
+              "properties": {
+                "documentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "section": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          },
+          "policyVersion": {
+            "type": "integer",
+            "readOnly": true
+          }
+        },
+        "oneOf": [
+          {
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "automation_device"
+                ]
+              },
+              "openStandards": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          {
+            "required": [
+              "automationUse"
+            ],
+            "properties": {
+              "kind": {
+                "type": "string",
+                "enum": [
+                  "automation_accessory"
+                ]
+              },
+              "automationUse": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 1000
+              }
+            }
+          }
+        ]
+      },
+      "Product": {
+        "type": "object",
+        "required": [
+          "name",
+          "pricing",
+          "eligibility",
+          "brand"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "brand": {
+            "type": "string",
+            "maxLength": 160,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 5000
+          },
+          "category": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "protocol": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "technology": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hero_image": {
+            "type": "string",
+            "maxLength": 2048
+          },
+          "images": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "pricing": {
+            "type": "object",
+            "anyOf": [
+              {
+                "required": [
+                  "mrp"
+                ]
+              },
+              {
+                "required": [
+                  "selling_price"
+                ]
+              }
+            ],
+            "properties": {
+              "mrp": {
+                "type": "number",
+                "minimum": 0
+              },
+              "selling_price": {
+                "type": "number",
+                "minimum": 0
+              },
+              "dealer_price": {
+                "type": "number",
+                "minimum": 0,
+                "nullable": true
+              }
+            }
+          },
+          "gst_rate": {
+            "type": "number",
+            "enum": [
+              0,
+              5,
+              12,
+              18,
+              28
+            ]
+          },
+          "hsn_code": {
+            "type": "string",
+            "pattern": "^[0-9]+$"
+          },
+          "eligibility": {
+            "$ref": "#/components/schemas/ListingEligibility"
+          }
+        }
+      },
+      "CreateProduct": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/Product"
+          },
+          {
+            "type": "object",
+            "required": [
+              "partner_sku"
+            ],
+            "properties": {
+              "partner_sku": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Normalized to uppercase; whitespace becomes hyphens. Other allowed characters: letters, digits, dot, underscore and hyphen."
+              }
+            }
+          }
+        ]
+      },
+      "UpdateProduct": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/Product"
+          },
+          {
+            "type": "object",
+            "required": [
+              "product"
+            ],
+            "properties": {
+              "product": {
+                "$ref": "#/components/schemas/Product"
+              }
+            }
+          }
+        ]
+      },
+      "Submission": {
+        "type": "object",
+        "required": [
+          "submission_id",
+          "org_id",
+          "partner_sku",
+          "catalog_sku",
+          "operation",
+          "status"
+        ],
+        "properties": {
+          "submission_id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "New submissions start at 1; legacy records lacking this field are reviewed as revision 0."
+          },
+          "org_id": {
+            "type": "string"
+          },
+          "partner_sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "Normalized to uppercase; whitespace becomes hyphens. Other allowed characters: letters, digits, dot, underscore and hyphen."
+          },
+          "catalog_sku": {
+            "type": "string"
+          },
+          "operation": {
+            "type": "string",
+            "enum": [
+              "CREATE",
+              "UPDATE",
+              "DELETE"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "PENDING",
+              "APPROVED",
+              "REJECTED"
+            ]
+          },
+          "payload": {
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Product"
+              }
+            ],
+            "nullable": true
+          },
+          "submitted_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submitted_by": {
+            "type": "string"
+          },
+          "reviewed_at": {
+            "type": "string",
+            "nullable": true
+          },
+          "reviewed_by": {
+            "type": "string",
+            "nullable": true
+          },
+          "review_reason": {
+            "type": "string",
+            "nullable": true
+          },
+          "evidence_reviewed": {
+            "type": "boolean"
+          },
+          "previous_approved_product": {
+            "type": "object",
+            "nullable": true,
+            "additionalProperties": true
+          },
+          "brand": {
+            "type": "string",
+            "description": "Brand bound to the organization grant at submission."
+          }
+        }
+      },
+      "SubmissionAccepted": {
+        "type": "object",
+        "required": [
+          "message",
+          "submission"
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "submission": {
+            "$ref": "#/components/schemas/Submission"
+          }
+        }
+      },
+      "SubmissionList": {
+        "type": "object",
+        "required": [
+          "items",
+          "count"
+        ],
+        "properties": {
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Submission"
+            }
+          },
+          "count": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "ApproveRequest": {
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision",
+          "evidence_reviewed"
+        ],
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "evidence_reviewed": {
+            "type": "boolean",
+            "enum": [
+              true
+            ],
+            "description": "Admin confirms the evidence and eligibility declarations were verified, or the deletion request was verified."
+          }
+        }
+      },
+      "RejectRequest": {
+        "type": "object",
+        "required": [
+          "submission_id",
+          "revision",
+          "reason"
+        ],
+        "properties": {
+          "submission_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "reason": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 1000
+          }
+        }
+      },
+      "ReviewResult": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "org_id": {
+            "type": "string"
+          },
+          "partner_sku": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "Normalized to uppercase; whitespace becomes hyphens. Other allowed characters: letters, digits, dot, underscore and hyphen."
+          },
+          "catalog_sku": {
+            "type": "string"
+          },
+          "submission_id": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer"
+          },
+          "operation": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "APPROVED",
+              "REJECTED"
+            ]
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "code": {
+            "type": "string"
+          },
+          "reasons": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "eligibility": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "CatalogBrandGrant": {
+        "type": "object",
+        "required": [
+          "brand",
+          "relationship",
+          "evidence"
+        ],
+        "properties": {
+          "brand": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 160
+          },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "brand_owner",
+              "authorized_supplier"
+            ]
+          },
+          "evidence": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 10,
+            "items": {
+              "type": "object",
+              "required": [
+                "documentId",
+                "section"
+              ],
+              "properties": {
+                "documentId": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 300
+                },
+                "section": {
+                  "type": "string",
+                  "minLength": 1,
+                  "maxLength": 500
+                }
+              }
+            }
+          },
+          "approved_by": {
+            "type": "string",
+            "readOnly": true
+          },
+          "approved_at": {
+            "type": "string",
+            "format": "date-time",
+            "readOnly": true
+          }
+        }
+      },
+      "CatalogBrandAccessRequest": {
+        "type": "object",
+        "required": [
+          "org_id",
+          "catalog_api_approved"
+        ],
+        "properties": {
+          "org_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "catalog_api_approved": {
+            "type": "boolean"
+          },
+          "catalog_brand_grants": {
+            "type": "array",
+            "maxItems": 100,
+            "items": {
+              "$ref": "#/components/schemas/CatalogBrandGrant"
+            },
+            "description": "Complete replacement for the approved brand scope. Required when enabling access without existing grants. Empty array revokes all brand grants and requires access disabled."
+          }
+        }
+      },
+      "CatalogBrandAccessResult": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/CatalogBrandAccessRequest"
+          }
+        ],
+        "properties": {
+          "message": {
+            "type": "string"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      }
+    }
+  }
+}
