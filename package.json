@@ -10,7 +10,10 @@
     "preview": "npm run cf:build && npx wrangler pages dev",
     "deploy": "CLOUDFLARE_ACCOUNT_ID=b9f8db8151b55e4e33b0190fd0805f38 npm run cf:build && npx wrangler deploy",
     "postinstall": "fumadocs-mdx",
-    "sync:partner-catalog-api": "node scripts/sync-partner-catalog-docs.mjs"
+    "sync:partner-catalog-api": "node scripts/sync-partner-catalog-docs.mjs",
+    "export:mcp-docs": "node scripts/export-mcp-docs.mjs",
+    "prebuild": "npm run export:mcp-docs",
+    "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
     "fumadocs-core": "^15.8.5",

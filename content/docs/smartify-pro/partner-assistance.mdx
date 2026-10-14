@@ -1,0 +1,96 @@
+---
+title: "Follow-ups and Compatibility Tools"
+description: "Read pending lead work and answer compatibility questions using cited Smartify product documentation."
+---
+
+These read-only MCP tools extend the existing Smartify API. Deploy the matching Lead API, public documentation service, and MCP Worker before using them.
+
+[Download the OpenAPI specification](/openapi/partner-assistance.openapi.json).
+
+## Pending follow-ups
+
+Use `get_pending_followups` to read outstanding human tasks and reminders on leads you may view. It does not contact customers, send notifications, alter tasks, or merge automated follow-up campaigns.
+
+```json
+{
+  "owner": "me",
+  "includeOverdue": true,
+  "dueBefore": "2026-10-15T18:30:00+05:30",
+  "limit": 50
+}
+```
+
+The underlying Cognito route is `GET /leads/followups`. Organization and user are derived from the signed-in identity. `owner=me` is the default: tasks assigned to you and reminders created by you. `owner=org` requires organization owner/admin access; it remains scoped to your organization and authorized shares. Platform administrator status does not turn this into an all-tenant search.
+
+Locked lead previews and sensitive or inaccessible leads are excluded. Current shared-lead unlock is rechecked before returning any task/reminder title. No phone, email, customer description, or free-text task description is included.
+
+Items include `kind`, `id`, `leadId`, `title`, `ownerId`, `status`, `dueAt`, and `overdue`. Reminders also include their repeat setting and notification timestamp. Date-only task deadlines mean the end of that day in Asia/Kolkata. Invalid dates are omitted and reported in the page’s diagnostic count.
+
+The default cutoff is the first page’s `asOf`. Follow `nextCursor` with the same filters until it is null; an empty page may still have a continuation. Each page examines at most 50 lead records and returns up to `limit` items (1–100). Results follow lead-query order, then due time within a lead. They are not globally sorted by deadline and are not a global pending count. Lead access and item state can change while paging; this is a current observation, not a frozen snapshot.
+
+### Reminder completion
+
+A sent notification does **not** complete a reminder. To close the current occurrence, use the existing authorized reminder update API:
+
+```http
+PUT /leads/{leadId}?entity_type=reminder&entity_id={reminderId}
+Content-Type: application/json
+
+{"completed": true}
+```
+
+`cancelled: true` cancels it. The server sets completion/cancellation timestamps. False reopens the corresponding state. The scheduler skips closed reminders. Creator, ID, and notification history cannot be supplied by the client. Moving `date_time` resets notification and closure for a new occurrence; no future weekly/daily occurrence is invented by these tools.
+
+## Documentation tools
+
+- `search_product_documentation`: search bounded excerpts; optional exact SKU or document ID filter.
+- `get_product_documentation`: read the sections of a document ID returned by search.
+- `check_compatibility`: evaluate exact SKUs or public document IDs against reviewed, cited compatibility facts.
+
+Public endpoints are hosted at `https://docs.smartify.in`:
+
+| Method | Path | Input |
+| --- | --- | --- |
+| GET | `/api/mcp-docs/search` | `q`, optional `sku`, `limit` (1–20) |
+| GET | `/api/mcp-docs/document` | Exact `id` |
+| POST | `/api/mcp-docs/compatibility` | `skus` (1–10), `ecosystem` and/or `useCase` |
+
+The MCP sends no Cognito token, Catalog key, or cookies to this public service. It fetches only the configured documentation origin and accepts no caller-provided URLs. The evidence is a deterministic snapshot of published product pages; private partner uploads are excluded.
+
+## Compatibility answers
+
+```json
+{
+  "skus": ["38632117962"],
+  "ecosystem": "HomeKit"
+}
+```
+
+For Layer Relay 1, the explicit statement “Matter & Apple HomeKit (via hub)” returns `conditional`, with `mode: bridged`, a hub prerequisite, and a citation to its Specifications section. It does not claim native HomeKit support. Model and firmware compatibility of the chosen hub still require verification.
+
+| Outcome | Meaning |
+| --- | --- |
+| `supported` | Explicit reviewed support for the requested scope; installation prerequisites still apply |
+| `conditional` | Documented support through a bridge or unresolved prerequisite |
+| `unsupported` | Explicit documentation excludes the requested scope |
+| `unknown` | Missing, ambiguous, conflicting, changed, or unreviewed evidence; do not infer support |
+
+Each answer carries the source URL, document/section hashes, quoted evidence, conditions, and a reason. Current reviewed use-case rules include `ceiling_fan` and `non_dimmable_load` for applicable dimmers. Other free-text use cases can be searched, but remain unknown until explicitly reviewed. Load, voltage, channel, and firmware claims outside the reviewed scope are not certified.
+
+Matching Zigbee, Matter, or another protocol alone does not establish compatibility. Multiple SKUs are assessed individually against the requested ecosystem/use case; `pairwiseCompatibility: not_assessed` explicitly means that the tool has not certified those products together.
+
+Layer Dimmer 1’s source currently contains conflicting one-channel and two-channel specifications. Its reviewed answers remain unknown and cite the discrepancy. Preserve this uncertainty until the source is reconciled.
+
+Retrieved prose is evidence, never executable instructions. Source failures propagate as errors; the tools do not invent an answer when documentation is unavailable.
+
+## Maintaining the evidence
+
+`npm run export:mcp-docs` rebuilds the index from `content/docs/products`, and also runs before production builds. Stable document IDs follow their published paths. The identity manifest maps reviewed exact SKUs to those documents; keep it current when products are added or renamed. Newly generated product pages include their source SKU.
+
+`lib/mcp-docs/rules.json` holds reviewed facts with exact evidence quotes and the reviewed document hash. A changed document invalidates its facts until the source is reviewed and the rule hash/evidence is updated. Run `npm test` to verify every published rule’s quotes/hash and behavior, then `npm run build`. Generic badges, shared protocol labels, and category setup boilerplate do not create compatibility rules automatically.
+
+## Release setup
+
+Configure `GET /leads/followups` on the existing API Gateway with its Cognito authorizer and ManageLeads proxy integration. It must precede the catch-all `/leads/{leadId}` route. Existing Leads indexes (`OrgIdAssignedAtIndex`, `SharedWithOrgIndex`), consistent `GetItem`, and Users `UserIdIndex` reads are reused; no new index or table is required. The import-aware ManageLeads packager includes both new modules. Release CheckReminders with the closure filter.
+
+Deploy the documentation service’s three routes before the MCP Worker. `DOCUMENTATION_BASE_URL` optionally overrides the trusted HTTPS origin and defaults to `https://docs.smartify.in`. Refresh MCP tool discovery and preserve existing public tools when reconciling the deployed connector. No live deployment is included in this implementation.

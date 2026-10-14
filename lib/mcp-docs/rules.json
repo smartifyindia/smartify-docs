@@ -1,0 +1,490 @@
+[
+  {
+    "documentId": "products/gateways/zigbee-gateway-matter",
+    "documentHash": "6a736bdd65b7d8206ff5d133373dbe9c734af5b89b7915142f8853eb160469e2",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Matter-compatible Apple Home ecosystem and wired Ethernet required."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Apple HomeKit (via Matter)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "documentHash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "ecosystem": "home_assistant",
+    "status": "unknown",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "| Channels | 1 |"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "100W \u00d7 2CH"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "documentHash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "ecosystem": "apple_home",
+    "status": "unknown",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "| Channels | 1 |"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "100W \u00d7 2CH"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "documentHash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "ecosystem": "matter",
+    "status": "unknown",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "| Channels | 1 |"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "100W \u00d7 2CH"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "documentHash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "useCase": "ceiling_fan",
+    "status": "unknown",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Not suitable for ceiling fans."
+      },
+      {
+        "heading": "Specifications",
+        "quote": "| Channels | 1 |"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "100W \u00d7 2CH"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "documentHash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "useCase": "non_dimmable_load",
+    "status": "unknown",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Dimmer modules: resistive and leading-edge dimmable loads only."
+      },
+      {
+        "heading": "Specifications",
+        "quote": "| Channels | 1 |"
+      },
+      {
+        "heading": "Specifications",
+        "quote": "100W \u00d7 2CH"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay-40a",
+    "documentHash": "ef0308697f6715fccbeaf511481fa52de488ad2821575ea723a8ee661ec648b0",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay-40a",
+    "documentHash": "ef0308697f6715fccbeaf511481fa52de488ad2821575ea723a8ee661ec648b0",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay-40a",
+    "documentHash": "ef0308697f6715fccbeaf511481fa52de488ad2821575ea723a8ee661ec648b0",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay",
+    "documentHash": "59f06595cec2e91307df0a66185270ad613ee8326ca6c3d5410914389259e4a1",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay",
+    "documentHash": "59f06595cec2e91307df0a66185270ad613ee8326ca6c3d5410914389259e4a1",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/1-channel-zigbee-retrofit-relay",
+    "documentHash": "59f06595cec2e91307df0a66185270ad613ee8326ca6c3d5410914389259e4a1",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "documentHash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "documentHash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "documentHash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "documentHash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "useCase": "ceiling_fan",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Not suitable for ceiling fans."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "documentHash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "useCase": "non_dimmable_load",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Dimmer modules: resistive and leading-edge dimmable loads only."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-relay",
+    "documentHash": "7f8c38b6c8156ec3a28a89614e22426350d900016ad25654981e04be459c75e4",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-relay",
+    "documentHash": "7f8c38b6c8156ec3a28a89614e22426350d900016ad25654981e04be459c75e4",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/2-channel-zigbee-retrofit-relay",
+    "documentHash": "7f8c38b6c8156ec3a28a89614e22426350d900016ad25654981e04be459c75e4",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "documentHash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "documentHash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "documentHash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "documentHash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "useCase": "ceiling_fan",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Not suitable for ceiling fans."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "documentHash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "useCase": "non_dimmable_load",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Dimmer modules: resistive and leading-edge dimmable loads only."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/led-controller-cv-dimmer",
+    "documentHash": "6eee1d62f553df21c5afb6a69468fa06881aa376fcba4699eaad22e1960acdbb",
+    "useCase": "ceiling_fan",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Not suitable for ceiling fans."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/led-controller-cv-dimmer",
+    "documentHash": "6eee1d62f553df21c5afb6a69468fa06881aa376fcba4699eaad22e1960acdbb",
+    "useCase": "non_dimmable_load",
+    "status": "unsupported",
+    "evidence": [
+      {
+        "heading": "Load Limits",
+        "quote": "Dimmer modules: resistive and leading-edge dimmable loads only."
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/zigbee-shutter-module",
+    "documentHash": "91cff1432b570113f92f3fc6a66483832e82c8418bdd2558b5d1f045e96e69eb",
+    "ecosystem": "home_assistant",
+    "status": "supported",
+    "mode": "native",
+    "conditions": [
+      "Zigbee coordinator required; installation and load constraints still apply."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Home Assistant (native)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/zigbee-shutter-module",
+    "documentHash": "91cff1432b570113f92f3fc6a66483832e82c8418bdd2558b5d1f045e96e69eb",
+    "ecosystem": "apple_home",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  },
+  {
+    "documentId": "products/retrofit/zigbee-shutter-module",
+    "documentHash": "91cff1432b570113f92f3fc6a66483832e82c8418bdd2558b5d1f045e96e69eb",
+    "ecosystem": "matter",
+    "status": "conditional",
+    "mode": "bridged",
+    "conditions": [
+      "Compatible hub required; verify model, firmware and bridge support."
+    ],
+    "evidence": [
+      {
+        "heading": "Specifications",
+        "quote": "Matter & Apple HomeKit (via hub)"
+      }
+    ]
+  }
+]

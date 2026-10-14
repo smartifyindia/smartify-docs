@@ -1,0 +1,2576 @@
+[
+  {
+    "id": "products/gateways/convergia",
+    "title": "Convergia",
+    "skus": [
+      "38616756936"
+    ],
+    "url": "https://docs.smartify.in/docs/products/gateways/convergia",
+    "hash": "38ae7f58be9d0527208a64a3ae95b2426c565a333d3f45942f0f761aa0f2f204",
+    "sourcePath": "content/docs/products/gateways/convergia.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Type:** Local Smart Automation Gateway  ·  **SRP:** ₹87,500\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch electrical loads. Central intelligence layer only.\n\nRequires: Qualified integrator installation recommended",
+        "hash": "671638dcb2b6cc81c64cab99ff13e2e793b9fac7c1b75e314c98f7e571f63d38"
+      },
+      {
+        "heading": "Description",
+        "text": "Convergia is a locally hosted smart automation gateway that unifies KNX wired systems and wireless ecosystems — Zigbee, Wi-Fi, Matter, and LAN/IP — into a single interoperable platform.\n\nBuilt on an Intel NUC-based appliance, it runs all automation logic locally, ensuring reliability independent of cloud connectivity. Advanced rule-based automation supports complex triggers, conditions, and multi-step logic. Integrates AV systems and IP cameras directly into automation workflows.",
+        "hash": "153fcc08a4ff85b412fff19482099e40fa772d8233724bdda59da17265d1632b"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Pre-configured Intel NUC-based hardware appliance |\n| Compatibility | KNX, Zigbee, Wi-Fi, Matter, LAN/IP, AV systems, IP cameras |",
+        "hash": "31fcabd45c56ad504496c81824eb070ef23dc10fedf88b18b22b908915655139"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹87,500 |\n| GST Rate | 18% |\n| HSN Code | 84713010 |",
+        "hash": "4685048dce4b1a1487438bae6ea184e0a36160f6b896c1122d3981f405a5f036"
+      }
+    ]
+  },
+  {
+    "id": "products/gateways/index",
+    "title": "Gateways & Hubs",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/gateways/index",
+    "hash": "2723e7221d15899ebdd0ca1f40bb892cad41f952f29a30952faf8e968faad256",
+    "sourcePath": "content/docs/products/gateways/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "Zigbee coordinators and protocol bridges. Wired Ethernet, Matter-compatible, VRV, and DALI variants to integrate any Smartify device with any smart home platform.",
+        "hash": "db006c9aaf4a29ebd4edd2a1063a483610a736447fd06ef6c34e52aa5da7bf73"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "The hub your home thinks through. — ₹6,250\n  \n  \n    One home. Every ecosystem. — ₹15,250\n  \n  \n    Your home. Fully understood. — ₹87,500\n  \n  \n    Your entire HVAC system. One tap. — ₹55,000\n  \n  \n    Architectural lighting. Smart precision. — ₹1,00,000",
+        "hash": "59bf598a21d6f2413cfcefb8732b3ec1a2ca95eca72ea5a6dd7fb0dc6c10b62b"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      }
+    ]
+  },
+  {
+    "id": "products/gateways/zigbee-dali-gateway",
+    "title": "Core DALI",
+    "skus": [
+      "38620154019"
+    ],
+    "url": "https://docs.smartify.in/docs/products/gateways/zigbee-dali-gateway",
+    "hash": "ef776e3c61316b85f72a7281ce813a38665607d625e55693e0fdc2f5eb2b8de7",
+    "sourcePath": "content/docs/products/gateways/zigbee-dali-gateway.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0 + DALI Bus  ·  **Type:** Zigbee to DALI Protocol Gateway  ·  **SRP:** ₹1,00,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not power lighting loads directly. Communicates with DALI drivers over the bus only.\n\nRequires: Zigbee coordinator or hub. Existing DALI bus installation.",
+        "hash": "02e21a589e36d5628697532fcdec8921fc604b384a7fd26c2a03d788d91bf516"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee to DALI protocol gateway that integrates DALI lighting systems into a Zigbee-based smart automation ecosystem. Supports up to 64 DALI nodes with DT8 compatibility for tunable white and RGBW control.\n\nTranslates Zigbee commands into DALI control signals for switching, dimming, grouping, scene control, and tunable white/RGBW operation. DIN rail or panel-mounted installation.",
+        "hash": "61363a8c086a6b78f0b395cd2f27d86d5365af82ce23a078ec106ef9b105c858"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | Up to 64 DALI nodes |\n| Recommended Load | DALI DT8 drivers and fixtures |\n| Installation | DIN rail or panel-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 24V DC |\n| DALI Channels | 1 |\n| Built-in DALI PS Output Voltage | 12–22.5V DC |\n| Built-in DALI PS Output Current | 250mA max |\n| DALI Current Consumption (PS disabled) | Max. 2mA |\n| Max DALI Devices | 64 |\n| Supported Device Types | DT6, DT8 Tc, DT8 XY, DT8 RGBWAF |\n| Connectivity | Ethernet (RJ45) |\n| Control Modes | Broadcast, group, scene, timer & schedule |\n| Built-in Battery & RTC | Yes |\n| Dimensions (L × W × H) | 110 × 53 × 65 mm |",
+        "hash": "685d5723fef914cca814a6638ec8baf49d7f315f2adb5469b17f6fc66217d166"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹1,00,000 |\n| GST Rate | 18% |\n| HSN Code | 85371010 |",
+        "hash": "de4c4dcb2732bfad94fb3ae6b641ca79d101be559e4e0f807bbe7f5601895b83"
+      }
+    ]
+  },
+  {
+    "id": "products/gateways/zigbee-gateway-matter",
+    "title": "Core Matter",
+    "skus": [
+      "38623861651"
+    ],
+    "url": "https://docs.smartify.in/docs/products/gateways/zigbee-gateway-matter",
+    "hash": "6a736bdd65b7d8206ff5d133373dbe9c734af5b89b7915142f8853eb160469e2",
+    "sourcePath": "content/docs/products/gateways/zigbee-gateway-matter.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0 + Matter (IP / Thread bridge)  ·  **Type:** Smart Home Gateway / Bridge  ·  **SRP:** ₹15,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Cross-protocol bridging requires Matter-compatible ecosystem.\n\nRequires: Wired Ethernet router connection",
+        "hash": "59a8bc830efcdc182da015fa95dac64d92b18fca44a19f520b05908b472f3f62"
+      },
+      {
+        "heading": "Description",
+        "text": "A wired smart home gateway that bridges Zigbee 3.0 and Matter protocols, enabling unified control across both ecosystems through a single stable Ethernet connection.\n\nSupports up to 128 devices and provides device pairing, cross-protocol bridging, scene automation, and remote control. Enables integration with Matter-enabled applications and Apple HomeKit via Matter.",
+        "hash": "f176c274ae57f9ce0da64396fdfda5227721a2f51d23521c3f718b657f7b2f79"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | Up to 128 devices |\n| Installation | Indoor, fixed wired LAN connection |\n| Compatibility | Matter-enabled apps, Apple HomeKit (via Matter), supported automation platforms |\n| Dimensions | 90 × 90 × 22 mm |\n| Power Input | 5V 1A |\n| Power Interface | USB Type-C |\n| Wireless Protocol | Zigbee, Thread |\n| Operating Temperature | -10°C to +55°C |\n| Operating Humidity | 10%–90% RH (non-condensing) |\n| Storage Temperature | -20°C to +60°C |\n| Storage Humidity | 5%–90% RH (non-condensing) |",
+        "hash": "44814ed2698655ab8b14fd801df3bcc9911aabdb45d9aba72124754be5ac5ba5"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹15,250 |\n| GST Rate | 18% |\n| HSN Code | 85176290 |",
+        "hash": "24ba3a0cba6cf5a45bd3287d306f2f53ae60393f9a02cd996b577e3a8e0cead2"
+      }
+    ]
+  },
+  {
+    "id": "products/gateways/zigbee-gateway-wired",
+    "title": "Core LAN",
+    "skus": [
+      "38678840105"
+    ],
+    "url": "https://docs.smartify.in/docs/products/gateways/zigbee-gateway-wired",
+    "hash": "141f0065849ee2184f3ae1005e66257499d2d5d1437f3859504e112116aa3c94",
+    "sourcePath": "content/docs/products/gateways/zigbee-gateway-wired.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Coordinator / Gateway  ·  **SRP:** ₹6,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Requires stable LAN connection for operation.\n\nRequires: Wired Ethernet router connection",
+        "hash": "11bd97b96d19186bb15cf6c879e88ccbb6e75aa263d521f0d0e07d0f8f1e855a"
+      },
+      {
+        "heading": "Description",
+        "text": "A wired Zigbee 3.0 gateway that acts as the central coordinator for all Zigbee devices in the system. Connects via Ethernet for a stable, low-latency network backbone.\n\nSupports up to 128 Zigbee devices and enables device pairing, scene automation, remote control, and unified device management through compatible mobile applications and automation platforms.",
+        "hash": "f653bfe64a02890ed13693e59fb9f0adc74244aea5ae895718295a90b8284077"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | Up to 128 Zigbee devices |\n| Installation | Indoor, fixed wired LAN connection |\n| Compatibility | Home Assistant and compatible Zigbee automation platforms |\n| Wireless Connection | Zigbee |\n| Max Connected Devices | 300 (wired) |\n| Working Temperature | -10°C to +55°C |\n| Power Input | USB-C 5V 2A |\n| Connectivity | RJ45 Ethernet |\n| Working Humidity | 10%–90% RH (non-condensing) |",
+        "hash": "e7e2efda1944d185cd6ff1a16fafef0afa8995f46a2c1b97b7375dac777ffc26"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹6,250 |\n| GST Rate | 18% |\n| HSN Code | 85176290 |",
+        "hash": "16e3a96f808acf5b46e19a45d15e42cc7830ce8c99fd1a21c583e98e102f2e0d"
+      }
+    ]
+  },
+  {
+    "id": "products/gateways/zigbee-vrv-gateway",
+    "title": "Core VRV",
+    "skus": [
+      "38693737333"
+    ],
+    "url": "https://docs.smartify.in/docs/products/gateways/zigbee-vrv-gateway",
+    "hash": "8db182c5472dbb952a8a77ed48748f9424e5880e7c1dfa537f2b6edaf2643037",
+    "sourcePath": "content/docs/products/gateways/zigbee-vrv-gateway.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** VRV/VRF to Zigbee Integration Gateway  ·  **SRP:** ₹55,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nCommunication bridge only. Does not switch electrical loads. VRV/VRF compatibility must be verified.\n\nRequires: Zigbee coordinator or hub. Compatible VRV/VRF system required.",
+        "hash": "16bc97a46693c9d0fc547645234cacfc7a1f6ad0428b551b5e14b86035eabfc3"
+      },
+      {
+        "heading": "Description",
+        "text": "A dedicated gateway that integrates VRV/VRF HVAC systems into a Zigbee-based smart automation ecosystem. Connects to the VRV/VRF outdoor unit via LAN cable and communicates wirelessly with a Zigbee gateway.\n\nEnables remote control, real-time monitoring, and automation of the entire VRV/VRF air conditioning system through the Zigbee automation platform — without modifying the HVAC hardware.",
+        "hash": "4c9a3241362b7cf5db0acd6378917f46d8906a59229556710eee131231474df8"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | Compatible VRV/VRF systems |\n| Installation | Indoor, wired LAN connection to outdoor unit |\n| Compatibility | Zigbee automation platforms |\n| Communication Protocol | Zigbee |\n| AC Interface | X, Y (VRF communication port) |\n| Additional Ports | RS485 Peripheral (×2), KNS, RS485 |\n| Power | External power adapter (do not connect 220V directly) |\n| Compatible Brands | Daikin, Samsung, TCL, Gree, Toshiba, Panasonic, Hitachi, Hisense, York, Mitsubishi Electric, Mitsubishi Heavy Industries, AUX, LG, Trane, Midea, Carrier, Bosch, Haier, McQuay and more |",
+        "hash": "36c5622360f45fe4f4a81853e9a9f990cbb00fc56c23b5ccb3079b73826d818e"
+      },
+      {
+        "heading": "Wired Gateway",
+        "text": "1. Connect via Ethernet to your router or switch.\n2. Power via USB-C.\n3. Add the gateway in Home Assistant (Zigbee integration → EZSP or Zigbee2MQTT).\n4. Begin pairing Zigbee devices.",
+        "hash": "ef232e4bcebcd74f73c5761482c38cb60080a96833077eccf3b346e80e054f0c"
+      },
+      {
+        "heading": "Matter Gateway (Convergia)",
+        "text": "1. Connect via Ethernet.\n2. Add to Apple Home, Google Home, or SmartThings using the Matter QR code on the device.\n3. All Zigbee child devices appear automatically in the Matter fabric.",
+        "hash": "611e3f68cf5efe237558b667c9c60692b63f5517ca8e45b41b96b18c376af5fc"
+      },
+      {
+        "heading": "VRV Gateway",
+        "text": "Bridges Zigbee to VRV/VRF air conditioning systems (Daikin, Mitsubishi, etc.).\n- Connect the RS-485 port to the VRV indoor unit or centralised controller.\n- Configure address and baud rate per your VRV system documentation.",
+        "hash": "0fa5b2f83f075cd52727ff30aa028cfb88fd14b6b5bdd8fa753e39616bb29976"
+      },
+      {
+        "heading": "DALI Gateway",
+        "text": "Bridges Zigbee to DALI-2 lighting systems.\n- Connect DALI bus terminals to the DALI line.\n- Each gateway supports up to 64 DALI addresses.\n- Configure via Home Assistant DALI integration.",
+        "hash": "8551fb33140de45f05eb4cca93ade61bd07648759a08ab88cb74625e9ba61417"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹55,000 |\n| GST Rate | 28% |\n| HSN Code | 84159000 |",
+        "hash": "00fc3502febed732d464f4a23fd9ab13f9c488ddff5c8040705de4094d0ab67b"
+      }
+    ]
+  },
+  {
+    "id": "products/getting-started",
+    "title": "Getting Started",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/getting-started",
+    "hash": "399f1abaae6e5e2b7070f3e5b41b26d92a31c4c6320186c6487e161b75a5941f",
+    "sourcePath": "content/docs/products/getting-started.mdx",
+    "sections": [
+      {
+        "heading": "What you need",
+        "text": "| Component | Description |\n|---|---|\n| **Zigbee Gateway** | The coordinator that all devices connect to. Required for every installation. |\n| **Switches / Panels / Sensors** | The devices you want to automate. Mix and match from the catalog. |\n| **Smart Home Platform** | Home Assistant (recommended), or Apple HomeKit / Google Home / Alexa via the gateway. |\n| **Internet connection** | Only needed for cloud integrations. Home Assistant runs fully local. |",
+        "hash": "55ab4bf000f039964574084147c524d01a6c24dba0279954eb49f2b7c6852ee4"
+      },
+      {
+        "heading": "Choose a gateway",
+        "text": "The [Core LAN](../gateways/zigbee-gateway-wired) is the most versatile option.\nFor Matter-native setups, use the [Convergia](../gateways/convergia).",
+        "hash": "011c373e52cc716b80d47d2027f0274f7eb6566a119449be906b41f3fbc95d55"
+      },
+      {
+        "heading": "Install Home Assistant",
+        "text": "Run on a Raspberry Pi, NUC, or VM. [Home Assistant installation →](https://www.home-assistant.io/installation/)",
+        "hash": "e17fe3159c0aaabae907e4c2e7cf443131919175a62233270fa01c839d25b69b"
+      },
+      {
+        "heading": "Add the Zigbee integration",
+        "text": "In Home Assistant: **Settings → Devices &amp; Services → Add Integration → Zigbee Home Automation (ZHA)** or Zigbee2MQTT.",
+        "hash": "6ee49213e0cbac3b21ebb5dc5bed47ad60314bb1b3f976e58993673bd1444ee1"
+      },
+      {
+        "heading": "Pair your devices",
+        "text": "Power on each device. Follow the pairing instructions on its product page.",
+        "hash": "5d6ced6db4cca77b7e51a9341f183a11479239472de78d3c92844b2e5b5ffdbe"
+      },
+      {
+        "heading": "Build automations",
+        "text": "Use Home Assistant's automation editor to trigger devices by time, sensor state, or scene.",
+        "hash": "67174951e35c48047a598b460a238cc823720c19251baccd0e7fd41d43f121da"
+      },
+      {
+        "heading": "Zigbee Network Notes",
+        "text": "- All Zigbee devices create a **mesh network** — the more mains-powered devices, the stronger the mesh.\n- Sensors and battery-powered devices are end devices and do not extend the mesh.\n- Gateways require **2.4GHz WiFi or Ethernet**. 5GHz is not supported.",
+        "hash": "af70cd710abbf58a50527c0b9015ae44cbd3c658f7c419c50c5a4707af4be72f"
+      },
+      {
+        "heading": "Resources",
+        "text": "- [Smartify website →](https://smartify.in)\n- [Home Assistant community forums →](https://community.home-assistant.io/)",
+        "hash": "4bf980f59b7ea96fe49875f30ae6732369b0e1e824eb5b7a08549510513586a0"
+      }
+    ]
+  },
+  {
+    "id": "products/index",
+    "title": "Products",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/index",
+    "hash": "adb83208fced1faa57bf3c9fe8ed3e327a6df9f767bd5dab0dd54556cfffba57",
+    "sourcePath": "content/docs/products/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "This is the technical documentation for **Smartify** — a Zigbee 3.0 smart home platform built for Indian homes.",
+        "hash": "c2e2b23b498fe018636eb205dd89445bf3fd35c92250f6049b92c12a908a6262"
+      },
+      {
+        "heading": "Product Catalog",
+        "text": "In-wall Zigbee smart switches in the TAC series. Single, double, triple, quad, heavy-load, fan speed, scene switch, and curtain variants. Compatible with standard Indian flush boxes.\n  \n  \n    Capacitive touch control panels in the TOQ series and large 4\"/10\" Android panels. Multi-touch, scene control, fan and socket combinations.\n  \n  \n    Zigbee relay and dimmer modules that fit behind your existing switches — no visible hardware change. Also includes the Zigbee shutter module for motorised blinds.\n  \n  \n    Zigbee sensors for automating your home: motion, contact, vibration, and cutting-edge mmWave presence sensors that detect stationary occupants.\n  \n  \n    Zigbee coordinators and protocol bridges. Wired Ethernet, Matter-compatible, VRV, and DALI variants to integrate any Smartify device with any smart home platform.\n  \n  \n    WiFi IR blasters to bring legacy appliances — ACs, TVs, fans — into your smart home without hardware replacement.\n  \n  \n    Zigbee LED controllers for CV RGB+CCT and CCT LED strips. Full colour and tunable white control via Home Assistant.",
+        "hash": "6dfaa1a413755ea5f4f7b04b9782d5707eeb24dd6d0afc92899451988105e7ca"
+      },
+      {
+        "heading": "Compatible Platforms",
+        "text": "All Smartify devices use **Zigbee 3.0**. Supported platforms:\n\n- **Home Assistant** — local control, no cloud required (recommended)\n- **Apple HomeKit** — via Matter-compatible gateway\n- **Amazon Alexa** — via gateway\n- **Google Home** — via gateway",
+        "hash": "21733c69a38e26892b0c1b827191d65cf6db403a4b361d96181b8a26d884bc46"
+      }
+    ]
+  },
+  {
+    "id": "products/ir-blasters/index",
+    "title": "IR Blasters",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/ir-blasters/index",
+    "hash": "4fddf94f7e93defc2763eb0dbc3e68c1129f13ec2d93ec1901a661123f98da0a",
+    "sourcePath": "content/docs/products/ir-blasters/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "WiFi IR blasters to bring legacy appliances — ACs, TVs, fans — into your smart home without hardware replacement.",
+        "hash": "b8f99f4ac013cf696266ee2e4d45538a1bdb24a1fb8f9108040e24c7e9252377"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "Every remote. One app. — ₹2,125\n  \n  \n    IR and RF. Nothing left out. — ₹3,000\n  \n  \n    It senses. It responds. You don't have to. — ₹4,750",
+        "hash": "b5e1722a6899c8fc23c7e7d4761aca3fa095bccb086af2c1f9fd59f516a93b2b"
+      },
+      {
+        "heading": "Network",
+        "text": "- Connect to 2.4GHz WiFi (5GHz not supported).\n- Use the Smartify or Tuya Smart app for initial pairing.",
+        "hash": "f80794e3d855a90e52554f7b687e5039456722cfadf59ccf7f2566859cc0b3c1"
+      },
+      {
+        "heading": "Adding Devices",
+        "text": "1. In the app, select the IR blaster.\n2. Add a new device → choose the appliance type (AC, TV, Fan, etc.).\n3. Point the IR blaster at the appliance and follow the learning/preset instructions.",
+        "hash": "fccdf43380133df729d25b11c7e13e2a7a1fe3a7f9b80932ab7edcbc81347cc5"
+      },
+      {
+        "heading": "AC Control (with Temp/Humidity Sensor)",
+        "text": "The IR Blaster w/ Analog Screen includes a built-in temperature and humidity display:\n- Use automations to trigger AC on/off based on room temperature.\n- Integrates with Home Assistant via local Tuya or cloud Tuya integration.",
+        "hash": "5bf0a7cb2ab8e80e117cf188635fa87c57a5f0a982b0c4ec0127b264ca8ef43f"
+      },
+      {
+        "heading": "Placement",
+        "text": "- Place in line-of-sight of target devices.\n- Range: up to 8m in open space.\n- Avoid placing behind glass or thick obstacles.",
+        "hash": "205b7204eab6f978084043e0701a02e2e8d65212a03641a85f8fa4577de712d4"
+      }
+    ]
+  },
+  {
+    "id": "products/ir-blasters/ir-blaster-w--analog-screen-temp-and-humidity-sensor-wifi",
+    "title": "Reach IR Pro",
+    "skus": [
+      "38614020398"
+    ],
+    "url": "https://docs.smartify.in/docs/products/ir-blasters/ir-blaster-w--analog-screen-temp-and-humidity-sensor-wifi",
+    "hash": "c12373c03d86696d1b28ce9780af76a43599df1a6c54c61b8edac9a0924240b1",
+    "sourcePath": "content/docs/products/ir-blasters/ir-blaster-w--analog-screen-temp-and-humidity-sensor-wifi.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Wi-Fi 2.4 GHz  ·  **Type:** Wi-Fi IR Blaster with Environmental Sensor  ·  **SRP:** ₹4,750\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nIR line-of-sight required. Does not switch electrical loads.\n\nRequires: 2.4 GHz Wi-Fi network",
+        "hash": "5022ffc9a0b393abcf3e1d71aa67fd5eade0103e9ca1f7fd11728c337f90d948"
+      },
+      {
+        "heading": "Description",
+        "text": "A Wi-Fi IR blaster with integrated temperature and humidity sensors and an analog-style display. Transmits IR commands to legacy devices while simultaneously reporting real-time environmental data for automation logic.\n\nConnects to your 2.4 GHz Wi-Fi network. Sensor data can be used as automation triggers — for example, activating an air conditioner when temperature exceeds a threshold.",
+        "hash": "c427ea5ca3ffd1156fce8285da48a743fda14218b88603e378f8e2507d6af480"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | IR-controlled devices (line-of-sight) |\n| Installation | Indoor, line-of-sight to IR devices |\n| Compatibility | Compatible smart home apps and automation platforms |\n| Power Input | DC 5V/1A (Micro USB, no adapter included) |\n| Infrared Frequency | 38 kHz |\n| IR Control Distance | ≤10m |\n| LED Indicator | Blue |\n| Connection | Wi-Fi 2.4GHz |\n| Temperature Measurement Range | 0°C to +60°C |\n| Temperature Accuracy | ±1°C |\n| Humidity Measurement Range | 0%–99% RH |\n| Humidity Accuracy | ±5% RH |\n| Dimensions | 65 × 65 × 17 mm |",
+        "hash": "7b7fe38e6ce34a53de0140593268ba0233a6aa2b487a956a7fb3db0350ef5e9d"
+      },
+      {
+        "heading": "Network",
+        "text": "- Connect to 2.4GHz WiFi (5GHz not supported).\n- Use the Smartify or Tuya Smart app for initial pairing.",
+        "hash": "f80794e3d855a90e52554f7b687e5039456722cfadf59ccf7f2566859cc0b3c1"
+      },
+      {
+        "heading": "Adding Devices",
+        "text": "1. In the app, select the IR blaster.\n2. Add a new device → choose the appliance type (AC, TV, Fan, etc.).\n3. Point the IR blaster at the appliance and follow the learning/preset instructions.",
+        "hash": "fccdf43380133df729d25b11c7e13e2a7a1fe3a7f9b80932ab7edcbc81347cc5"
+      },
+      {
+        "heading": "AC Control (with Temp/Humidity Sensor)",
+        "text": "The IR Blaster w/ Analog Screen includes a built-in temperature and humidity display:\n- Use automations to trigger AC on/off based on room temperature.\n- Integrates with Home Assistant via local Tuya or cloud Tuya integration.",
+        "hash": "5bf0a7cb2ab8e80e117cf188635fa87c57a5f0a982b0c4ec0127b264ca8ef43f"
+      },
+      {
+        "heading": "Placement",
+        "text": "- Place in line-of-sight of target devices.\n- Range: up to 8m in open space.\n- Avoid placing behind glass or thick obstacles.",
+        "hash": "205b7204eab6f978084043e0701a02e2e8d65212a03641a85f8fa4577de712d4"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹4,750 |\n| GST Rate | 18% |\n| HSN Code | 85437099 |",
+        "hash": "2920d50e1d26c5bc9e114b10e678ecbc6696dabf7d5fc9de85cb182e8ae2cfbc"
+      }
+    ]
+  },
+  {
+    "id": "products/ir-blasters/ir-blaster-wifi",
+    "title": "Reach IR",
+    "skus": [
+      "38668925286"
+    ],
+    "url": "https://docs.smartify.in/docs/products/ir-blasters/ir-blaster-wifi",
+    "hash": "e2755755a69ba6d6a2e66c2550aad6db2ca0924b202de1f5c985b8f2d9934a23",
+    "sourcePath": "content/docs/products/ir-blasters/ir-blaster-wifi.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Wi-Fi 2.4 GHz  ·  **Type:** Wi-Fi IR Blaster / IR Controller  ·  **SRP:** ₹2,125\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nIR line-of-sight required. Does not switch electrical loads. RF devices not supported.\n\nRequires: 2.4 GHz Wi-Fi network",
+        "hash": "baaa49bfdc152155e6b0c5ab475b863a6f477bc064bab2f3c63ce41bdfbf530e"
+      },
+      {
+        "heading": "Description",
+        "text": "A Wi-Fi IR blaster that sends infrared commands to legacy IR-controlled devices — TVs, air conditioners, set-top boxes, and other appliances — through your smart home network.\n\nConnects to your local 2.4 GHz Wi-Fi network and transmits configurable IR codes via mobile apps and automation platforms. Requires line-of-sight to target devices.",
+        "hash": "645ca40cc753dfbffbb2410f621498f61244d0f30fab478532875bce5a411d99"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | IR-controlled devices (line-of-sight) |\n| Installation | Indoor, line-of-sight to IR devices |\n| Compatibility | Compatible smart home apps and automation platforms |\n| Power Input | 5V DC 1A (Micro USB) |\n| Connection | Wi-Fi 2.4GHz 802.11b/g/n |\n| IR Control Distance | ≤8m |\n| Working Temperature | 0°C to +50°C |\n| Working Humidity | ≤85% RH |\n| Dimensions | 68 × 68 × 19.5 mm |",
+        "hash": "1f8245734aba9645fd9b90383fa735538499936fdd1c9c08d17ce497a2ddb79b"
+      },
+      {
+        "heading": "Network",
+        "text": "- Connect to 2.4GHz WiFi (5GHz not supported).\n- Use the Smartify or Tuya Smart app for initial pairing.",
+        "hash": "f80794e3d855a90e52554f7b687e5039456722cfadf59ccf7f2566859cc0b3c1"
+      },
+      {
+        "heading": "Adding Devices",
+        "text": "1. In the app, select the IR blaster.\n2. Add a new device → choose the appliance type (AC, TV, Fan, etc.).\n3. Point the IR blaster at the appliance and follow the learning/preset instructions.",
+        "hash": "fccdf43380133df729d25b11c7e13e2a7a1fe3a7f9b80932ab7edcbc81347cc5"
+      },
+      {
+        "heading": "AC Control (with Temp/Humidity Sensor)",
+        "text": "The IR Blaster w/ Analog Screen includes a built-in temperature and humidity display:\n- Use automations to trigger AC on/off based on room temperature.\n- Integrates with Home Assistant via local Tuya or cloud Tuya integration.",
+        "hash": "5bf0a7cb2ab8e80e117cf188635fa87c57a5f0a982b0c4ec0127b264ca8ef43f"
+      },
+      {
+        "heading": "Placement",
+        "text": "- Place in line-of-sight of target devices.\n- Range: up to 8m in open space.\n- Avoid placing behind glass or thick obstacles.",
+        "hash": "205b7204eab6f978084043e0701a02e2e8d65212a03641a85f8fa4577de712d4"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹2,125 |\n| GST Rate | 18% |\n| HSN Code | 85437099 |",
+        "hash": "b53dd4e790796bd25c932a907ea8f54f32aeac5f7c09efc447be5164c141b2be"
+      }
+    ]
+  },
+  {
+    "id": "products/ir-blasters/irplusrf-blaster-wifi",
+    "title": "Reach IR+",
+    "skus": [
+      "38635939814"
+    ],
+    "url": "https://docs.smartify.in/docs/products/ir-blasters/irplusrf-blaster-wifi",
+    "hash": "2e92454f0610b6aa6bee9acbb6f87487c3148c4f98a5a14d275551160e4c0421",
+    "sourcePath": "content/docs/products/ir-blasters/irplusrf-blaster-wifi.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Wi-Fi 2.4 GHz  ·  **Type:** Wi-Fi IR + RF Blaster / Universal Remote Controller  ·  **SRP:** ₹3,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch electrical loads. IR requires line-of-sight; RF does not.\n\nRequires: 2.4 GHz Wi-Fi network",
+        "hash": "800e26a1199c82a669aaa1cee2fea32c76b5fc8fdd3f0a45e77a639e2b1ab8cb"
+      },
+      {
+        "heading": "Description",
+        "text": "A Wi-Fi IR and RF blaster that transmits both infrared and radio frequency commands to legacy remote-controlled devices — TVs, air conditioners, projectors, RF motorized curtains, fans, and RF switches.\n\nConnects to your local 2.4 GHz Wi-Fi network and sends programmable IR and RF codes via mobile apps and automation platforms. IR requires line-of-sight; RF does not.",
+        "hash": "cb47d673df83e54f3d678593b674e7f9543cdcbfa0b244a90c78b8be5df67b06"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Recommended Load | IR and RF-controlled devices |\n| Installation | Indoor, within signal range of target devices |\n| Compatibility | Compatible smart home apps and automation platforms |\n| Power Input | DC 5V/1A (Micro USB 2.0) |\n| Standby Power | ≤0.5W |\n| IR Control Distance | ≤8m (horizontal), ≤15m (opposite direction, environment dependent) |\n| IR Control Direction | Multi-directional |\n| RF Frequency | 433/315 MHz |\n| Carrier Frequency | 38 kHz |\n| Connection | Wi-Fi 2.4GHz 802.11b/g/n |\n| Operating Temperature | 0°C to +50°C |\n| Operating Humidity | ≤85% RH |\n| Dimensions | 68 × 68 × 27 mm |",
+        "hash": "fac235039e9530cc7b5269ed74d4190fdd2057bbcf2d70ec44d2aedb2eef5ed0"
+      },
+      {
+        "heading": "Network",
+        "text": "- Connect to 2.4GHz WiFi (5GHz not supported).\n- Use the Smartify or Tuya Smart app for initial pairing.",
+        "hash": "f80794e3d855a90e52554f7b687e5039456722cfadf59ccf7f2566859cc0b3c1"
+      },
+      {
+        "heading": "Adding Devices",
+        "text": "1. In the app, select the IR blaster.\n2. Add a new device → choose the appliance type (AC, TV, Fan, etc.).\n3. Point the IR blaster at the appliance and follow the learning/preset instructions.",
+        "hash": "fccdf43380133df729d25b11c7e13e2a7a1fe3a7f9b80932ab7edcbc81347cc5"
+      },
+      {
+        "heading": "AC Control (with Temp/Humidity Sensor)",
+        "text": "The IR Blaster w/ Analog Screen includes a built-in temperature and humidity display:\n- Use automations to trigger AC on/off based on room temperature.\n- Integrates with Home Assistant via local Tuya or cloud Tuya integration.",
+        "hash": "5bf0a7cb2ab8e80e117cf188635fa87c57a5f0a982b0c4ec0127b264ca8ef43f"
+      },
+      {
+        "heading": "Placement",
+        "text": "- Place in line-of-sight of target devices.\n- Range: up to 8m in open space.\n- Avoid placing behind glass or thick obstacles.",
+        "hash": "205b7204eab6f978084043e0701a02e2e8d65212a03641a85f8fa4577de712d4"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,000 |\n| GST Rate | 18% |\n| HSN Code | 85437099 |",
+        "hash": "50bf545621085d93190165ba7b7c38d81a8c020f3598289fed8d285e8b992817"
+      }
+    ]
+  },
+  {
+    "id": "products/led-controllers/index",
+    "title": "LED Controllers",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/led-controllers/index",
+    "hash": "88eda2784826fc557be03ee77109b8da95606d26b4913ebbe0202bd94cf0cbbf",
+    "sourcePath": "content/docs/products/led-controllers/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "Zigbee LED controllers for CV RGB+CCT and CCT LED strips. Full colour and tunable white control via Home Assistant.",
+        "hash": "c8e6aec517897abe0364a99f0dae924e46a562f845aa656b01d85861f945d170"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "Every colour. Every white. One controller. — ₹9,247\n  \n  \n    Warm in the evening. Crisp in the morning. — ₹8,247",
+        "hash": "f81bd359ec160b47b618bc930cdf540959220737cc2d822dcde338fa2f63c545"
+      },
+      {
+        "heading": "CV RGB+CCT Controller",
+        "text": "- **R, G, B** → respective colour channels of your LED strip\n- **WW, CW** → warm white and cool white channels\n- **12V / 24V** → match your strip's voltage\n- Maximum load: check product specifications per channel",
+        "hash": "f4d669ca0d8679c67a82ac48e24fb1953e92b6547ef5e9e3d584eea71f633760"
+      },
+      {
+        "heading": "CV CCT Controller",
+        "text": "- **WW, CW** → warm and cool white channels\n- Enables smooth colour temperature tuning from warm to cool white",
+        "hash": "3d0506ca540d1bdef7425689f7bb98218873d24b745224eaeb03b73c1fa3bac1"
+      },
+      {
+        "heading": "Setup",
+        "text": "1. Wire the controller per the diagram above.\n2. Connect to power.\n3. Pair with your Zigbee coordinator.\n4. In Home Assistant, the light entity will expose colour temperature and brightness controls.",
+        "hash": "fdc96650dd107f359a2d9b53958f9b45ef69f98fd5c1a0e237c08f729ec75043"
+      },
+      {
+        "heading": "Tips",
+        "text": "- Use a power supply rated at ≥1.2× the total LED strip wattage.\n- Run separate power supplies for runs longer than 5m to avoid voltage drop.",
+        "hash": "b5b3bdf4f060a04c6d52034f672be1f245f94f7b2e22dcbf91b853e51991501c"
+      }
+    ]
+  },
+  {
+    "id": "products/led-controllers/led-controller-cc-cct",
+    "title": "Lume CC-CCT",
+    "skus": [
+      "38671782652"
+    ],
+    "url": "https://docs.smartify.in/docs/products/led-controllers/led-controller-cc-cct",
+    "hash": "c32e74895c26ecb43fbb18af48f17c237be0ca7673db11fbeec262bf5b238db3",
+    "sourcePath": "content/docs/products/led-controllers/led-controller-cc-cct.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Compatible smart ecosystem  ·  **Type:** Constant Current LED Controller  ·  **SRP:** ₹8,247\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nNot compatible with constant voltage LED strips. Constant current loads only.\n\nRequires: Constant current LED loads matched to controller rated output current",
+        "hash": "4708e5342e4c0039b6c45cda1c555fc8d69724e5eacc660784cfc976905061a9"
+      },
+      {
+        "heading": "Description",
+        "text": "A constant current LED controller for CCT (tunable white) lighting fixtures, providing independent control of brightness and colour temperature across warm white and cool white channels.\n\nDesigned specifically for constant current LED loads. Not compatible with constant voltage LED strips. Suitable for panel or fixture-integrated installation.",
+        "hash": "3b3e4018fd56772d69e5d36c7a3757fb558822ce241a0bfceed99648bc3cfe1e"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 2 (WW + CW) |\n| Recommended Load | CCT constant current LED loads |\n| Installation | Indoor panel or fixture-integrated |\n| Compatibility | Compatible smart lighting ecosystems |",
+        "hash": "14fb73762ae7a9c924cff1c0c1bf03be3d622c43cc68bd5beae0389b557c9fd7"
+      },
+      {
+        "heading": "CV RGB+CCT Controller",
+        "text": "- **R, G, B** → respective colour channels of your LED strip\n- **WW, CW** → warm white and cool white channels\n- **12V / 24V** → match your strip's voltage\n- Maximum load: check product specifications per channel",
+        "hash": "f4d669ca0d8679c67a82ac48e24fb1953e92b6547ef5e9e3d584eea71f633760"
+      },
+      {
+        "heading": "CV CCT Controller",
+        "text": "- **WW, CW** → warm and cool white channels\n- Enables smooth colour temperature tuning from warm to cool white",
+        "hash": "3d0506ca540d1bdef7425689f7bb98218873d24b745224eaeb03b73c1fa3bac1"
+      },
+      {
+        "heading": "Setup",
+        "text": "1. Wire the controller per the diagram above.\n2. Connect to power.\n3. Pair with your Zigbee coordinator.\n4. In Home Assistant, the light entity will expose colour temperature and brightness controls.",
+        "hash": "fdc96650dd107f359a2d9b53958f9b45ef69f98fd5c1a0e237c08f729ec75043"
+      },
+      {
+        "heading": "Tips",
+        "text": "- Use a power supply rated at ≥1.2× the total LED strip wattage.\n- Run separate power supplies for runs longer than 5m to avoid voltage drop.",
+        "hash": "b5b3bdf4f060a04c6d52034f672be1f245f94f7b2e22dcbf91b853e51991501c"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹8,247 |\n| GST Rate | 18% |\n| HSN Code | 85371010 |",
+        "hash": "824ba461805600b964da2a8e057c32599f007f18f053e474beb7c82bdd9b7887"
+      }
+    ]
+  },
+  {
+    "id": "products/led-controllers/led-controller-cv-rgbpluscct",
+    "title": "Lume CV RGB+",
+    "skus": [
+      "38619518575"
+    ],
+    "url": "https://docs.smartify.in/docs/products/led-controllers/led-controller-cv-rgbpluscct",
+    "hash": "bd6bdde196f25cd378778dabfd3373b8076f1cc224c397d4eb3e51907d73fe96",
+    "sourcePath": "content/docs/products/led-controllers/led-controller-cv-rgbpluscct.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Compatible smart ecosystem  ·  **Type:** Constant Voltage LED Controller  ·  **SRP:** ₹9,247\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nRequires appropriate CV DC power supply. Does not power LEDs from mains directly.\n\nRequires: Compatible CV DC power supply (12V or 24V) required",
+        "hash": "e6ba5ddfb9af03cea19779d2a60e79e328ebb30dcb9f1a8b668f507a3c48992b"
+      },
+      {
+        "heading": "Description",
+        "text": "A constant voltage LED controller for RGB+CCT LED strips, providing independent control over color (RGB), white temperature (CCT), and brightness across 5 output channels.\n\nRequires an appropriate constant voltage DC power supply (12V or 24V) matched to the LED strip specification. Designed for panel or concealed installation.",
+        "hash": "0174a762970098df8da68417550b0c3e1275021a3d8b2439fa0aecdbd8bfccff"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 5 (R, G, B, CW, WW) |\n| Recommended Load | RGB+CCT CV LED strips (12V or 24V) |\n| Installation | Indoor panel or concealed installation |\n| Compatibility | Compatible smart lighting ecosystems |",
+        "hash": "987c4f888f33948c4eb703d83c0065239ba660f5387a8b7b2d77b76086166cec"
+      },
+      {
+        "heading": "CV RGB+CCT Controller",
+        "text": "- **R, G, B** → respective colour channels of your LED strip\n- **WW, CW** → warm white and cool white channels\n- **12V / 24V** → match your strip's voltage\n- Maximum load: check product specifications per channel",
+        "hash": "f4d669ca0d8679c67a82ac48e24fb1953e92b6547ef5e9e3d584eea71f633760"
+      },
+      {
+        "heading": "CV CCT Controller",
+        "text": "- **WW, CW** → warm and cool white channels\n- Enables smooth colour temperature tuning from warm to cool white",
+        "hash": "3d0506ca540d1bdef7425689f7bb98218873d24b745224eaeb03b73c1fa3bac1"
+      },
+      {
+        "heading": "Setup",
+        "text": "1. Wire the controller per the diagram above.\n2. Connect to power.\n3. Pair with your Zigbee coordinator.\n4. In Home Assistant, the light entity will expose colour temperature and brightness controls.",
+        "hash": "fdc96650dd107f359a2d9b53958f9b45ef69f98fd5c1a0e237c08f729ec75043"
+      },
+      {
+        "heading": "Tips",
+        "text": "- Use a power supply rated at ≥1.2× the total LED strip wattage.\n- Run separate power supplies for runs longer than 5m to avoid voltage drop.",
+        "hash": "b5b3bdf4f060a04c6d52034f672be1f245f94f7b2e22dcbf91b853e51991501c"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹9,247 |\n| GST Rate | 18% |\n| HSN Code | 85371010 |",
+        "hash": "c0a06ae6f9155259784f960bd9c6d58ccc82cf7b1779ef9052f74e769cf489a8"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/10-touch-control-panel",
+    "title": "10\" Touch Control Panel",
+    "skus": [
+      "38694583069"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/10-touch-control-panel",
+    "hash": "3ffcc4862edf09f7d4e3272561f61176149ff62ef405ef01b30e23b46cb4e387",
+    "sourcePath": "content/docs/products/panels/10-touch-control-panel.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Wi-Fi + Zigbee + Bluetooth  ·  **Type:** Smart Home Touch Control Panel  ·  **SRP:** ₹1,12,500\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch electrical loads. Central control interface and multi-protocol gateway only.\n\nRequires: Wi-Fi network. Live/neutral wiring or USB-C power.",
+        "hash": "6c33f8989a108ca452696958ec0c6c578ef0b4f693835e23262c489a51485e21"
+      },
+      {
+        "heading": "Description",
+        "text": "A 10-inch wall-mounted smart home control panel with integrated Zigbee and Bluetooth gateways, supporting 128+ devices per protocol. Features a built-in HD camera, doorbell intercom, proximity wake sensor, and customizable control interface.\n\nSupports Wi-Fi, Zigbee, and Bluetooth. Powerable via live/neutral wiring or USB-C. Manages lighting, scenes, security, and automation from a central touchscreen.",
+        "hash": "b6ff89ab0c67945e78480e7ff3f01442a2bed19b49a33ea423e7a6186f81ec3f"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Wall-mounted (live/neutral or USB-C powered) |\n| Compatibility | Zigbee (128+ devices), Bluetooth/BLE/Sigmesh (128+ devices) |\n| Input | 100–240V AC, 50/60Hz |\n| Wireless Protocol | Wi-Fi, Bluetooth, Zigbee |\n| Display | 1920 × 1200 FHD, 10.1-inch touch screen |\n| Operating Temperature | 0°C to 40°C |\n| Working Humidity | 5%–90% RH (non-condensing) |\n| Size (without base) | 259 × 161 × 13 mm |\n| Size (with base) | 259 × 161 × 37 mm |",
+        "hash": "663d936ac64c1d0de0708cb31ae030490f30878cabad827492d4f30e2536b4fd"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹1,12,500 |\n| GST Rate | 18% |\n| HSN Code | 85371000 |",
+        "hash": "2d86bd8c4686aa2e0a51990dd672bdb681a0f612f1b0e49e45b74d121902886a"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/4-touch-control-panel",
+    "title": "4\" Touch Control Panel",
+    "skus": [
+      "38618602731"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/4-touch-control-panel",
+    "hash": "1cddee546bf00aba4b176cfd2bd023194a6806da5395dd614bee0d8e2671d170",
+    "sourcePath": "content/docs/products/panels/4-touch-control-panel.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Wi-Fi + Zigbee (built-in gateway)  ·  **Type:** Smart Home Touch Control Panel  ·  **SRP:** ₹33,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch electrical loads. Control interface and Zigbee gateway only.\n\nRequires: Wi-Fi network",
+        "hash": "289d0c27cf30c8572f99a360d3445c9cb6dbb8afbe65ba46d5a03e95702fd9b0"
+      },
+      {
+        "heading": "Description",
+        "text": "A 4-inch wall-mounted smart home touch panel with an integrated Zigbee gateway, Wi-Fi connectivity, and built-in Alexa voice control. Provides centralized control of smart home devices, scenes, and automations.\n\nFeatures automatic screen brightness adjustment and supports remote app-based control alongside local touchscreen interaction.",
+        "hash": "d468023e2d085cbf9edf1b8c094e07d5f61fd8fc8777a0d97504638021046e03"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Wall-mounted |\n| Compatibility | Zigbee devices, Alexa voice control |\n| Input | 100–240V AC, 50/60Hz |\n| Rated Current | 74 mA |\n| Wireless Protocol | Wi-Fi, Zigbee |\n| Working Temperature | 0°C to 40°C |\n| Working Humidity | 5%–90% RH (non-condensing) |\n| Size (without base) | 86.0 × 86.0 × 10.5 mm |\n| Size (with base) | 86.0 × 86.0 × 36.2 mm |",
+        "hash": "0d7fd89a34790690f3b33fdaae9f42d84fb8ca7da136fd13d5c7b58a37ce77df"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹33,000 |\n| GST Rate | 18% |\n| HSN Code | 85371000 |",
+        "hash": "13aa385932bf71bb7c69bc1ef73fb3f1caa7513e6827899d003edaa862c9b4a4"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/index",
+    "title": "Smart Panels",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/panels/index",
+    "hash": "a1ae720a45a79d52fce4d142e2bf55dbd653c81a44d8c2e1151481e613ee68ed",
+    "sourcePath": "content/docs/products/panels/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "Capacitive touch control panels in the TOQ series and large 4\"/10\" Android panels. Multi-touch, scene control, fan and socket combinations.",
+        "hash": "0c647a2948dce0bfff2962530ded9b1c70d60ec8a4c4d5c12af63f69ae3d2271"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "Four touches. Your whole room. — ₹10,930\n  \n  \n    Control your room. Charge your devices. One panel. — ₹14,382\n  \n  \n    Eight circuits. One surface. — ₹13,805\n  \n  \n    Ten touches. Every light, every scene. — ₹19,557\n  \n  \n    Lights and fans. One elegant panel. — ₹21,460\n  \n  \n    Four circuits, two fans. One surface. — ₹14,957\n  \n  \n    Eight circuits, a power outlet. Nothing missing. — ₹18,982\n  \n  \n    Everything a room needs. One panel. — ₹20,135\n  \n  \n    Ten circuits, two sockets. Total control. — ₹28,187\n  \n  \n    Your whole home. Four inches of glass. — ₹33,000\n  \n  \n    Your home has a face. — ₹1,12,500",
+        "hash": "40964dc581183c4962ea3cdbb102214e091ffbc5cfa1e1920da1c7c04f92529c"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-10t",
+    "title": "TOQ 10T",
+    "skus": [
+      "38617579105"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-10t",
+    "hash": "a8aa943801d5aaa269e07de0df55d9f5ad96cd0d312604a6015183b7d8290f8a",
+    "sourcePath": "content/docs/products/panels/toq-10t.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel  ·  **SRP:** ₹19,557\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "e4e07d5cce74205eabbd4eaca5fc8f772f875278ec4c9b889de6a724d8e020e8"
+      },
+      {
+        "heading": "Description",
+        "text": "A 10-button Zigbee capacitive touch panel for comprehensive load switching and scene control across up to 10 independent channels in residential and commercial installations.\n\nEach button independently controls a load or triggers a scene. Configurable for toggle or momentary operation per button. Available in white or black glass with silver, gold, or black bezel and configurable backlight.",
+        "hash": "c6731ef3de8cca4fc45cd53bb3d3d8d2233fec14fca95170bb197a4db25357e5"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 10 |\n| Max Switching | 10A per channel |\n| Recommended Load | Up to 4A per channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "80487faf688143c1e5079aae7320f9073235622ebfc0cd2cca6cc26068654f76"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹19,557 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "7f378420e7949eeb29bbbbfd84587d0e69b173f63b581ed96b646bc50e616666"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-10tplus2s",
+    "title": "TOQ 10T+2S",
+    "skus": [
+      "38676065011"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-10tplus2s",
+    "hash": "f2efdb82397b0d5e6bedf5e8886be4f6ffd27e999b0cf369ec30282c274bf5d5",
+    "sourcePath": "content/docs/products/panels/toq-10tplus2s.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Integrated Sockets  ·  **SRP:** ₹28,187\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor. Each socket rated 6A.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "e17c26d7ddd4b1f0abbfa961930ff90841c5563e46be663bcd462fd9d173d5cb"
+      },
+      {
+        "heading": "Description",
+        "text": "A 10-button Zigbee capacitive touch panel with two integrated 6A utility sockets, providing comprehensive smart control across 10 channels alongside dual power outlet access.\n\nEach button independently controls a load or triggers a scene. Available in white or black glass with silver, gold, or black bezel.",
+        "hash": "3fcb3cb4ac702fd9fb800360b0d2b10c2209265f9c9ec65c4efe6ba677a65aca"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 10 |\n| Max Switching | 10A per button channel |\n| Recommended Load | Up to 4A per button channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "a62992c4e7e9fcdb4e39c3c1c32aadff84eba13495cd555855fba105ff280514"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹28,187 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "af44795d5332e49db0d48d5987da2e09ca79c5092e2b9b0960c021b1c491f306"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-4t",
+    "title": "TOQ 4T",
+    "skus": [
+      "38676610441"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-4t",
+    "hash": "988767d72df855acb7a88384ec33176986b2e3e196b726a418e9b9d9a12c6836",
+    "sourcePath": "content/docs/products/panels/toq-4t.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel  ·  **SRP:** ₹10,930\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "7fbe677273a11d540a788d2d24d2525e8186c42fe8b5be32c3be012d70222d5e"
+      },
+      {
+        "heading": "Description",
+        "text": "A 4-button Zigbee capacitive touch panel for load switching, scene triggering, and dimming control in smart automation systems.\n\nEach button operates independently and is configurable for toggle (bistable) or momentary (monostable) operation. Supports brightness control via compatible retrofit dimmer modules. Available in white or black glass with silver, gold, or black bezel options and configurable backlight colour.",
+        "hash": "b7b35fb4c781fad956eb56717628256f55193128dac115af1f4744dd7e1949a7"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 |\n| Max Switching | 10A per channel |\n| Recommended Load | Up to 4A per channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "e9cb3c640fbac4cefb570c315017c6c94ce52757de7a3fa0373064d76a8f1560"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹10,930 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "7f75eca1895b0806e5511895671c30a4291db296d3fbdfe4e24e620bfd044421"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-4tplus1s",
+    "title": "TOQ 4T+1S",
+    "skus": [
+      "38639614871"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-4tplus1s",
+    "hash": "be7f69de2b2b27f2b655b9bf7a349236d804da545d0e1820b9a6bb13867db876",
+    "sourcePath": "content/docs/products/panels/toq-4tplus1s.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Integrated Socket  ·  **SRP:** ₹14,382\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor. Socket rated 6A.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "486be06cb90b1061c99d8b2aa37f6d9da0f9939c7eaf2da73d3e5a1099e6cc71"
+      },
+      {
+        "heading": "Description",
+        "text": "A 4-button Zigbee capacitive touch panel with an integrated 6A power socket and USB-C/USB-A charging ports, combining smart load control with utility power access in a single wall panel.\n\nEach button is independently configurable for toggle or momentary operation, supporting load switching, scene triggering, and dimmer control. Available in white or black glass with silver, gold, or black bezel options.",
+        "hash": "da0b836ba6588cc13083789d17c9f0349586a342c9e597d6f9ac3223e18e9ca8"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 |\n| Max Switching | 10A per channel |\n| Recommended Load | Up to 4A per channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "e9cb3c640fbac4cefb570c315017c6c94ce52757de7a3fa0373064d76a8f1560"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹14,382 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "d3c144cc541d115e57642f44699a93d46a73e8fd55b0d6810a0783b07ad2d7f8"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-4tplus2f",
+    "title": "TOQ 4T+2F",
+    "skus": [
+      "38638793830"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-4tplus2f",
+    "hash": "2379d049470f2c005bf426b131768432ab087244d4bd6ced2161473b9d152f82",
+    "sourcePath": "content/docs/products/panels/toq-4tplus2f.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Fan Control  ·  **SRP:** ₹14,957\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A on button channels use external SSR or contactor.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "49a6b90327c6a470f8a7ba6c97d5a323c5d4d781900d34734c1112b2e2474c49"
+      },
+      {
+        "heading": "Description",
+        "text": "A 4-button Zigbee touch panel with two dedicated fan control channels for ceiling fans up to 120W each, providing load switching, scene control, and dual fan management from a single wall panel.\n\nButton channels are independently configurable for toggle or momentary operation. Available in white or black glass with silver, gold, or black bezel.",
+        "hash": "42a4e3c00592c3e04f275bf7307cecb914d821797ddf484253832a032e4bd749"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 + 2 fan |\n| Max Switching | 10A per button channel |\n| Recommended Load | Up to 4A per button channel; fans up to 120W each |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "80fe7e5b1b4e7b6be76667f495d29e665ec5013ac1dcf5a18107de371ae82f2b"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹14,957 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "34ebe5813f2398eae6080f88983c9fab781f14bcca8a43a05c17792f5653112d"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-4tplus2fplus1s",
+    "title": "TOQ 4T+2F+1S",
+    "skus": [
+      "38612926801"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-4tplus2fplus1s",
+    "hash": "34d0e5e2f9f97275b7483c207a9ce6e3dcf68717bd5e56a221ca9024a9ea29a6",
+    "sourcePath": "content/docs/products/panels/toq-4tplus2fplus1s.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Fan and Socket  ·  **SRP:** ₹20,135\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor. Socket rated 6A.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "25cd64f92c1cc4884bd1aa0c920776d3e81f124824d1628619445ac140b7b587"
+      },
+      {
+        "heading": "Description",
+        "text": "A multi-function Zigbee wall panel combining 4 load control buttons, 2 dedicated fan channels, and an integrated 6A utility socket in a single glass panel.\n\nIdeal for rooms requiring lighting, fan, and power access control from one location. Each button configurable independently. Available in white or black glass with silver, gold, or black bezel.",
+        "hash": "6e4f542ac45dd8af6602dad8e8ff18b7af51a1c045929353112d66b079e61a08"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 + 2 fan |\n| Max Switching | 10A per button channel |\n| Recommended Load | Up to 4A per button channel; fans up to 120W each |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "80fe7e5b1b4e7b6be76667f495d29e665ec5013ac1dcf5a18107de371ae82f2b"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹20,135 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "209be9a6dc3e89aa90303de17ec4cc65914a6b70c9460473af459c12bb2c74cb"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-8t",
+    "title": "TOQ 8T",
+    "skus": [
+      "38687106141"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-8t",
+    "hash": "6a9ad338f510059e8f67e519820c6ad63a8c9b934c675b6d9b393cfcd59402f8",
+    "sourcePath": "content/docs/products/panels/toq-8t.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel  ·  **SRP:** ₹13,805\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "eea57a28d27a29f52fe668857816f1fa2ff72de281b6292c1825a5cacbbf1271"
+      },
+      {
+        "heading": "Description",
+        "text": "An 8-button Zigbee capacitive touch panel for load switching, scene triggering, and dimming control across up to 8 independent channels.\n\nEach button is individually configurable for toggle or momentary operation. Supports dimming via compatible retrofit dimmer modules. Available in white or black glass with silver, gold, or black bezel and configurable backlight colour.",
+        "hash": "f40ce7bce1ead7eabcdfbf7be0999fa35e8ace8f1cde67d7cd31a98de3974fcb"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 8 |\n| Max Switching | 10A per channel |\n| Recommended Load | Up to 4A per channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "7669cf630203393ff261dfe99cb51434192195d28e42fb590a347ec678690fb1"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹13,805 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "3e69e45c6fef2cbcd2daa84cd80e9ecf8531ae8bd86ba117d46606e954d8079b"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-8tplus1f",
+    "title": "TOQ 8T+1F",
+    "skus": [
+      "38648381854"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-8tplus1f",
+    "hash": "b3303270afa73fcb803427101b02f4dc0f76ed42731ffb50432e83a28e8800b5",
+    "sourcePath": "content/docs/products/panels/toq-8tplus1f.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Fan Control  ·  **SRP:** ₹21,460\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A on button channels use external SSR or contactor.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "116a20ccf2b76973b414cbc9d150de78387fc9a14689b8febe8bd5956446e994"
+      },
+      {
+        "heading": "Description",
+        "text": "An 8-button Zigbee touch panel with a dedicated fan control channel for ceiling fans up to 120W, combining multi-circuit load control with integrated fan management in a single wall panel.\n\nEach of the 8 buttons is independently configurable for toggle or momentary operation. The fan channel operates separately for speed and on/off control. Available in white or black glass with silver, gold, or black bezel.",
+        "hash": "c2e79ae119326cb90821313fe3b94100b6cd31b94e3a27eb772f7df2f5e3690f"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 8 + 1 fan |\n| Max Switching | 10A per button channel |\n| Recommended Load | Up to 4A per button channel; fan up to 120W |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "de20625d2f5f6b81067aed0b32bd8b42fcea548c7a4ba1845b4aba3b3b4dec0b"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹21,460 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "e3d9b6e485fc50b6b5bc797d716a84dc059decb522cc3e526fefcf0acbda254d"
+      }
+    ]
+  },
+  {
+    "id": "products/panels/toq-8tplus1s",
+    "title": "TOQ 8T+1S",
+    "skus": [
+      "3863826889"
+    ],
+    "url": "https://docs.smartify.in/docs/products/panels/toq-8tplus1s",
+    "hash": "2d32512414d986b01f9f4dd665a31b20c8b4d604a74f72db63a6429649cc0e95",
+    "sourcePath": "content/docs/products/panels/toq-8tplus1s.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Touch Control Panel with Integrated Socket  ·  **SRP:** ₹18,982\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor. Socket rated 6A.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "06e98582922e459b616a251cff5fc591820f1eb1d7d4af2cc1ec487fdb4bbd4b"
+      },
+      {
+        "heading": "Description",
+        "text": "An 8-button Zigbee capacitive touch panel with an integrated 6A utility socket, combining comprehensive load control and scene triggering with convenient power access in a single wall panel.\n\nEach button is independently configurable for toggle or momentary operation with dimmer support via retrofit modules. Available in white or black glass with silver, gold, or black bezel.",
+        "hash": "c59fc69ee92a7ede98fde63d10ed72e48137fd732f34f7d15ec501273a1fe3e6"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 8 |\n| Max Switching | 10A per button channel |\n| Recommended Load | Up to 4A per button channel |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |",
+        "hash": "4ef6297d4e9c4809396d858985e04b70a42cb55cf1e14021fc39b1771d47f62c"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard flush box compatible with panel dimensions\n- Live, Neutral, Load wires\n- Zigbee coordinator within range\n\n\n\nSwitch off the circuit breaker.\n\n\nMount the backplate/box to the wall.\n\n\nConnect wiring per the channel labels on the panel.\n\n\nSnap or screw the panel into position.\n\n\nRestore power and pair with your Zigbee coordinator.\n\n\nConfigure scenes and buttons in the Smartify or Home Assistant UI.",
+        "hash": "ad04c82a87a8f51d104a2ea15023cf5aa066f7994291a35e2333eef306d4ce70"
+      },
+      {
+        "heading": "Notes",
+        "text": "- Touch panels must be grounded to avoid false triggers.\n- Ensure the panel is flush against the wall for reliable capacitive touch detection.",
+        "hash": "a6a32e33c73c3a155e8615a48cc6574a5ad9db0636154214b9f8a63b08f53bcb"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹18,982 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "9f7955aebf83e96cad7c7d2fcbebb2258306ff827f52a3eeaf41a0122246cbdc"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "title": "Layer Dimmer 1",
+    "skus": [
+      "38632957173"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/1-channel-zigbee-retrofit-dimmer",
+    "hash": "85acbefa87b6a1afae931f58e49e44c55441c3990a858435021a899fa5a8ebdf",
+    "sourcePath": "content/docs/products/retrofit/1-channel-zigbee-retrofit-dimmer.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Phase-Cut Dimmer  ·  **SRP:** ₹3,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nCompatible with dimmable loads only. Not a 0-10V controller. Does not function as a simple on/off relay.\n\nRequires: Zigbee coordinator or hub. Dimmable fixtures or drivers required.",
+        "hash": "e571795c3b58fa3e9766aef168f0da586196cc74d5d9d5c2af1cfdd225bc4f76"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-channel Zigbee phase-cut dimmer module designed to retrofit any standard wall switch with intelligent brightness control — no switch replacement required.\n\nSupports trailing and leading edge phase-cut dimming up to 200W for compatible dimmable lighting fixtures and drivers. Installs behind the existing switch in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "1801ea11e5c755f1d364cb130cfab109a580278689f58c73322a2e541cef9d90"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 200W |\n| Recommended Load | Dimmable fixtures / drivers only |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Voltage | 90–250V AC |\n| Max Power | 100W × 2CH (220V) |\n| Wireless Protocol | Zigbee 3.0 |\n| Operating Temperature | 0°C to +40°C |\n| Case Temperature (Tc) | +80°C Max |\n| Dimensions | 40 × 40 × 18 mm |\n| IP Rating | IP20 |\n| Frequency Band | 2.405–2.480 GHz |\n| Max Radio Transmit Power | &lt;+10 dBm |\n| Installation Type | Behind Switch / DIN Rail |",
+        "hash": "3428b47e6ae5521042417bada48bd1f64951d81f9a1880649e756eb06b427089"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,000 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "a4a6a5224e8831aad5eaac6dfb91b499228153b18557ee66a1d8b85a07042f55"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/1-channel-zigbee-retrofit-relay-40a",
+    "title": "Layer Relay 1 HL",
+    "skus": [
+      "38632117965"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/1-channel-zigbee-retrofit-relay-40a",
+    "hash": "ef0308697f6715fccbeaf511481fa52de488ad2821575ea723a8ee661ec648b0",
+    "sourcePath": "content/docs/products/retrofit/1-channel-zigbee-retrofit-relay-40a.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Heavy-Duty Switching Relay  ·  **SRP:** ₹5,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nProper cable sizing and protection devices mandatory. Qualified installation required.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "119a0cde095967305ef7a5456c9f762b753ddb70cfddab7ffea36f30c71e697e"
+      },
+      {
+        "heading": "Description",
+        "text": "A heavy-duty single-channel Zigbee relay rated for direct switching of high-current loads up to 40A. Designed for high-power appliances such as water heaters, pumps, HVAC loads, and industrial equipment.\n\nInstalls behind an existing wall switch in a flush box or on DIN rail. Proper cable sizing, circuit protection, and installation practices are mandatory for safe operation at rated current. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "ed398f5cc96805ec51052e7bc7e2bca2c8254ddc8b62a2ff8433fb1afbd66bd5"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 40A |\n| Recommended Load | High-power appliances and heavy electrical loads |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |",
+        "hash": "d7b7b17fc82f0653b2160fd03855ff9c3368d40096fdceee5a21e65a0fafd484"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹5,000 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "50bd3c1c4a3325a2471f21e03cb25eb810b32d256e07285bac02bfb183651d02"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/1-channel-zigbee-retrofit-relay",
+    "title": "Layer Relay 1",
+    "skus": [
+      "38632117962"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/1-channel-zigbee-retrofit-relay",
+    "hash": "59f06595cec2e91307df0a66185270ad613ee8326ca6c3d5410914389259e4a1",
+    "sourcePath": "content/docs/products/retrofit/1-channel-zigbee-retrofit-relay.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Switching Relay  ·  **SRP:** ₹3,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external relay / SSR / contactor\n\nRequires: Zigbee coordinator or hub",
+        "hash": "10ceb01938f8ee851cfb90549da41e23ab36388ccaeddf645ddea1396409c5be"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-channel Zigbee switching relay designed to retrofit any standard mechanical switch into a smart switch — no rewiring, no hardware replacement.\n\nInstalls behind the existing wall switch in a flush box or on DIN rail. Supports direct load switching up to 4A; for loads between 4A and 10A, an external relay, SSR, or contactor is required. Communicates natively over Zigbee 3.0 with full Home Assistant support, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "7e7453dd56268ca63af522a7d766adff8a52ba3bc751c7e7801a44e80aa9014a"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 10A |\n| Recommended Load | Up to 4A |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Voltage | 90–250V AC |\n| Max Current | 10A |\n| Wireless Protocol | Zigbee 3.0 |\n| Operating Temperature | -10°C to +40°C |\n| Max Case Temperature (Tc) | +80°C |\n| Wireless Range | ≤200m (open field) |\n| Dimensions | 52 × 47 × 18 mm |\n| IP Rating | IP20 |\n| Installation Type | Behind Switch / DIN Rail |",
+        "hash": "002c5001b21ebb7ba654cdc83c4a20eb0b82dd96042c174c5e2e5977b41271a6"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,000 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "a4a6a5224e8831aad5eaac6dfb91b499228153b18557ee66a1d8b85a07042f55"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "title": "Layer Dimmer 2",
+    "skus": [
+      "38625458903"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/2-channel-zigbee-retrofit-dimmer",
+    "hash": "c8cb4ad6c557a448910e35f64f81ba1e9050cc1d8f2dde208cf11ae2e917df5b",
+    "sourcePath": "content/docs/products/retrofit/2-channel-zigbee-retrofit-dimmer.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Phase-Cut Dimmer  ·  **SRP:** ₹3,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nCompatible with dimmable loads only. Not a 0-10V controller. Does not function as a simple on/off relay.\n\nRequires: Zigbee coordinator or hub. Dimmable fixtures or drivers required.",
+        "hash": "0f512d292b2c67ad6f9a077d6af6bb8dc483a4ab1e7f9e88d154240c11da3f8e"
+      },
+      {
+        "heading": "Description",
+        "text": "A dual-channel Zigbee phase-cut dimmer that retrofits two standard wall switches with independent brightness control — without replacing any existing hardware.\n\nEach channel independently supports phase-cut dimming up to 100W for compatible dimmable lighting fixtures and drivers. Installs behind existing switches in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "8064a2d0403ebf6fbcae7a72dddef0392c7f050a9329c836ca42cf0594879a38"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 2 (independent) |\n| Max Switching | 100W per channel |\n| Recommended Load | Dimmable fixtures / drivers only |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Voltage | 90–250V AC |\n| Max Power | 75W (110V) / 150W (220V) |\n| Wireless Protocol | Zigbee 3.0 |\n| Operating Temperature | 0°C to +40°C |\n| Case Temperature (Tc) | +80°C Max |\n| Dimensions | 40 × 40 × 18 mm |\n| IP Rating | IP20 |\n| Frequency Band | 2.405–2.480 GHz |\n| Max Radio Transmit Power | &lt;+10 dBm |\n| Installation Type | Behind Switch / DIN Rail |",
+        "hash": "4e45e9379798ba14b93edb1e4ae234bb85b7eb284b7f2f1e3dc083b6bdcce538"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,250 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "75cd15c597fc757867d4ff2fda668fa2642baaa023964f6e73962953da48772a"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/2-channel-zigbee-retrofit-relay",
+    "title": "Layer Relay 2",
+    "skus": [
+      "38659529195"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/2-channel-zigbee-retrofit-relay",
+    "hash": "7f8c38b6c8156ec3a28a89614e22426350d900016ad25654981e04be459c75e4",
+    "sourcePath": "content/docs/products/retrofit/2-channel-zigbee-retrofit-relay.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Switching Relay  ·  **SRP:** ₹3,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A per channel use external relay / SSR / contactor. Not a dimmer. Not dry contact.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "51a6ae682cedc7d7184f6912b8d98a418c7c75ed7e2691e6262b2ca8da8400d2"
+      },
+      {
+        "heading": "Description",
+        "text": "A dual-channel Zigbee switching relay that converts two standard mechanical switches into smart switches simultaneously — without replacing any existing hardware.\n\nEach channel operates independently with direct load switching up to 4A. For loads above 4A per channel, an external relay, SSR, or contactor is required. Installs behind existing switches in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "83f515482c2498db23797ddfe674a941fb1dea5c52b88e67d786f4a7b2e9b195"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 2 (independent) |\n| Max Switching | 5A per channel |\n| Recommended Load | Up to 4A per channel |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Voltage | 90–250V AC, 50/60Hz |\n| Current | Total 10A |\n| Wireless Protocol | Zigbee 3.0 |\n| Operating Temperature | -10°C to +65°C |\n| Case Temperature (Tc) | +80°C Max |\n| Operating Range | ≤70m |\n| Dimensions | 40 × 40 × 18 mm |\n| IP Rating | IP20 |\n| Frequency Band | 2.405–2.480 GHz |\n| Max Radio Transmit Power | &lt;+10 dBm |\n| Installation Type | Behind Switch / DIN Rail |",
+        "hash": "5f443c8e05f79832de09a2e52d09268d32e3ef4d05316852fb6c511c186cd914"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,250 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "75cd15c597fc757867d4ff2fda668fa2642baaa023964f6e73962953da48772a"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/analog-0-10v-zigbee-dimmer",
+    "title": "Layer Dimmer Analog",
+    "skus": [
+      "38637323117"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/analog-0-10v-zigbee-dimmer",
+    "hash": "868f48976070acb6089feec78269ed8711569d46f6bbb34e27a3cac4ea1145c8",
+    "sourcePath": "content/docs/products/retrofit/analog-0-10v-zigbee-dimmer.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** 0-10V Analog Dimmer Controller  ·  **SRP:** ₹4,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch or dim high-voltage loads directly. Control signal output only.\n\nRequires: Zigbee coordinator or hub. Compatible 0-10V LED drivers required.",
+        "hash": "4c37a5f6c776e1c3f92c8a121e0daf927aeeb6416a97d9d3773703df12e347bd"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-channel Zigbee 0-10V analog dimming controller designed to integrate with LED drivers and lighting systems that accept a 0-10V dimming input signal.\n\nOutputs a low-voltage 0-10V control signal — it does not switch or dim mains voltage directly. Designed for DIN rail or panel installation. Communicates natively over Zigbee 3.0 with Home Assistant, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "84b19ef84ce42c320a08a605deade56e1539450d33dbdabf35ba9ae3bd43dbc1"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 0-10V control signal |\n| Recommended Load | Compatible 0-10V LED drivers |\n| Installation | DIN rail / electrical panel |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Input Voltage | AC100–240V 50Hz/60Hz |\n| Output Voltage | 0–10V DC Max. 20mA |\n| Dimming Type | 0–10V |\n| Operation Frequency | 2.412GHz–2.484GHz |\n| Operation Temperature | -10°C to +40°C |\n| Protocol | Zigbee 3.0 |\n| Dimensions (W × D × H) | 39 × 39 × 18 mm |\n| IP Rating | IP20 |",
+        "hash": "d576b52d32371e11b62a56ba6b05b7361dcfb52296c246ac2fd7d4c5854781b5"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹4,250 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "c73382470fa33f3a83eeae56be0cdb435bc0a367791110779fad392e88f226f5"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/index",
+    "title": "Retrofit Relays & Dimmers",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/retrofit/index",
+    "hash": "8626037672dcbacb58c19c745619df02eb4cac6a68e0471051cc6cd2c935763d",
+    "sourcePath": "content/docs/products/retrofit/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "Zigbee relay and dimmer modules that fit behind your existing switches — no visible hardware change. Also includes the Zigbee shutter module for motorised blinds.",
+        "hash": "573a0f684548dc125e93f558922e48cb9fd078655f7eea2077d0c859cd8f0cf2"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "Your switch. Smarter. — ₹3,000\n  \n  \n    Heavy loads. Light control. — ₹5,000\n  \n  \n    Two switches. One module. Zero effort. — ₹3,250\n  \n  \n    The right light. Always. — ₹3,000\n  \n  \n    Two circuits. One mood. — ₹3,250\n  \n  \n    Your blinds open with the morning. They close before the afternoon heat sets in. You didn't touch them. — ₹3,000\n  \n  \n    Professional lighting. Smart control. — ₹4,250\n  \n  \n    Simple. Smooth. Smart. — ₹8,247\n  \n  \n    Open. Close. Stop. That's all you need. — ₹17,750",
+        "hash": "01d1170cfc8fb2f1fc229bb21e0185703ebe64bbef804e63a339bb1a6f77fc30"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/led-controller-cv-dimmer",
+    "title": "Lume CV Dim",
+    "skus": [
+      "38673300629"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/led-controller-cv-dimmer",
+    "hash": "6eee1d62f553df21c5afb6a69468fa06881aa376fcba4699eaad22e1960acdbb",
+    "sourcePath": "content/docs/products/retrofit/led-controller-cv-dimmer.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Compatible smart ecosystem  ·  **Type:** Constant Voltage LED Dimmer Controller  ·  **SRP:** ₹8,247\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nRequires appropriate CV DC power supply. Single-color only. Does not power LEDs from mains directly.\n\nRequires: Compatible CV DC power supply (12V or 24V) required",
+        "hash": "ac18ef181708e2aeb1a34cfc4d1ac954e1043b8d0f00a9058b77385549f10dcd"
+      },
+      {
+        "heading": "Description",
+        "text": "A constant voltage LED dimmer controller for single-color low-voltage LED strips, providing smooth 0-100% brightness control through a compatible smart ecosystem.\n\nRequires an appropriate constant voltage DC power supply (12V or 24V) matched to the LED strip specification. Designed for panel or concealed installation.",
+        "hash": "eb3df87057a46a71be6104487a8efef861c4530aa837d8c7ef8da26c0f0528dd"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Recommended Load | Single-color CV LED strips (12V or 24V) |\n| Installation | Indoor panel or concealed installation |\n| Compatibility | Compatible smart lighting ecosystems |",
+        "hash": "08cc4b606420f8db9b1dd962691c3f8c71330357edb7e2ae94d81d9e74b52177"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹8,247 |\n| GST Rate | 18% |\n| HSN Code | 85371010 |",
+        "hash": "824ba461805600b964da2a8e057c32599f007f18f053e474beb7c82bdd9b7887"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/tac-sh",
+    "title": "TAC SH",
+    "skus": [
+      "38622224396"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/tac-sh",
+    "hash": "fd340204ce57f4459b947188c865b9e75571210b63a33a91b6be6f63dcbfdfa3",
+    "sourcePath": "content/docs/products/retrofit/tac-sh.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Shutter / Curtain Control Switch  ·  **SRP:** ₹17,750\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nAC motor loads only. Not suitable for use as a standard lighting switch. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "f44a7c5a066acdc3253967fb311e4f4d5125c26630f89a2bcdfb8e28cff02f6f"
+      },
+      {
+        "heading": "Description",
+        "text": "A 3-button Zigbee shutter and curtain control switch with dedicated Open, Close, and Stop functions for AC motorized blinds and curtains up to 150W.\n\nBacklit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "4ff518584156eb69380d3ae5d80873c6448d063ee6094ae38386ecd213b6c9bd"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 (Open / Close / Stop) |\n| Max Switching | 150W motor |\n| Recommended Load | AC curtain/blind motor up to 150W |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "8cc2d874ac5e933c07c8202100a22c9581a131778f3bd49e08f72497e75b18b8"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹17,750 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "ce12ad57729dd17e0bb9ae152e1a1339fb665db729460c4bc668860886b413b4"
+      }
+    ]
+  },
+  {
+    "id": "products/retrofit/zigbee-shutter-module",
+    "title": "Layer Shutter",
+    "skus": [
+      "38684154573"
+    ],
+    "url": "https://docs.smartify.in/docs/products/retrofit/zigbee-shutter-module",
+    "hash": "91cff1432b570113f92f3fc6a66483832e82c8418bdd2558b5d1f045e96e69eb",
+    "sourcePath": "content/docs/products/retrofit/zigbee-shutter-module.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Shutter / Curtain Motor Controller  ·  **SRP:** ₹3,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nAC motor loads only. Not for DC motors. Must not be used as a lighting relay.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "d3ac0fc7a3a1ceba41ef89bf7ee592bdad08b748538d6312f5a1661ba3337dbc"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-channel Zigbee shutter controller designed for AC motorized curtains, roller blinds, and shutters. Provides interlocked directional outputs — Up, Down, and Stop — eliminating any possibility of simultaneous conflicting signals to the motor.\n\nInstalls behind the existing wall switch in a flush box or on DIN rail. Communicates natively over Zigbee 3.0 with full Home Assistant support, and integrates with Matter and Apple HomeKit via a compatible hub.",
+        "hash": "ede47109a7a5b373b125288b81e812d2b5567bfed1913fab49a391db79494533"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 motor channel |\n| Max Switching | 2A |\n| Recommended Load | AC motor loads only |\n| Installation | Flush box or DIN rail |\n| Compatibility | Home Assistant (native), Matter & Apple HomeKit (via hub) |\n| Voltage | 90–250V AC, 50/60Hz |\n| Current | 2A |\n| Max Power | 500W (250V) |\n| Wireless Protocol | Zigbee 3.0 |\n| Operating Temperature | -10°C to +40°C |\n| Case Temperature (Tc) | +80°C Max |\n| Operating Range | ≤200m |\n| Dimensions | 52 × 47 × 18 mm |\n| IP Rating | IP20 |\n| Installation Type | Behind Switch / DIN Rail |",
+        "hash": "9d45e0a5651f6d894278105a837a573472cbd3de312c5689012c5be549d415b8"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Existing wall switch in a flush box (≥ 60mm depth recommended)\n- Live, Neutral, and Load wires in the flush box\n- Zigbee coordinator within range\n\n\n\n**Turn off the circuit breaker** for the affected circuit.\n\n\nRemove the existing switch plate. The retrofit module sits *behind* the existing switch — no visible hardware change.\n\n\nConnect wiring:\n- **Live** → L input\n- **Neutral** → N input\n- **Load** → load output(s)\n\n\nFit the module into the flush box. Use DIN rail adapters for panel board installation.\n\n\nReplace the switch plate.\n\n\nRestore power. The device will blink — ready to pair.\n\n\nPair with your Zigbee coordinator.",
+        "hash": "d6d7f98423b73f8f997d5625339b0a85a3bcfb6488bc26d99209d7db6867cfe6"
+      },
+      {
+        "heading": "Load Limits",
+        "text": "- Standard relay: up to 4A direct. For 4–10A, use an external relay/SSR/contactor.\n- 40A relay: rated for direct high-current switching. Proper cable sizing and circuit protection mandatory.\n- Dimmer modules: resistive and leading-edge dimmable loads only. Not suitable for ceiling fans.",
+        "hash": "4f0dc67081e455f566594d22d47695a9b65ed80a5f404a396e14e33bacc8b27f"
+      },
+      {
+        "heading": "Shutter Module",
+        "text": "The shutter module controls motorised curtains, blinds, and shutters:\n- **M1, M2** → motor up/down terminals\n- Configure travel time in your coordinator for accurate position reporting.",
+        "hash": "80f855d7d35fc9d460ca435c4591858accecd21f90c085c17e975fa92bcfe8d0"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,000 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "a4a6a5224e8831aad5eaac6dfb91b499228153b18557ee66a1d8b85a07042f55"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/index",
+    "title": "Sensors",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/sensors/index",
+    "hash": "5a508282593b57c3d6c3111a0ef01f1bd8f16436a95d0d511ed70d4b04fca7a8",
+    "sourcePath": "content/docs/products/sensors/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "Zigbee sensors for automating your home: motion, contact, vibration, and cutting-edge mmWave presence sensors that detect stationary occupants.",
+        "hash": "9983bab494a2cda7c1b8391f96f57f3fba1d40c001d8648ecee709b3864e5dfa"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "Open. Closed. Your home knows. — ₹2,322\n  \n  \n    The lights come on when you enter. Not when the sun is still up. — ₹4,250\n  \n  \n    If something moves, you'll know. — ₹3,750\n  \n  \n    It knows you're there. Even when you're still. — ₹7,000\n  \n  \n    A room that knows when it's occupied. — ₹10,375",
+        "hash": "61431a246eebe03fff30cced444412333ce3f28446d0829380137cc8d58a4a5e"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/zigbee-contact-sensor",
+    "title": "Aware Contact",
+    "skus": [
+      "38640080710"
+    ],
+    "url": "https://docs.smartify.in/docs/products/sensors/zigbee-contact-sensor",
+    "hash": "e4bcbd5ecb7bd77fcfcaf0630752096f34b77f1ec88f2ca3d59ffa8653af0b22",
+    "sourcePath": "content/docs/products/sensors/zigbee-contact-sensor.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Door/Window Contact Sensor  ·  **SRP:** ₹2,322\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Status feedback only.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "db8a46fa9f4fc5766f7cfab207cc7ea65a662ed0c6989117ee3607cffcdfc76f"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee 3.0 magnetic contact sensor that detects and reports the open/closed state of doors, windows, and other entry points to a Zigbee gateway or compatible hub.\n\nBattery-powered with surface mount installation via adhesive or screws. Used for security monitoring and as an automation trigger.",
+        "hash": "7d26d7dc1b35573385641622573a2e06fe5cdf6939c7bbff4b4250ed63cb7120"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Surface mount (adhesive or screws) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Wireless Connection | Zigbee |\n| Battery | CR2032 (replaceable) |\n| Low Battery Alarm | Yes |\n| Operating Temperature | -10°C to +50°C |\n| Dimensions (Host) | 40 × 26 × 13 mm |\n| Dimensions (Magnet) | 26 × 9.5 × 11 mm |",
+        "hash": "9f602d6924b81cdee9cd3589e3d676f93fc0737a9378b9a728eca0f2cb7f0a76"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹2,322 |\n| GST Rate | 18% |\n| HSN Code | 85319000 |",
+        "hash": "9dfafc36b67626bc86becc8a220edbc77f35d43680a4c5964f5cb4224918fd02"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/zigbee-mmwave-sensor-ceiling-mounted",
+    "title": "Aware Wave Pro",
+    "skus": [
+      "38678738240"
+    ],
+    "url": "https://docs.smartify.in/docs/products/sensors/zigbee-mmwave-sensor-ceiling-mounted",
+    "hash": "49dce242b893a83ece6c80997eb617d9e08443c85f49561eb6aa7a9c997eee71",
+    "sourcePath": "content/docs/products/sensors/zigbee-mmwave-sensor-ceiling-mounted.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** mmWave Motion / Presence Sensor  ·  **SRP:** ₹10,375\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Provides presence/motion signals for automation.\n\nRequires: Mains wiring at ceiling mount point. Zigbee coordinator or hub.",
+        "hash": "5e226421c2bf04e94b73e9c45d2a328fc82cf06c69d5aac2150e032b5c7571fe"
+      },
+      {
+        "heading": "Description",
+        "text": "A ceiling-mounted, mains-powered Zigbee mmWave presence sensor designed for accurate occupancy detection across a full room. Detects micro-movements for continuous presence sensing — not just initial motion.\n\nIdeal for lighting control, HVAC triggers, and occupancy-based automation in residential and commercial spaces. Ceiling mount provides optimal coverage.",
+        "hash": "5a9105b223bb0a426e35ff0de04887116a1e1cfe471ec086c5fe9b7628481aea"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Ceiling mount (mains powered) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Wireless Connection | Zigbee |\n| Working Voltage | AC 100–250V |\n| Working Current | ≤70mA |\n| Working Temperature | -20°C to +70°C |\n| Detection Distance | 0.3–9m (default 6m) |\n| Sensitivity | 0–9 (default 7) |\n| Target Detection Confirmation Time | 0–10s |\n| Target Disappearance Delay Time | 0.5s–25 min (min. 15s recommended) |\n| Light Sensing Range | 0–2000 Lux |",
+        "hash": "4ae191f6a78659b63b34e5009e234424254d4b442c4156cff0fe63ebe493338d"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹10,375 |\n| GST Rate | 18% |\n| HSN Code | 85319000 |",
+        "hash": "32e1c8c2ffc50d1eac8bd3ed68ecf4eed202a48b15b823ba58bf744926cd351e"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/zigbee-mmwave-sensor-usb",
+    "title": "Aware Wave",
+    "skus": [
+      "38626055855"
+    ],
+    "url": "https://docs.smartify.in/docs/products/sensors/zigbee-mmwave-sensor-usb",
+    "hash": "bd7f7242e4fb5ec69743dd406dcfd32e0a2d555274acc9bb11c8a9cbbb66901f",
+    "sourcePath": "content/docs/products/sensors/zigbee-mmwave-sensor-usb.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** mmWave Motion / Presence Sensor  ·  **SRP:** ₹7,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Provides presence/motion signals for automation.\n\nRequires: USB power adapter or USB power source. Zigbee coordinator or hub.",
+        "hash": "dc2803efc4e88edc89bcc44bff52792084e20067dbdf9273239f2d28fb4c52db"
+      },
+      {
+        "heading": "Description",
+        "text": "A USB-powered Zigbee mmWave presence sensor that detects fine motion and human presence using radar technology — without relying on traditional PIR sensing.\n\nEnables accurate presence-based automations such as lighting control and HVAC triggers even when minimal movement occurs. USB power allows flexible placement where mains wiring is unavailable.",
+        "hash": "fc8574517d0e5e181349dc7dbc8ffc601bf6049e0966fbc4cd3c7cfbce4cbfe9"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Flexible (surface, ceiling, or wall) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Power Supply | 5V 1A (USB) |\n| Power Consumption | 0.5W |\n| Communication Protocol | Zigbee |\n| Radar Frequency | 24GHz–24.25GHz |\n| Light Sensitivity Range | 0–10000 Lux |\n| Operating Temperature | -10°C to +40°C |\n| Operating Humidity | 0%–95% RH (non-condensing) |",
+        "hash": "7267ccfccd1f6cec0107ddcabee3ce69e95bbc98dddeb703a90b9b1dc634bf59"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹7,000 |\n| GST Rate | 18% |\n| HSN Code | 85319000 |",
+        "hash": "51ba94bc469a972692900f0f508271b9ac45fbbb117d489a2868ed3c6ef671a6"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/zigbee-motion-sensor-plus-lux-sensor",
+    "title": "Aware Motion",
+    "skus": [
+      "38687599521"
+    ],
+    "url": "https://docs.smartify.in/docs/products/sensors/zigbee-motion-sensor-plus-lux-sensor",
+    "hash": "b602a50c70abbbcea50abd3f5f5822177184a771ca947260614996ee7b2b6f96",
+    "sourcePath": "content/docs/products/sensors/zigbee-motion-sensor-plus-lux-sensor.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Motion + Ambient Light (LUX) Sensor  ·  **SRP:** ₹4,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Provides motion and LUX data for automation logic.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "6dcafb333c42a59e6af02935f71cd98ca563270bac9e0bbb6a3073842a9033e0"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee 3.0 combined motion and ambient light sensor that reports both occupancy and LUX readings to a Zigbee gateway or compatible hub for automation and control logic.\n\nEnables intelligent automations based on both presence and light conditions — for example, activating lights only when motion is detected and ambient light is below a set threshold. Battery-powered with wall or ceiling mount.",
+        "hash": "73c40e19da4488dc8a04e4f22a499cf4940efa8408b9ba12c7b6a771d0aee5ff"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Wall or ceiling (adhesive or screws) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Input Voltage | 3V |\n| Battery | CR2450 (replaceable) |\n| Low Battery Warning | Yes |\n| Communication Protocol | Zigbee (IEEE 802.15.4) |\n| Operating Frequency | 2.405–2.480 GHz |\n| Max RF Power | +10 dBm |\n| Data Transmission Rate | 250 Kbps |\n| Antenna | PCB antenna, gain 1.08 dBi |\n| Detection Range | 8m |\n| Detection Angle | 120° |\n| LED Indicator | Single white lamp |\n| Operating Temperature | -10°C to +50°C |\n| Dimensions | ø52 × 46 mm (±1mm) |",
+        "hash": "78881ad73b0832c71c00e3676fc9f61ef64ce42cf63ea643acbf8fb2a56d2fa1"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹4,250 |\n| GST Rate | 18% |\n| HSN Code | 85319000 |",
+        "hash": "4aff272cdc5bd736b13eac6c5dcf15dc68633c902faf64993cf3abe5af48ee86"
+      }
+    ]
+  },
+  {
+    "id": "products/sensors/zigbee-vibration-sensor",
+    "title": "Aware Vibration",
+    "skus": [
+      "3864587193"
+    ],
+    "url": "https://docs.smartify.in/docs/products/sensors/zigbee-vibration-sensor",
+    "hash": "0e7b5e1e9c24a9a32da5fe38f558ff144c405c9b797f9b7208b724f355e9597a",
+    "sourcePath": "content/docs/products/sensors/zigbee-vibration-sensor.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Vibration Detection Sensor  ·  **SRP:** ₹3,750\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not control electrical loads. Event notification only.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "44e7cc118b8adf95a9dfe2c3f52252576a7cab4ced9879d80330d949ff5d33d3"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee 3.0 vibration sensor that detects movement, vibration, and tampering on doors, windows, safes, cabinets, and other surfaces, reporting events to a Zigbee gateway or compatible hub.\n\nUsed for security monitoring, tamper alerts, and automation triggers. Battery-powered with surface mount installation.",
+        "hash": "64775d7ed1d58002a83f6da85c66cf58cf480555619fa04a9d3c544e024e5dbe"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Installation | Surface mount (adhesive or screws) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Working Voltage | DC 3V |\n| Battery | 1.5V AAA × 2 |\n| Standby Current | ≤10 µA |\n| Alarm Current | ≤20 mA |\n| Communication Protocol | Zigbee |\n| Transmission Distance | 10–30m (indoor, unobstructed) |\n| Data Update Frequency | Every 30 minutes |\n| LED Indicator | Yes |\n| Working Temperature | -10°C to +50°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "943286c4ad8a1c219faf8fce8866d42061f2fa9ca23d245975db61d32664dd66"
+      },
+      {
+        "heading": "Motion Sensor",
+        "text": "- Mount at 2–2.5m height, angled downward for best coverage.\n- Avoid direct sunlight, HVAC vents, and heat sources to prevent false triggers.\n- Detection angle: ~110°, range: ~7m.",
+        "hash": "995d3585e9f601881198e4d1693cb23d51dfa7b1dd20fb78d95beeed2935f244"
+      },
+      {
+        "heading": "mmWave Presence Sensor (USB & Ceiling)",
+        "text": "- Designed for **continuous presence detection** — detects stationary occupants unlike PIR sensors.\n- Ceiling mount: Install in the centre of the room, directly above the target zone.\n- USB variant: Connect to a USB-A power adapter; position near the area to monitor.\n- Configure sensitivity and detection zones in Home Assistant.",
+        "hash": "a1604b5dd67517662d4d0018f3de136e9f1c87f44bd4de295f7970e24ea0b551"
+      },
+      {
+        "heading": "Contact Sensor",
+        "text": "- Attach the main sensor to the door/window frame and the magnet to the moving panel.\n- Align within 10mm for reliable open/close detection.\n- Battery-powered; typical life 1–2 years.",
+        "hash": "fb146f2e3bf5e2a614ce84742813f027d79f3f2cbb92bd140e4ab7c1520f9fe6"
+      },
+      {
+        "heading": "Vibration Sensor",
+        "text": "- Attach to surfaces you want to monitor (doors, windows, appliances).\n- Sensitive to physical shock and movement.\n- Tune sensitivity via coordinator to avoid false alarms from nearby vibrations.",
+        "hash": "ed1092c4aa9ed58f6b566a914363fd7d0185a0d04e5a5d576f0eacef08cbd86a"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹3,750 |\n| GST Rate | 18% |\n| HSN Code | 85319000 |",
+        "hash": "2ddd406e346c429cc6888812bc3545f38f87a446c0a98b30bf61a30482f9cadf"
+      }
+    ]
+  },
+  {
+    "id": "products/support",
+    "title": "Support",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/support",
+    "hash": "cf43415b041f244e19e63b4c44babae4110273c6bb86398cb2a9743a41314047",
+    "sourcePath": "content/docs/products/support.mdx",
+    "sections": [
+      {
+        "heading": "Contact Support",
+        "text": "- **Email:** support@smartify.in\n- **Website:** [smartify.in/contact](https://smartify.in/contact)\n- **WhatsApp:** Available via the website",
+        "hash": "d2215c0dbbb759fd87e0cc2eef29c8d4483bae941832744d14595fbb28800294"
+      },
+      {
+        "heading": "Troubleshooting",
+        "text": "Before contacting support, check:\n\n1. **Device not pairing** — ensure the gateway is in pairing mode and the device has been factory reset. See [Pairing & Reset](./for-installers/pairing-and-reset) for per-device procedures.\n2. **Device offline** — check Zigbee mesh coverage. Mains-powered devices extend the mesh; battery devices do not.\n3. **Gateway unreachable** — verify 2.4GHz WiFi or Ethernet connection. 5GHz is not supported.",
+        "hash": "6f16ae953e45b2d392f8d0d840d720853dfd4ac95fb0a629298c3c825db2f05f"
+      },
+      {
+        "heading": "Community",
+        "text": "- [Home Assistant community forums →](https://community.home-assistant.io/)\n- [Home Assistant Zigbee docs →](https://www.home-assistant.io/integrations/zha/)",
+        "hash": "4ca63625479387e318571dbb5352f76183d6414e9fd57aa159916569c94219ca"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/4-gang-scene-switch",
+    "title": "Interface Scene",
+    "skus": [
+      "38623516280"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/4-gang-scene-switch",
+    "hash": "8ad8b75d70c3a6b406f0d6f8a335f1452406a1bc31961a6aa35a21f84216a774",
+    "sourcePath": "content/docs/products/switches/4-gang-scene-switch.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Scene Control Switch (Battery)  ·  **SRP:** ₹8,747\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nNo relay. Does not switch electrical loads. Scene triggers only. Battery: CR2430 (~2 years).\n\nRequires: Zigbee coordinator or hub. CR2430 battery.",
+        "hash": "32bf1119d3ad9b15fee1e5bf77d7a57e83403bacd876bf2b1c9927f4739ba157"
+      },
+      {
+        "heading": "Description",
+        "text": "A battery-powered Zigbee scene switch with 4 mechanical buttons, each supporting single press, double press, and long press actions — enabling up to 12 configurable scenes or automation triggers without wiring.\n\nCR2430 battery with approximately 2-year life. Slim profile (~1.3 cm). Wireless installation via adhesive mount or portable use.",
+        "hash": "72035c7ec3d80171237d01c35c66764673e47d035745465c0b073f6c060231b9"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 0 (no relay) |\n| Installation | Wireless (adhesive mount or portable) |\n| Compatibility | Compatible Zigbee gateways and automation platforms |\n| Input Power | CR2430 button battery |\n| Communication | Zigbee |\n| Dimensions | 86 × 86 × 13 mm |\n| Standby Power | 10 µA |\n| Working Temperature | -10°C to +45°C |\n| Working Humidity | &lt;90% RH |\n| Button Lifecycle | 50,000 presses |\n| Frequency Band | 2400–2484 MHz |\n| Max Radio Transmit Power | &lt;+19 dBm |",
+        "hash": "a4a56eb1276e7456115e627cd235fd1212862af03aea39b2f10a126b74ba28c2"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹8,747 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "b2a90746216332c6d41eab4d4f7aa45338b2633faa3b5ac5f4886f5046272fcb"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/index",
+    "title": "TAC Smart Switches",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/switches/index",
+    "hash": "483685746c8a60a875593cbc178e8621950fc23ffe303d42ae1a58b8187c1135",
+    "sourcePath": "content/docs/products/switches/index.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "In-wall Zigbee smart switches in the TAC series. Single, double, triple, quad, heavy-load, fan speed, scene switch, and curtain variants. Compatible with standard Indian flush boxes.",
+        "hash": "1e27106b2e998d0d518d7111226399d91d63020bab5973d679f94c0452f02053"
+      },
+      {
+        "heading": "Products in this category",
+        "text": "One touch. The right response. — ₹17,500\n  \n  \n    Two circuits. One switch. — ₹17,750\n  \n  \n    Three loads. One clean face. — ₹19,500\n  \n  \n    Four circuits. Seamless control. — ₹20,000\n  \n  \n    Six scenes. One wall. — ₹21,250\n  \n  \n    Your geyser. On your schedule. — ₹18,000\n  \n  \n    Load control and scenes. One switch. — ₹21,250\n  \n  \n    Any wall. Any location. No wiring. — ₹21,250\n  \n  \n    A socket that fits the system. — ₹15,250\n  \n  \n    Your fan. Fully in control. — ₹6,250\n  \n  \n    Turn to dim. Push to switch. That's it. — ₹34,000\n  \n  \n    Four buttons. Twelve possibilities. Zero wiring. — ₹8,747",
+        "hash": "98210581dbb72fe6c676867a9e833c247a95dcfe15dda47f88a3e370796c086c"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-1",
+    "title": "TAC 1",
+    "skus": [
+      "38627276917"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-1",
+    "hash": "4d722f2c7051cfd413fe1ce9f48e671d0786fffb332578b6bcac65146dd8cb04",
+    "sourcePath": "content/docs/products/switches/tac-1.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch  ·  **SRP:** ₹17,500\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor loads above 4A use external SSR or contactor. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "bcaa77720678ee0e79ec2fe952896dc25c80565c28b7085d1d7592460473f042"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-button Zigbee smart switch for direct load control or scene triggering. Features a backlit button with customizable icon and is available in polypropylene (PP) or anti-glare glass (AG) in black, white, or gold.\n\nDimming can be achieved via compatible retrofit dimmer modules. Operates as a direct load switch or scene trigger within the Zigbee ecosystem.",
+        "hash": "050a68906d55f4c6acc49b3b7807299c1f030c3851aec059f97e89c0da70c994"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 10A |\n| Recommended Load | Up to 4A |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "b00f667b913ff9025fecdb93568c8d492c348b6ccb11d3070b6f69efea68d336"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹17,500 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "0f7bed0e758245bec4c7b7e5309fd9a4e699e2cc9daa2e0239f614db753fc665"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-2",
+    "title": "TAC 2",
+    "skus": [
+      "38698147296"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-2",
+    "hash": "83ed140b0d2dbc896c2d1bea7389b7b449cb86da796ef38cc89ec4aa9b6e0510",
+    "sourcePath": "content/docs/products/switches/tac-2.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch  ·  **SRP:** ₹17,750\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\n10A total shared capacity. For loads above 4A use external SSR or contactor. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "ee795c5b2c779c0b2d85bfcff879407b18adda0422f608bcf1be40f955500d5d"
+      },
+      {
+        "heading": "Description",
+        "text": "A 2-button Zigbee smart switch with independent load control or scene triggering per button. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "e5f6518f645068a51eec3fc4591429d4d1599b81fb784e5051900fe84b5c7a63"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 2 |\n| Max Switching | 10A total (shared) |\n| Recommended Load | Up to 4A per load |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "f3c46620d38581fc7e4017fb00a239835188e332ee6e042f017fb7553e1c4352"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹17,750 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "ce12ad57729dd17e0bb9ae152e1a1339fb665db729460c4bc668860886b413b4"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-3",
+    "title": "TAC 3",
+    "skus": [
+      "38677515791"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-3",
+    "hash": "e02d2d8a1ec46fa57ff7eddc7fb6b57aceca0af74e8df1115f595abfed436b14",
+    "sourcePath": "content/docs/products/switches/tac-3.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch  ·  **SRP:** ₹19,500\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\n10A total shared. For loads above 3A use external SSR or contactor. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "7993ad395a80b2a3ab178c798af008d7098f3cc2a4f6097b18cd6e8995f95666"
+      },
+      {
+        "heading": "Description",
+        "text": "A 3-button Zigbee smart switch with independent load control or scene triggering per button. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "a70d8f79a4d9982fea68034eb1b74d8f8704918e213952fcd6c52e49a698ccea"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 3 |\n| Max Switching | 10A total (shared) |\n| Recommended Load | Up to 3A per load |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "29a75b584e6eab6b76be707210094d527e0019c6f7d4bb08d154fe1a582e3e20"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹19,500 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "4b9fa42443f2e22f2195f697dde5fc5b1422dd87ba43f98e94f653628d807ab4"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-4",
+    "title": "TAC 4",
+    "skus": [
+      "38697240638"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-4",
+    "hash": "9b0f7ba9f069739cab57be3be87a0802745a34b7737558db222288980f93ac97",
+    "sourcePath": "content/docs/products/switches/tac-4.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch  ·  **SRP:** ₹20,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\n10A total shared. For loads above 2A use external SSR or contactor. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "39d908b548a5e7ac68971912c71f50953072e38acab05e804127d8adcc2d6715"
+      },
+      {
+        "heading": "Description",
+        "text": "A 4-button Zigbee smart switch with independent load control or scene triggering per button. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "9975add5397a65c0dac01d6111c938cff1c05c6262e6d563df0296ce6051476b"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 |\n| Max Switching | 10A total (shared) |\n| Recommended Load | Up to 2A per load |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "05449d94b47b2269c053dc4a97ab3005a34a3c075be408940633651b607ba209"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹20,000 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "64950c5d0692a9cc5ae84bcddfead22a9d497e8fefbdc6375e6e6ed96a8e9cc7"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-6",
+    "title": "TAC 6",
+    "skus": [
+      "38683759132"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-6",
+    "hash": "2ba719592ddce79e6a26b9350c08c3c1671047518aaaf2e8ed1bdfa40f0e8c8f",
+    "sourcePath": "content/docs/products/switches/tac-6.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Scene Control Switch  ·  **SRP:** ₹21,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nNo relays. Does not switch electrical loads directly. Scene and automation control only.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "591ff465f390dcedb288464ff5af37ced6e3e2c62786f108c55980b16e8c5444"
+      },
+      {
+        "heading": "Description",
+        "text": "A 6-button Zigbee scene control switch for triggering scenes and automations within a Zigbee ecosystem. Contains no relays and does not switch electrical loads directly.\n\nEach button is independently configurable for scene or automation triggers. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "4805c2b6ad75d5665605d5e8f2c122dd6f116f6cb6bdf643813384a826d6a616"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 0 (no relay) |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "5c262a14624917c9f4929d409851bae4b0dfee158817dfa3557629c2e6ab09b8"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹21,250 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "8d776ae660f2bf79383574df2dd64d29837216dc0bac1c43692ddf7d7821b788"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-6plus",
+    "title": "TAC 6+",
+    "skus": [
+      "3861317782"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-6plus",
+    "hash": "ec3a85daf3f56fcd27e2c277afab59a7748bad546fbc3fe753d82f89b766205f",
+    "sourcePath": "content/docs/products/switches/tac-6plus.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch with Scene Control  ·  **SRP:** ₹21,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\n10A total shared across load buttons. Scene buttons have no relay. For loads above 2A use external SSR. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "a6b71a8cad82a85390779214b37362c2b27b6ea7993cb70c8b98bb511d2ab973"
+      },
+      {
+        "heading": "Description",
+        "text": "A 6-button Zigbee smart switch with 4 load control buttons and 2 dedicated scene trigger buttons. Combines direct load switching with scene control on a single switch face.\n\nThe 4 load buttons share a 10A relay capacity; the 2 scene buttons contain no relay and trigger automations only. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "b6a6140adf7e6e600900e7dbd18dfbcaf91f53509738c94c850436718bc8a847"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 4 load + 2 scene |\n| Max Switching | 10A total (shared across 4 load buttons) |\n| Recommended Load | Up to 2A per load |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "33ebe31c63deba21da0148009707dc5c42504613ca5b04beb1c1186b7988dfb7"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹21,250 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "8d776ae660f2bf79383574df2dd64d29837216dc0bac1c43692ddf7d7821b788"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-f",
+    "title": "TAC F",
+    "skus": [
+      "38688864221"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-f",
+    "hash": "d376003b34194864924544d3c00bada39fab2e8b6ab7d9a8c5ac281a8141c6a0",
+    "sourcePath": "content/docs/products/switches/tac-f.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Fan Control Switch  ·  **SRP:** ₹6,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nFor ceiling fans within rated load capacity (150W) only. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "f1075886ff05b571affcd384b783a74f9ddd78e0706e02c829ca0c403a7ddc73"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee smart fan control panel for ceiling fans up to 150W. Provides on/off and speed control with a dedicated fan control interface.\n\nIntegrates with the Zigbee automation ecosystem. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "3955cd9137d33a0b66c608183d979e84fba805a396b551f9f8cfa54d4cf9c6d6"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 fan channel |\n| Max Switching | 150W |\n| Recommended Load | Ceiling fans up to 150W |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "d432e060fc77e5fe7b8e18e0b991f115172a30b653a12129ea6a11f7b58dfbb5"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹6,250 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "6764049a6191ce28122b1767b34cd4a5cddbd9c87e3a4d3297e114a37cc80f22"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-hl",
+    "title": "TAC HL",
+    "skus": [
+      "38649421973"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-hl",
+    "hash": "8cbe2b550d49c6aba4d7493231dd819f0b28528bcda641e706f66d0cb00fe2c3",
+    "sourcePath": "content/docs/products/switches/tac-hl.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Smart Switch (Heavy Load)  ·  **SRP:** ₹18,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nHeavy load installation. Qualified installation required. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "531487104b92510d256f1b63280d4d7d00ab1b5a17384a252669f05382aede5e"
+      },
+      {
+        "heading": "Description",
+        "text": "A single-button Zigbee smart switch rated for heavy electrical loads up to 20A — designed for direct control of geysers, water heaters, pumps, and other high-power appliances.\n\nBacklit with customizable icon. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "d05a957b4d694fcf5058032d53c7d32507305419a2bdc45841550f656471a397"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 1 |\n| Max Switching | 20A |\n| Recommended Load | Geysers, heaters, pumps, heavy appliances |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "a6dc0136882ea89e03065ef1a4e16ba23c6c2f58e168f38eec0f8ac6c43a2783"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹18,000 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "5cfb013e34f23e1ec6320968bbc116089e1d8f225b4bda8022f1a96b35615708"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-k",
+    "title": "TAC K",
+    "skus": [
+      "38647971307"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-k",
+    "hash": "871e9ae8277e3a364839a759a57c71b76974978a3a3812e63f851bc111e9a6f0",
+    "sourcePath": "content/docs/products/switches/tac-k.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Rotary Control Dial  ·  **SRP:** ₹34,000\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nDoes not switch electrical loads directly. Control interface only.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "2708c652b0009d808a6b1f54842153af11807b5eb1da829e36800d19581173f5"
+      },
+      {
+        "heading": "Description",
+        "text": "A Zigbee rotary smart dial for intuitive control of lighting brightness, colour temperature, and device groups. Supports up to 3 individual lights or 3 lighting groups via rotate and push interaction.\n\nRotate to adjust brightness or colour temperature. Push to switch between groups or trigger actions. Designed for wall-mounted installation.",
+        "hash": "523c33e1fecc26c3a31cf12432a0b70e8cf10dbd34cbb448097cfe7851128c54"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | Up to 3 lights or 3 lighting groups |\n| Installation | Wall-mounted |\n| Compatibility | Zigbee automation platforms |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 25.4 mm (knob: 16mm) |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "b9df845cd11d22d33d2f47b06defe49ab3c431f615bdaf4774ac5e3926deaab8"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹34,000 |\n| GST Rate | 18% |\n| HSN Code | 85365090 |",
+        "hash": "0504428124c8c7950507033bd5d1b1a20c353d66ac5c1847c69263467be589ff"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-s",
+    "title": "TAC S",
+    "skus": [
+      "38676256320"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-s",
+    "hash": "e685bc0eca29462a9639b9c8503132ef3ac77a289ba2cffa9a33e55ca9842b1d",
+    "sourcePath": "content/docs/products/switches/tac-s.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Type:** Modular Power Socket  ·  **SRP:** ₹15,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nNot a smart socket by itself. Smart control requires a TAC load channel or compatible retrofit relay module. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: TAC load channel or compatible retrofit relay for smart control",
+        "hash": "169bc3510f19f44f99de8b67869690f77da39caf885b28ff0445c94b87dabdcf"
+      },
+      {
+        "heading": "Description",
+        "text": "A modular 6A power socket designed for integration within the TAC Tile system. Not a standalone smart socket — smart control requires connection to a TAC load button channel or a compatible retrofit relay module.",
+        "hash": "86e265f78e049e7ebcf006a59574362eb6c0a01935ae3c21dbe88d6b8471df2d"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Max Switching | 6A |\n| Recommended Load | 6A |\n| Installation | Wall-mounted modular |\n| Compatibility | TAC smart switch system or retrofit relay module |\n| Type | Non-smart 3-pin Universal Socket with Switch |\n| Input Voltage | 110–240V AC 50/60Hz |\n| Product Size | 86 × 86 × 10.5 mm |\n| Bottom Shell Depth | 28mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "4f4bd255c632c7a6bb5e182295c54023138db81566c49c8e0497ca8d28ffc21d"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹15,250 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "6b7332c8c6ca393ef4bf724ba86c89ae12d948795172636beed9e5c1db7b5793"
+      }
+    ]
+  },
+  {
+    "id": "products/switches/tac-ss",
+    "title": "TAC SS",
+    "skus": [
+      "38686106442"
+    ],
+    "url": "https://docs.smartify.in/docs/products/switches/tac-ss",
+    "hash": "ba8a4d36ecf35ee77a16e9e159d9c5d7ab3f44dc4618a1caa03fa43ded583091",
+    "sourcePath": "content/docs/products/switches/tac-ss.mdx",
+    "sections": [
+      {
+        "heading": "Overview",
+        "text": "**Protocol:** Zigbee 3.0  ·  **Type:** Zigbee Scene Control Switch (Battery)  ·  **SRP:** ₹21,250\n\n**Works with:** `Amazon Alexa` · `Google Home` · `Siri / Apple HomeKit`\n\nNo relay. Battery-powered scene control only. Does not switch electrical loads. Materials: PP or AG glass. Colours: Black, White, Gold.\n\nRequires: Zigbee coordinator or hub",
+        "hash": "8847192364b9b328cd317905badf5f4cf1b12d86d05402faafc9e39450d21a29"
+      },
+      {
+        "heading": "Description",
+        "text": "A battery-powered Zigbee scene switch with 6 configurable buttons for wireless scene and automation triggering — no wiring required.\n\nCan be wall-mounted or surface-mounted at any location without electrical installation. Backlit with customizable icons. Available in PP or anti-glare glass in black, white, or gold.",
+        "hash": "45f70a16db3ecd9828be8f9a75b3ff8d6b7e1f2925fdebdd2325cf059814f251"
+      },
+      {
+        "heading": "Specifications",
+        "text": "| Specification | Value |\n|---|---|\n| Channels | 0 (no relay) |\n| Installation | Wall-mounted or surface-mounted (wireless, no wiring required) |\n| Compatibility | Zigbee automation platforms |\n| Input | 3V (2 × CR2032 batteries) |\n| Communication Protocol | Zigbee |\n| Product Size | 86 × 86 × 12 mm |\n| Working Temperature | -10°C to +60°C |\n| Working Humidity | ≤95% RH (non-condensing) |",
+        "hash": "07b693b95d2eaaba61d312bc573ecaaea6b56b116c48688b9b3773f77f6ea02e"
+      },
+      {
+        "heading": "Requirements",
+        "text": "- Standard 2-module or 4-module flush box\n- Live, Neutral, and Load wires available at the switch location\n- Zigbee coordinator (gateway) within range\n\n\n\n**Turn off the circuit breaker** for the circuit you're working on.\n\n\nRemove the existing switch plate and pull out the wires.\n\n\nConnect **Live (L)** → L terminal, **Neutral (N)** → N terminal, **Load** → the load terminal(s).\n\n\nTuck the module into the flush box and fit the TAC switch plate.\n\n\nRestore power. The LED indicator will blink — the device is ready to pair.\n\n\nOpen your Zigbee coordinator app (Home Assistant, SmartThings, etc.) and put it in pairing mode.\n\n\nPress and hold the switch for 5 seconds until the LED blinks rapidly — pairing begins.",
+        "hash": "adc3c51101ae4dbd44f8d5fee63c5b7a354a46c678f6e5f761f1489531101106"
+      },
+      {
+        "heading": "Wiring Notes",
+        "text": "- Neutral wire is **required** for all TAC switches.\n- Maximum load per channel: see product specifications.\n- For ceiling fans, use the TAC F (fan speed controller variant).",
+        "hash": "4d77681ea14920f6ee2e435398c4146ffff2e562c3204e1c721e2f04d0786b99"
+      },
+      {
+        "heading": "Ordering",
+        "text": "| | |\n|---|---|\n| SRP (incl. GST) | ₹21,250 |\n| GST Rate | 18% |\n| HSN Code | 85369090 |",
+        "hash": "8d776ae660f2bf79383574df2dd64d29837216dc0bac1c43692ddf7d7821b788"
+      }
+    ]
+  },
+  {
+    "id": "products/warranty",
+    "title": "Warranty",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/warranty",
+    "hash": "6d9c9bfbf0c194de3d216a409472daf79590caf32822537597f8426ccfde50f8",
+    "sourcePath": "content/docs/products/warranty.mdx",
+    "sections": [
+      {
+        "heading": "Coverage",
+        "text": "All Smartify products carry a **5-year warranty** from the date of purchase against manufacturing defects.\n\n**Covered:**\n- Hardware failure under normal operating conditions\n- Factory defects in materials or workmanship\n\n**Not covered:**\n- Physical damage, water ingress, or incorrect installation\n- Damage from voltage surges or wiring faults\n- Products modified outside Smartify-authorised channels",
+        "hash": "fcf9e9a5a5696d64546682c74f8cc90603e2a24f6e925d2ccb71edf5228c5611"
+      },
+      {
+        "heading": "Making a Claim",
+        "text": "1. Email **support@smartify.in** with your order number and a description of the issue\n2. Attach proof of purchase — invoice or order confirmation\n3. Smartify support will confirm eligibility and arrange replacement or repair",
+        "hash": "530ad0e07d77d439b6ab6746aa2b271766e01b5c5909c5eacafc32a610356eb0"
+      },
+      {
+        "heading": "Contact",
+        "text": "- **Email:** support@smartify.in\n- **Website:** [smartify.in/contact](https://smartify.in/contact)",
+        "hash": "aede90e0246cbd9cf0d190215d99a2396d01720f4c24a3feec67266514df094e"
+      }
+    ]
+  },
+  {
+    "id": "products/why-smartify",
+    "title": "Why Smartify",
+    "skus": [],
+    "url": "https://docs.smartify.in/docs/products/why-smartify",
+    "hash": "d45948b740696e79d8931dd12f30c34b2b952415abb7855d119622a8c04907ca",
+    "sourcePath": "content/docs/products/why-smartify.mdx",
+    "sections": [
+      {
+        "heading": "Zigbee vs WiFi",
+        "text": "| | Smartify (Zigbee 3.0) | Typical WiFi switches |\n|---|---|---|\n| **Protocol** | Zigbee 3.0 mesh | WiFi (2.4GHz) |\n| **Cloud dependency** | None — works fully local via Home Assistant | Requires vendor cloud; breaks if cloud goes down |\n| **Mesh range** | Self-healing mesh — every mains device extends coverage | Point-to-point — dead zones common in large homes |\n| **Network load** | Separate Zigbee radio — zero WiFi congestion | Adds every device to your WiFi router |\n| **Interoperability** | Open standard — works with Home Assistant, HomeKit, Alexa, Google | Locked to vendor app; cross-brand automations unreliable |\n| **Wiring** | Fits standard Indian 3-module flush boxes — no new wiring | Same, but often requires neutral wire |\n| **Retrofit** | Relay and dimmer modules fit behind existing switches | Limited retrofit options |\n| **Longevity** | Zigbee 3.0 is a decade-old open standard with broad support | Vendor may discontinue app or cloud service |",
+        "hash": "3f4fd3c79a36f6a5ab162437de87db26bbc2e1bbf92718d86f46433dd48d2397"
+      },
+      {
+        "heading": "Platform independence",
+        "text": "Smartify devices are not tied to any vendor cloud or app. Because they use the open Zigbee 3.0 standard, you can control them with:\n\n- **Home Assistant** — fully local, no subscription, unlimited automations\n- **Apple HomeKit** — via Matter-compatible Convergia gateway\n- **Amazon Alexa / Google Home** — via gateway\n\nIf a platform stops supporting a feature, you can switch to another without replacing hardware.",
+        "hash": "4432abd82e041633e7c339617148b10b07058c886634b77529d1f381754ed1f0"
+      },
+      {
+        "heading": "Built for Indian homes",
+        "text": "- All switches fit **standard 3-module and 4-module flush boxes** used across India — no custom boxes or special backboxes\n- Neutral wire is **not required** for switch modules — works in older wiring layouts\n- Retrofit relays and dimmers fit **behind existing switches** — no visible hardware change\n- Tested for **230V / 50Hz** mains with Indian load profiles (fans, geysers, AC units)",
+        "hash": "26ea50bc9b4970080c6eaeae05d67a770e2a7640c02e470ac90dff3bc7d5d876"
+      }
+    ]
+  }
+]

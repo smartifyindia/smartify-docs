@@ -1,0 +1,284 @@
+{
+  "products/retrofit/1-channel-zigbee-retrofit-dimmer": {
+    "title": "Layer Dimmer 1",
+    "skus": [
+      "38632957173"
+    ]
+  },
+  "products/retrofit/1-channel-zigbee-retrofit-relay": {
+    "title": "Layer Relay 1",
+    "skus": [
+      "38632117962"
+    ]
+  },
+  "products/retrofit/1-channel-zigbee-retrofit-relay-40a": {
+    "title": "Layer Relay 1 HL",
+    "skus": [
+      "38632117965"
+    ]
+  },
+  "products/panels/10-touch-control-panel": {
+    "title": "10\" Touch Control Panel",
+    "skus": [
+      "38694583069"
+    ]
+  },
+  "products/retrofit/2-channel-zigbee-retrofit-dimmer": {
+    "title": "Layer Dimmer 2",
+    "skus": [
+      "38625458903"
+    ]
+  },
+  "products/retrofit/2-channel-zigbee-retrofit-relay": {
+    "title": "Layer Relay 2",
+    "skus": [
+      "38659529195"
+    ]
+  },
+  "products/switches/4-gang-scene-switch": {
+    "title": "Interface Scene",
+    "skus": [
+      "38623516280"
+    ]
+  },
+  "products/panels/4-touch-control-panel": {
+    "title": "4\" Touch Control Panel",
+    "skus": [
+      "38618602731"
+    ]
+  },
+  "products/retrofit/analog-0-10v-zigbee-dimmer": {
+    "title": "Layer Dimmer Analog",
+    "skus": [
+      "38637323117"
+    ]
+  },
+  "products/gateways/convergia": {
+    "title": "Convergia",
+    "skus": [
+      "38616756936"
+    ]
+  },
+  "products/ir-blasters/ir-blaster-w--analog-screen-temp-and-humidity-sensor-wifi": {
+    "title": "Reach IR Pro",
+    "skus": [
+      "38614020398"
+    ]
+  },
+  "products/ir-blasters/ir-blaster-wifi": {
+    "title": "Reach IR",
+    "skus": [
+      "38668925286"
+    ]
+  },
+  "products/ir-blasters/irplusrf-blaster-wifi": {
+    "title": "Reach IR+",
+    "skus": [
+      "38635939814"
+    ]
+  },
+  "products/led-controllers/led-controller-cc-cct": {
+    "title": "Lume CC-CCT",
+    "skus": [
+      "38671782652"
+    ]
+  },
+  "products/retrofit/led-controller-cv-dimmer": {
+    "title": "Lume CV Dim",
+    "skus": [
+      "38673300629"
+    ]
+  },
+  "products/led-controllers/led-controller-cv-rgbpluscct": {
+    "title": "Lume CV RGB+",
+    "skus": [
+      "38619518575"
+    ]
+  },
+  "products/switches/tac-1": {
+    "title": "TAC 1",
+    "skus": [
+      "38627276917"
+    ]
+  },
+  "products/switches/tac-2": {
+    "title": "TAC 2",
+    "skus": [
+      "38698147296"
+    ]
+  },
+  "products/switches/tac-3": {
+    "title": "TAC 3",
+    "skus": [
+      "38677515791"
+    ]
+  },
+  "products/switches/tac-4": {
+    "title": "TAC 4",
+    "skus": [
+      "38697240638"
+    ]
+  },
+  "products/switches/tac-6": {
+    "title": "TAC 6",
+    "skus": [
+      "38683759132"
+    ]
+  },
+  "products/switches/tac-6plus": {
+    "title": "TAC 6+",
+    "skus": [
+      "3861317782"
+    ]
+  },
+  "products/switches/tac-f": {
+    "title": "TAC F",
+    "skus": [
+      "38688864221"
+    ]
+  },
+  "products/switches/tac-hl": {
+    "title": "TAC HL",
+    "skus": [
+      "38649421973"
+    ]
+  },
+  "products/switches/tac-k": {
+    "title": "TAC K",
+    "skus": [
+      "38647971307"
+    ]
+  },
+  "products/switches/tac-s": {
+    "title": "TAC S",
+    "skus": [
+      "38676256320"
+    ]
+  },
+  "products/retrofit/tac-sh": {
+    "title": "TAC SH",
+    "skus": [
+      "38622224396"
+    ]
+  },
+  "products/switches/tac-ss": {
+    "title": "TAC SS",
+    "skus": [
+      "38686106442"
+    ]
+  },
+  "products/panels/toq-10t": {
+    "title": "TOQ 10T",
+    "skus": [
+      "38617579105"
+    ]
+  },
+  "products/panels/toq-10tplus2s": {
+    "title": "TOQ 10T+2S",
+    "skus": [
+      "38676065011"
+    ]
+  },
+  "products/panels/toq-4t": {
+    "title": "TOQ 4T",
+    "skus": [
+      "38676610441"
+    ]
+  },
+  "products/panels/toq-4tplus1s": {
+    "title": "TOQ 4T+1S",
+    "skus": [
+      "38639614871"
+    ]
+  },
+  "products/panels/toq-4tplus2f": {
+    "title": "TOQ 4T+2F",
+    "skus": [
+      "38638793830"
+    ]
+  },
+  "products/panels/toq-4tplus2fplus1s": {
+    "title": "TOQ 4T+2F+1S",
+    "skus": [
+      "38612926801"
+    ]
+  },
+  "products/panels/toq-8t": {
+    "title": "TOQ 8T",
+    "skus": [
+      "38687106141"
+    ]
+  },
+  "products/panels/toq-8tplus1f": {
+    "title": "TOQ 8T+1F",
+    "skus": [
+      "38648381854"
+    ]
+  },
+  "products/panels/toq-8tplus1s": {
+    "title": "TOQ 8T+1S",
+    "skus": [
+      "3863826889"
+    ]
+  },
+  "products/sensors/zigbee-contact-sensor": {
+    "title": "Aware Contact",
+    "skus": [
+      "38640080710"
+    ]
+  },
+  "products/gateways/zigbee-dali-gateway": {
+    "title": "Core DALI",
+    "skus": [
+      "38620154019"
+    ]
+  },
+  "products/gateways/zigbee-gateway-matter": {
+    "title": "Core Matter",
+    "skus": [
+      "38623861651"
+    ]
+  },
+  "products/gateways/zigbee-gateway-wired": {
+    "title": "Core LAN",
+    "skus": [
+      "38678840105"
+    ]
+  },
+  "products/sensors/zigbee-mmwave-sensor-ceiling-mounted": {
+    "title": "Aware Wave Pro",
+    "skus": [
+      "38678738240"
+    ]
+  },
+  "products/sensors/zigbee-mmwave-sensor-usb": {
+    "title": "Aware Wave",
+    "skus": [
+      "38626055855"
+    ]
+  },
+  "products/sensors/zigbee-motion-sensor-plus-lux-sensor": {
+    "title": "Aware Motion",
+    "skus": [
+      "38687599521"
+    ]
+  },
+  "products/retrofit/zigbee-shutter-module": {
+    "title": "Layer Shutter",
+    "skus": [
+      "38684154573"
+    ]
+  },
+  "products/sensors/zigbee-vibration-sensor": {
+    "title": "Aware Vibration",
+    "skus": [
+      "3864587193"
+    ]
+  },
+  "products/gateways/zigbee-vrv-gateway": {
+    "title": "Core VRV",
+    "skus": [
+      "38693737333"
+    ]
+  }
+}

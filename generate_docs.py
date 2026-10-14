@@ -442,6 +442,7 @@ def product_page(p: dict, category_slug: str) -> str:
     )
     frontmatter = f"""---
 title: {yaml_str(name)}
+sku: {yaml_str(str(p.get("sku", "")))}
 description: {yaml_str(tech_first_line)}
 ---
 """
