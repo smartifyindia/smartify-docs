@@ -1,0 +1,113 @@
+---
+title: "Smartify MCP"
+description: "Connect Claude to Smartify Pro with the Smartify MCP connector."
+---
+
+Smartify MCP lets Claude use your Smartify Pro account to look up products, estimates, and leads, and to carry out selected account actions when you ask it to. It connects with OAuth; you do not paste a Smartify password or API key into Claude.
+
+## Before you connect
+
+- You need an active Smartify Pro account that can sign in at [pro.smartify.in](https://pro.smartify.in).
+- The connector URL is `https://connect.smartify.in/mcp`.
+- Connecting authorises Claude to act within the Smartify Pro account you approve. Treat prompts that create, change, unlock, generate, or share records as account actions.
+
+<Callout type="warn">
+**Important:** `share_estimate` sends a customer-facing estimate communication by **email**. `update_lead` changes lead status or notes in your account, and `unlock_lead` changes the lead record to reveal contact details. Review the estimate or lead and ask for confirmation before using these actions.
+</Callout>
+
+## Connect Smartify MCP in Claude
+
+<Steps>
+<Step>
+### Open Claude connectors
+
+In Claude, open **Settings** and then **Connectors**. Choose **Add custom connector** (the exact label can vary by Claude plan or workspace).
+</Step>
+<Step>
+### Add the Smartify server
+
+Enter `https://connect.smartify.in/mcp` as the server URL and save the connector.
+</Step>
+<Step>
+### Sign in to Smartify Pro
+
+Claude opens the Smartify authorisation flow. Sign in to Smartify Pro if prompted, check that the account shown is the account you intend to connect, then continue to approve the connection.
+</Step>
+<Step>
+### Return to Claude
+
+After authorisation, return to Claude and try a read-only prompt such as “List my last five estimates.” If it cannot access your account, reconnect and complete the sign-in flow in the same browser session.
+</Step>
+</Steps>
+
+If your Claude workspace does not show an option to add a custom connector, check your Claude plan and workspace administrator settings. Smartify cannot enable that Claude feature from its side.
+
+## What Smartify MCP can access
+
+All tool calls require a connected Smartify Pro account. The connector can read the following account-scoped information:
+
+- Smartify product catalogue details, including product specifications, pricing, and compatibility information.
+- Product recommendations based on room and property details.
+- Estimates, including items, pricing, property details, and status.
+- Dashboard analytics, including lead and estimate statistics, conversion rates, revenue, and credit balance.
+- Leads, including their profile, status, notes, tasks, reminders, and activity.
+
+It can also provide Smartify’s public product information and home-automation planning guidance after you have connected your account. These planning outputs are not quotations or installation commitments.
+
+## Actions that change account data
+
+Smartify MCP can perform the following actions when you explicitly request them:
+
+| Action | What changes |
+| --- | --- |
+| Create or update an estimate | Creates a persistent estimate or changes its items. |
+| Calculate an estimate | Persists estimate pricing, taxes, and automation ratings. |
+| Generate an estimate PDF | Generates and persists an estimate PDF. |
+| Share an estimate | Sends a customer-facing estimate communication by **email**. |
+| Unlock a lead | Changes the lead record to reveal the customer’s contact details. **It does not spend credits.** |
+| Update a lead | Changes the lead’s status and may add notes. |
+
+<Callout type="warn">
+Ask Claude to show the relevant record first, then explicitly confirm any write action. Do not ask it to send an estimate or unlock or update a lead unless you intend that account change.
+</Callout>
+
+## Example prompts
+
+- “Search Smartify products for a Zigbee curtain controller compatible with a 3-bedroom villa.”
+- “Show my five most recent draft estimates and summarise their totals.”
+- “Recommend products for the living room in a 2BHK retrofit, with a per-product budget of ₹10,000.”
+- “Create a draft estimate for Priya Shah’s 1,200 sq ft apartment with two TAC 2 Gang switches and one Zigbee Gateway.”
+- “Before you share estimate `EST-123`, show me its customer email and a summary. Do not send it until I confirm.”
+- “Unlock lead `LEAD-123` and show the contact details. I understand this changes the lead record but does not spend credits.”
+- “Change lead `LEAD-123` to Contacted and add the note ‘Called on 19 September; site visit requested.’”
+
+Use real estimate and lead IDs from your account. Claude may ask you to clarify missing details before it can complete an action.
+
+## Disconnect Smartify MCP
+
+In Claude, open **Settings → Connectors**, select Smartify MCP, and choose **Disconnect** or remove the connector. The Smartify server supports OAuth token revocation as part of the connection lifecycle.
+
+If the connector remains available after removing it, reconnect only if you intend to authorise it again. For help revoking access or investigating a connection you do not recognise, contact [Smartify Pro support](mailto:inquiries@smartify.in).
+
+## Troubleshooting
+
+| Problem | What to try |
+| --- | --- |
+| Claude cannot connect | Re-enter the exact URL: `https://connect.smartify.in/mcp`. Do not use the Smartify Pro website URL in its place. |
+| Sign-in returns to Claude without access | Sign out of the unintended Smartify Pro session, start the connection again, and finish the approval flow in the same browser. |
+| Claude says authorisation is required or expired | Disconnect and reconnect Smartify MCP, then sign in again. |
+| A tool cannot find an estimate or lead | Ask Claude to list records first and use the identifier returned for your account. The connector does not expose another account’s data. |
+| An action failed | Check that you asked for all required details. For a failed email share, estimate generation, or lead action, verify the record in Smartify Pro before retrying. |
+| Custom connectors are unavailable in Claude | Check Claude plan and workspace administrator settings; this is controlled by Claude, not Smartify. |
+
+## Privacy and support
+
+During OAuth connection, Smartify verifies your Smartify Pro Cognito session and keeps connector credentials in an encrypted OAuth token vault. The connector uses your authenticated Smartify Pro session to call the Smartify Pro API for the tools above. Its code sets short-lived authorisation state and code records, access tokens bounded by the Smartify session, and refresh tokens with a 30-day lifetime.
+
+The connector source does not provide enough evidence to document production request logging, analytics, or API-data retention beyond those OAuth credential lifetimes. Those details need human privacy review before any stronger retention claim is published.
+
+- [Smartify Pro Privacy Policy](https://pro.smartify.in/privacy)
+- [Smartify Pro Terms & Conditions](https://pro.smartify.in/terms)
+- [Contact Smartify Pro support](mailto:inquiries@smartify.in)
+
+This guide links to the existing privacy policy and terms; it does not change them.
