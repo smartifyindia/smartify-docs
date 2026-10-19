@@ -2,6 +2,8 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "smartify-docs",
   "main": ".open-next/worker.js",
+  // Keep next-themes' serialized startup script free of esbuild's __name helper.
+  "keep_names": false,
   "compatibility_date": "2025-01-01",
   "compatibility_flags": ["nodejs_compat"],
   "workers_dev": true,
