@@ -20,6 +20,7 @@ export function Mermaid({ chart }: { chart: string }) {
 
       mermaid.initialize({
         startOnLoad: false,
+        securityLevel: 'strict',
         theme: dark ? 'dark' : 'neutral',
         themeVariables: dark
           ? {

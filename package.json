@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "cf:build": "npx @opennextjs/cloudflare@latest build",
+    "cf:build": "opennextjs-cloudflare build",
     "start": "next start",
     "preview": "npm run cf:build && npx wrangler pages dev",
     "deploy": "CLOUDFLARE_ACCOUNT_ID=b9f8db8151b55e4e33b0190fd0805f38 npm run cf:build && npx wrangler deploy",
