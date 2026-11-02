@@ -8,6 +8,16 @@ const config = {
   images: {
     unoptimized: true,
   },
+  async headers() {
+    return [{
+      source: '/:path*',
+      headers: [{ key: 'Link', value: [
+        '<https://docs.smartify.in/sitemap.xml>; rel="sitemap"; type="application/xml"',
+        '<https://docs.smartify.in/llms.txt>; rel="describedby"; type="text/plain"',
+        '<https://docs.smartify.in/.well-known/api-catalog>; rel="api-catalog"; type="application/linkset+json"',
+      ].join(', ') }],
+    }];
+  },
   async redirects() {
     const categories = [
       'switches', 'panels', 'retrofit', 'sensors',
