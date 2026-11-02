@@ -20,9 +20,17 @@ dist/
 .open-next/
 .wrangler/
 
+# Wrangler local secrets
+.dev.vars
+.dev.vars.*
+
 # OS
 .DS_Store
 
 # Editor
 .vscode/
 .idea/
+
+# Python and TypeScript caches
+__pycache__/
+*.tsbuildinfo

@@ -75,7 +75,9 @@ Deployed as a **Cloudflare Worker** (not Pages) via OpenNext:
 ## generate_docs.py gotchas
 
 - MDX frontmatter descriptions containing `:` must be double-quoted → use `yaml_str(s)` helper
-- `<` and `>` in MDX table cells must be escaped → use `mdx_safe(s)` helper
+- Every catalog string interpolated into MDX must go through `mdx_text(s)` (body / JSX children / attributes), `mdx_safe(s)` (table cells) or `mdx_alt(s)` (image alt). They entity-escape `{ } < >` and line-leading `import`/`export`, because MDX compiles those to code that runs at build time
+- Product slugs must go through `product_slug(p)`, which rejects anything but `[a-z0-9][a-z0-9-]*` (a slug becomes a file name); `write_file` refuses paths outside `content/docs`; `copy_images` skips symlinked PNGs
+- Run `python3 -m unittest discover -s tests` after changing the generator
 - `PRODUCTS_JSON` and `IMAGES_SRC` use absolute paths — update if the product catalog moves
 - `CATEGORY_MAP` maps `products.json` category strings → folder slugs. Add entries here when new product categories are introduced.
 

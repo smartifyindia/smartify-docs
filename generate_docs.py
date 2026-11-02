@@ -376,7 +376,7 @@ def specs_table(specs: dict) -> str:
             part = part.strip()
             if ":" in part:
                 k, v = part.split(":", 1)
-                label = k.strip()
+                label = mdx_safe(k.strip())
                 val = mdx_safe(v.strip())
                 # Avoid duplicates
                 if not any(label.lower() in r.lower() for r in rows):
@@ -391,19 +391,73 @@ def specs_table(specs: dict) -> str:
 def assistants_badges(assistants: list[str]) -> str:
     if not assistants:
         return ""
-    badges = " · ".join(f"`{a}`" for a in assistants)
+    # Collapse lines and neutralise delimiters before wrapping catalog text.
+    labels = [" ".join(mdx_text(a).split()).replace("`", "&#96;") for a in assistants]
+    badges = " · ".join(f"`{label}`" for label in labels)
     return f"\n**Works with:** {badges}\n"
 
 
 def yaml_str(s: str) -> str:
-    """Return a YAML-safe quoted string (double-quoted, internal quotes escaped)."""
-    escaped = s.replace("\\", "\\\\").replace('"', '\\"')
+    """Return a YAML-safe quoted string (double-quoted, internal quotes escaped).
+
+    Newlines and other control characters are escaped too, so a value can never
+    close the frontmatter block or add keys to it.
+    """
+    escaped = (
+        s.replace("\\", "\\\\")
+        .replace('"', '\\"')
+        .replace("\n", "\\n")
+        .replace("\r", "\\r")
+        .replace("\t", "\\t")
+    )
+    escaped = re.sub(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]", "", escaped)
     return f'"{escaped}"'
 
 
-def mdx_safe(s: str) -> str:
-    """Escape characters that would be treated as JSX in MDX table cells."""
-    return s.replace("<", "&lt;").replace(">", "&gt;")
+_MDX_ENTITIES = {"{": "&#123;", "}": "&#125;", "<": "&lt;", ">": "&gt;"}
+_ESM_LINE = re.compile(r"(?m)^([ \t]*)(import|export)\b")
+
+
+def mdx_text(s) -> str:
+    """Escape catalog text for MDX body, JSX-children and attribute context.
+
+    MDX compiles `{expr}`, `<Tag>` and line-leading `import`/`export` to code, so
+    catalog strings must never reach the page source raw. Markdown punctuation is
+    left alone; only the four code-significant characters and ESM line starts are
+    neutralised with HTML entities.
+    """
+    if s is None:
+        return ""
+    if not isinstance(s, str):
+        raise TypeError(f"expected a string catalog field, got {type(s).__name__}")
+    s = "".join(_MDX_ENTITIES.get(ch, ch) for ch in s)
+    return _ESM_LINE.sub(lambda m: f"{m.group(1)}&#{ord(m.group(2)[0])};{m.group(2)[1:]}", s)
+
+
+def mdx_safe(s) -> str:
+    """Escape catalog text for an MDX table cell (also keeps `|` from splitting it)."""
+    return mdx_text(s).replace("|", "&#124;")
+
+
+def mdx_alt(s) -> str:
+    """Escape catalog text for markdown image alt text."""
+    s = " ".join(mdx_text(s).split())
+    return s.replace("[", "&#91;").replace("]", "&#93;")
+
+
+_SLUG_RE = re.compile(r"[a-z0-9][a-z0-9-]*")  # no separators, dots or leading hyphen
+
+
+def product_slug(p: dict) -> str:
+    """Return the page slug for a product, rejecting anything that is not a bare slug.
+
+    A catalog-supplied slug becomes a file name and a URL path segment, so it must
+    not contain path separators or `..`. `index` is reserved for the category page.
+    """
+    slug = p.get("slug") or slugify(p["name"])
+    if not isinstance(slug, str) or not _SLUG_RE.fullmatch(slug) or slug == "index":
+        raise ValueError(f"unsafe product slug {slug!r} for {p.get('name')!r}: use lowercase letters, digits and hyphens")
+    return slug
 
 
 def strip_embedded_specs(text: str) -> str:
@@ -423,7 +477,9 @@ def strip_embedded_specs(text: str) -> str:
 def product_page(p: dict, category_slug: str) -> str:
     """Generate MDX content for a single product page."""
     name = p["name"]
-    desc_technical = p.get("description", {}).get("technical", "")
+    desc_technical = p.get("description", {}).get("technical", "") or ""
+    if not isinstance(desc_technical, str):
+        raise TypeError(f"{name!r}: description.technical must be a string")
     specs = p.get("specs", {})
     pricing = p.get("pricing", {})
     limitations = p.get("limitations", "")
@@ -447,14 +503,14 @@ description: {yaml_str(tech_first_line)}
 """
 
     # Hero image
-    hero = f"\n![{name}]({img})\n" if img else ""
+    hero = f"\n![{mdx_alt(name)}]({img})\n" if img else ""
 
     # Quick-info line
     quick = []
     if protocol:
-        quick.append(f"**Protocol:** {protocol}")
+        quick.append(f"**Protocol:** {mdx_text(protocol)}")
     if device_type:
-        quick.append(f"**Type:** {device_type}")
+        quick.append(f"**Type:** {mdx_text(device_type)}")
     if pricing.get("srp_inr"):
         quick.append(f"**SRP:** {inr(pricing['srp_inr'])}")
     quick_block = f"\n{'  ·  '.join(quick)}\n" if quick else ""
@@ -465,13 +521,13 @@ description: {yaml_str(tech_first_line)}
     # Callouts — moved to top, before any section headings
     callouts = []
     if limitations:
-        callouts.append(f'<Callout type="warn">{limitations}</Callout>')
+        callouts.append(f'<Callout type="warn">{mdx_text(limitations)}</Callout>')
     if dependencies:
-        callouts.append(f'<Callout type="info">Requires: {dependencies}</Callout>')
+        callouts.append(f'<Callout type="info">Requires: {mdx_text(dependencies)}</Callout>')
     callouts_section = ("\n" + "\n\n".join(callouts) + "\n") if callouts else ""
 
     # Description — technical prose only (embedded spec list stripped)
-    desc_section = f"\n## Description\n\n{tech_prose}\n" if tech_prose else ""
+    desc_section = f"\n## Description\n\n{mdx_text(tech_prose)}\n" if tech_prose else ""
 
     # Specifications table
     specs_str = specs_table(specs)
@@ -486,9 +542,9 @@ description: {yaml_str(tech_first_line)}
     if pricing.get("srp_inr"):
         pricing_rows.append(f"| SRP (incl. GST) | {inr(pricing['srp_inr'])} |")
     if pricing.get("gst_rate"):
-        pricing_rows.append(f"| GST Rate | {pricing['gst_rate']}% |")
+        pricing_rows.append(f"| GST Rate | {mdx_safe(str(pricing['gst_rate']))}% |")
     if pricing.get("hsn"):
-        pricing_rows.append(f"| HSN Code | {pricing['hsn']} |")
+        pricing_rows.append(f"| HSN Code | {mdx_safe(str(pricing['hsn']))} |")
     ordering_section = (
         "\n## Ordering\n\n| | |\n|---|---|\n" + "\n".join(pricing_rows) + "\n"
         if pricing_rows
@@ -518,13 +574,13 @@ def category_index(slug: str, title: str, products: list[dict]) -> str:
     product_links = []
     for p in products:
         img = image_path_for(p)
-        img_md = f"![{p['name']}]({img})" if img else ""
-        desc = (p.get("description", {}).get("consumer", "") or "").splitlines()[0]
+        consumer = p.get("description", {}).get("consumer", "") or ""
+        desc = mdx_text(consumer.splitlines()[0]) if consumer.strip() else ""
         srp = p.get("pricing", {}).get("srp_inr")
         srp_str = f" — {inr(srp)}" if srp else ""
-        link_slug = p.get("slug") or slugify(p["name"])
+        link_slug = product_slug(p)
         card_desc = f"{desc}{srp_str}" if srp_str else desc
-        safe_title = p["name"].replace('"', "&quot;")
+        safe_title = mdx_text(p["name"]).replace('"', "&quot;")
         product_links.append(
             f'  <Card href="/docs/{slug}/{link_slug}" title="{safe_title}">\n    {card_desc}\n  </Card>'
         )
@@ -1311,9 +1367,31 @@ For dealer enquiries: **sales@smartify.in**
 
 
 def write_file(path: Path, content: str):
+    # Generated files must stay inside content/docs. Catalog-derived path segments
+    # (product slugs) are validated in product_slug(); this is the last-line check.
+    if not path.resolve().is_relative_to(DOCS_DIR.resolve()):
+        raise ValueError(f"refusing to write outside {DOCS_DIR}: {path}")
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
     print(f"  ✓ {path.relative_to(SCRIPT_DIR)}")
+
+
+def copy_images(src: Path, dest_dir: Path) -> tuple[int, int]:
+    """Copy catalog PNGs into the served images directory; return (copied, skipped).
+
+    public/images is served verbatim, so only regular files that live directly in
+    the catalog images directory are copied, never what a symlink points at.
+    """
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    count = skipped = 0
+    for img in sorted(src.glob("*.png")):
+        if img.is_symlink() or not img.is_file():
+            print(f"  ⚠ skipped non-regular image: {img.name}")
+            skipped += 1
+            continue
+        shutil.copy2(img, dest_dir / img.name, follow_symlinks=False)
+        count += 1
+    return count, skipped
 
 
 def main():
@@ -1363,7 +1441,9 @@ def main():
         # per-product pages
         page_slugs = ["index"]
         for p in cat_products:
-            p_slug = p.get("slug") or slugify(p["name"])
+            p_slug = product_slug(p)
+            if p_slug in page_slugs:
+                raise ValueError(f"duplicate product slug {p_slug!r} in {slug}/")
             write_file(cat_dir / f"{p_slug}.mdx", product_page(p, slug))
             page_slugs.append(p_slug)
 
@@ -1438,12 +1518,8 @@ def main():
     # ── Copy images ────────────────────────────────────────────────────────────
     print(f"\nCopying images from {IMAGES_SRC}…")
     PUBLIC_IMAGES.mkdir(parents=True, exist_ok=True)
-    count = 0
-    for img in IMAGES_SRC.glob("*.png"):
-        dest = PUBLIC_IMAGES / img.name
-        shutil.copy2(img, dest)
-        count += 1
-    print(f"  ✓ {count} images copied to public/images/")
+    count, skipped = copy_images(IMAGES_SRC, PUBLIC_IMAGES)
+    print(f"  ✓ {count} images copied to public/images/" + (f" ({skipped} skipped)" if skipped else ""))
 
     print("\n✅ Done! Run `npm install && npm run dev` to start the site.")
 
