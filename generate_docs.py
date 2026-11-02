@@ -391,7 +391,9 @@ def specs_table(specs: dict) -> str:
 def assistants_badges(assistants: list[str]) -> str:
     if not assistants:
         return ""
-    badges = " · ".join(f"`{a}`" for a in assistants)
+    # Collapse lines and neutralise delimiters before wrapping catalog text.
+    labels = [" ".join(mdx_text(a).split()).replace("`", "&#96;") for a in assistants]
+    badges = " · ".join(f"`{label}`" for label in labels)
     return f"\n**Works with:** {badges}\n"
 
 

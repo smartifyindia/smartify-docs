@@ -30,3 +30,7 @@ dist/
 # Editor
 .vscode/
 .idea/
+
+# Python and TypeScript caches
+__pycache__/
+*.tsbuildinfo

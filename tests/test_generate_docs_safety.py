@@ -64,6 +64,13 @@ class MdxEscaping(unittest.TestCase):
         tags = set(re.findall(r"<(/?[A-Za-z]+)", body))
         self.assertTrue(tags <= {"Callout", "/Callout"}, tags)
 
+    def test_assistant_cannot_break_out_of_badge(self):
+        page = g.product_page(product(assistants=["`\n\nexport const injected = 1\n\n{process.exit()} <X/>\n`"]), "sensors")
+        self.assertNotIn("\nexport const injected", page)
+        self.assertNotIn("{process.exit()}", page)
+        self.assertNotIn("<X/>", page)
+        self.assertIn("**Works with:**", page)
+
     def test_frontmatter_cannot_be_broken_out_of(self):
         page = g.product_page(product(name='A"\n---\ninjected: yes'), "sensors")
         front = page.split("\n---\n", 1)[0]
