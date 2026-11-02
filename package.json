@@ -12,7 +12,8 @@
     "postinstall": "fumadocs-mdx",
     "test": "python3 -m unittest discover -s tests",
     "type-check": "tsc --noEmit",
-    "ci": "npm test && npm run cf:build && npm run type-check"
+    "ci": "npm test && npm run cf:build && npm run type-check && npm run test:discovery",
+    "test:discovery": "node tests/agent-discovery.test.mjs"
   },
   "dependencies": {
     "fumadocs-core": "^15.8.5",

@@ -1,0 +1,74 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Smartify Docs Search",
+    "version": "1.0.0",
+    "description": "Read-only full-text search of public Smartify documentation. No registration or API key is required. Result URLs are relative to https://docs.smartify.in. Use source pages for citations."
+  },
+  "servers": [
+    {
+      "url": "https://docs.smartify.in"
+    }
+  ],
+  "security": [],
+  "paths": {
+    "/api/search": {
+      "get": {
+        "operationId": "searchDocumentation",
+        "summary": "Search public product and installation documentation",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "zigbee"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Matching pages, headings and text excerpts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "type",
+                      "content",
+                      "url"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string",
+                        "enum": [
+                          "page",
+                          "heading",
+                          "text"
+                        ]
+                      },
+                      "content": {
+                        "type": "string"
+                      },
+                      "url": {
+                        "type": "string",
+                        "description": "Relative source URL; may include a section fragment."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
