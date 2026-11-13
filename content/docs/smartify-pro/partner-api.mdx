@@ -26,7 +26,7 @@ curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" https://api.pro.smartify.in
 
 - A key belongs to your organization, not to a person, and sees exactly what your team sees in the app, never more.
 - Up to 10 active keys per organization. A revoked key stops working within about a minute.
-- A key cannot manage keys or webhook endpoints.
+- A key cannot manage keys. It can manage webhook endpoints only with the `webhooks:manage` scope, and only the ones it created.
 - A key never sees partnership, dealership, Smartify Pro or support inquiries, even if one was shared with you.
 
 <Callout>
@@ -45,6 +45,7 @@ Each key has one or more scopes. A request that needs a scope the key lacks gets
 | `referrals:write` | Refer a customer to Smartify. |
 | `catalog:read` | Read the Smartify catalog (once Smartify has approved catalog access for your organization). |
 | `catalog:submit` | Submit, change and remove your own catalog products for Smartify review. |
+| `webhooks:manage` | Create, change and delete the webhook endpoints this key created (see [Webhooks](/docs/smartify-pro/webhooks#manage-webhook-endpoints-with-an-api-key)). |
 
 Give a key only the scopes its job needs. `GET /me` works with any key and lists the key's scopes.
 
@@ -82,6 +83,9 @@ Lists return `data`, `next_cursor` and `has_more`. Pass `next_cursor` back as `a
 | `DELETE /leads/{leadId}/attachments/{itemId}` | `leads:write` | Remove a file from the lead. |
 | `POST /leads/{leadId}/unlock` | `leads:unlock` | Unlock a shared lead. |
 | `POST /referrals` | `referrals:write` | Refer a customer to Smartify. |
+| `GET` or `POST /webhooks` | `webhooks:manage` | List the webhook endpoints this key created, or create one. |
+| `GET`, `PATCH` or `DELETE /webhooks/{endpointId}` | `webhooks:manage` | Read, change or delete one of them. |
+| `POST /webhooks/{endpointId}/rotate-secret` and `.../test` | `webhooks:manage` | Rotate the signing secret, or send a `ping`. |
 
 The catalog endpoints are on [their own page](/docs/smartify-pro/partner-catalog-api).
 
@@ -425,7 +429,7 @@ Branch on the HTTP status first, then on `code`.
 ## Limits
 
 - 120 requests a minute per key. Over the limit you get `429 rate_limited` with a `Retry-After` header; wait that many seconds.
-- Up to 10 active keys per organization, and 5 webhook endpoints.
+- Up to 10 active keys per organization, and 25 webhook endpoints.
 
 The machine-readable contract is the [OpenAPI 3.1 document](https://github.com/smartifyindia/smartify-pro-backend/blob/main/docs/api/openapi.json).
 
