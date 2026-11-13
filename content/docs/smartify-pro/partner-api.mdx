@@ -1,0 +1,90 @@
+---
+title: "Partner API"
+description: "Read the leads Smartify shares with your organization, and your own leads, from your CRM with an API key."
+---
+
+The Partner API lets your CRM or other systems read the leads your organization can see in Smartify Pro: leads you own and leads Smartify shares with you. It's read-only today. For real-time updates, add a [webhook](/docs/smartify-pro/webhooks).
+
+## Base URL
+
+| | URL |
+|---|---|
+| Today | `https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1` |
+| Coming soon | `https://api.pro.smartify.in/v1` |
+
+Both reach the same API. The paths below are relative to the base URL.
+
+## API keys
+
+1. An owner or admin of your organization opens **Settings → API** in Smartify Pro and chooses **Create key**.
+2. The key (`spk_live_…`) is shown **once**. Store it in your secret manager; Smartify keeps only a hash of it.
+3. Send it on every request: `Authorization: Bearer spk_live_…`
+
+- A key belongs to your organization, not to a person, and sees exactly what your team sees in the app, never more.
+- Today's scope is `leads:read`.
+- Up to 10 active keys per organization. A revoked key stops working within a minute.
+- A key never sees partnership, dealership or support inquiries, even if one was shared with you.
+
+<Callout>
+Keep keys out of browsers and mobile apps. Call the API from your server.
+</Callout>
+
+## Endpoints
+
+| Request | Returns |
+|---|---|
+| `GET /me` | The key: `key_id`, `key_name`, `org_id`, `org_name`, `scopes`. Use it to check a key works. |
+| `GET /leads` | Your leads, newest first. Query: `limit` (1 to 100, default 25), `after`, `stage`. |
+| `GET /leads?updated_since=...` | The change feed: every lead changed at or after that ISO 8601 time, oldest first. |
+| `GET /leads/{leadId}` | One lead, as the app shows it to you, with header `ETag: W/"updated_at"`. |
+| `GET /leads/{leadId}/history` | Notes, activities and stage changes, newest first. |
+| `GET /events` | Your organization's event feed (see [Webhooks](/docs/smartify-pro/webhooks#event-feed)). |
+
+Lists return `data`, `next_cursor` and `has_more`. Pass `next_cursor` back as `after` until `has_more` is `false` or `data` is empty. A cursor only resumes the listing that issued it.
+
+### Keep your CRM in step
+
+Store the `updated_at` of the newest lead you processed, and ask for changes from that time:
+
+```bash
+curl -s -H "Authorization: Bearer $SPK" \
+  "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1/leads?updated_since=2026-11-13T00:00:00Z&limit=100"
+```
+
+The boundary is inclusive, so you can see the same lead twice: upsert by `lead_id`. With webhooks set up, use this feed only to catch up after downtime.
+
+### What a lead shows
+
+You get the same fields the app shows your organization. A lead shared with you but not yet unlocked is a preview (`"masked": true`, no contact details), and its history answers `403 lead_locked` until you unlock it in the app.
+
+In history, your own team's entries show their names. Everything else, including work Smartify's team did before sharing the lead, is credited to **Smartify** (`created_by: "smartify"`).
+
+## Errors
+
+Errors from the API are [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `application/problem+json` with a stable `code`:
+
+| Status | `code` | Meaning |
+|---|---|---|
+| 400 | `invalid_parameter` | A query parameter is malformed. `detail` says which. |
+| 401 | `invalid_key` | The key was revoked moments ago. |
+| 403 | `insufficient_scope` | The key lacks the scope the route needs. |
+| 403 | `lead_locked` | Unlock the lead in the app before reading its history. |
+| 404 | `lead_not_found` | No such lead, or not one your organization can see. The two are deliberately the same. |
+| 429 | `rate_limited` | Over 120 requests a minute for this key. Wait `Retry-After` seconds. |
+| 5xx | `internal_error` | Retry with backoff. |
+
+Some errors come from the gateway before the API sees the request. They are plain JSON with a `message` and no `code`:
+
+| Status | `message` | Meaning |
+|---|---|---|
+| 401 | `Unauthorized` | Missing, malformed or revoked key: the usual bad-key answer. |
+| 403 | `Missing Authentication Token` | No such route, or a method the route doesn't have (every route is `GET`). |
+
+Branch on the HTTP status, not on `code`.
+
+## Limits
+
+- 120 requests a minute per key.
+- Read-only. Write access (status, notes, tasks) and an MCP server that accepts keys come next.
+
+The machine-readable contract is the [OpenAPI 3.1 document](https://github.com/smartifyindia/smartify-pro-backend/blob/main/docs/api/openapi.json).
