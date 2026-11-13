@@ -1,18 +1,11 @@
 ---
 title: "Smartify MCP"
-description: "Connect Claude or another AI assistant to Smartify Pro: sign-in with Smartify Connect, or a partner API key with the Smartify MCP server."
+description: "Connect Claude, ChatGPT or another AI assistant to Smartify Pro with Smartify Connect: sign in and approve, no key needed."
 ---
 
-There are two Smartify MCP servers. Pick the one that fits:
+Connect Claude, ChatGPT or another AI assistant to Smartify Pro with **Smartify Connect**, at `https://connect.smartify.in/mcp`. You sign in with your Smartify Pro login and approve access in a consent screen (OAuth); there is no key to copy.
 
-| | Smartify Connect | Partner API key server |
-|---|---|---|
-| URL | `https://connect.smartify.in/mcp` | `https://mcp.smartify.in/mcp` |
-| Sign-in | Your Smartify Pro login, approved in a consent screen (OAuth) | A partner API key (`spk_live_…`) |
-| Best for | Working with estimates, products and leads in Claude, as yourself | Automating your CRM: the same operations as the [Partner API](/docs/smartify-pro/partner-api), in an assistant or agent |
-| Tools | Estimating and lead tools | One tool per Partner API operation, limited to the key's scopes |
-
-The rest of this page covers Smartify Connect first. Jump to the [partner API key server](#partner-api-key-server) if that is the one you need.
+The older key-based server at `mcp.smartify.in` is retired: it answers with a pointer to Smartify Connect. To automate your CRM without an assistant, use the [Partner API](/docs/smartify-pro/partner-api) with a partner API key.
 
 ## Smartify Connect
 
@@ -124,54 +117,3 @@ The connector source does not provide enough evidence to document production req
 - [Contact Smartify Pro support](mailto:inquiries@smartify.in)
 
 This guide links to the existing privacy policy and terms; it does not change them.
-
-
-## Partner API key server
-
-`https://mcp.smartify.in/mcp` gives an AI assistant the same operations as the [Partner API](/docs/smartify-pro/partner-api), using a partner API key. It is separate from Smartify Connect above: there is no sign-in screen, and the key decides what the assistant can do.
-
-The old "Generate connector URL" flow and the `/api/key` endpoint are gone. Keys made that way no longer work; create a partner API key instead.
-
-### Connect
-
-1. An owner or admin opens **Settings → Integrations** in Smartify Pro and creates a key with only the scopes the assistant needs (for example `leads:read` for a read-only assistant). The key is shown once.
-2. Add `https://mcp.smartify.in/mcp` as a custom connector or MCP server in your client, and send the key as a header:
-
-```http
-Authorization: Bearer spk_live_…
-```
-
-3. Ask for something read-only first, such as "List my newest five leads."
-
-Some clients can only take a URL and cannot send a header. For those, the key can go in the URL instead:
-
-```text
-https://mcp.smartify.in/mcp?key=spk_live_…
-```
-
-<Callout type="warn">
-A URL with a key in it can end up in logs, browser history and shared screenshots. Prefer the `Authorization` header whenever your client allows it, give a URL-only client a key with the fewest scopes, and revoke the key if the URL leaks.
-</Callout>
-
-### Tools
-
-There is one tool per Partner API operation, named after the operation in snake case: `list_leads`, `get_lead`, `change_stage`, `create_task`, `unlock`, `submit_referral` and so on. The list your client shows is filtered to your key's scopes, so a read-only key never sees the write tools.
-
-- A tool call is the same HTTP request the Partner API takes, made with your key. Scopes, tenant isolation and rate limits apply exactly as they do for the API: 120 requests a minute per key.
-- Tool inputs are the operation's path and query parameters and body fields. Operations that take an `Idempotency-Key` or `If-Match` header have `idempotency_key` and `if_match` inputs.
-- Successful write calls return the lead's `etag` with the result.
-- When the API refuses a request, the tool returns an error result containing the problem body (`code`, `detail` and any extra fields such as `allowed_transitions`), so the assistant can read it and adjust.
-
-<Callout type="warn">
-Tools that write change real records, and `unlock` spends credits exactly as unlocking in the app does. Ask the assistant to show the lead first and confirm before it writes, and give it a key without `leads:unlock` unless you want it to unlock leads.
-</Callout>
-
-### Troubleshooting
-
-| Problem | What to try |
-|---|---|
-| `401` and "A Smartify partner API key is required" | The key is missing from the request. Check the `Authorization: Bearer` header, or the `key` in the URL. |
-| `401` and "revoked or does not exist" | The key was revoked or mistyped. Create a new one in **Settings → Integrations**. |
-| A tool you expect is missing | The key lacks the scope. Create a key with the scope that tool needs. |
-| `insufficient_scope` on a call | Same cause; the client's tool list was cached before the key changed. Reconnect. |
-| Rate limit exceeded | Wait a minute. The limit is 120 requests a minute per key. |
