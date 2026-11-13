@@ -43,7 +43,7 @@ Each key has one or more scopes. A request that needs a scope the key lacks gets
 | `leads:write` | Edit your own manual leads, change stages, and add or change notes, activities, tasks, reminders and attachments. |
 | `leads:unlock` | Unlock a shared lead. This spends credits exactly as unlocking in the app does. |
 | `referrals:write` | Refer a customer to Smartify. |
-| `catalog:read` | Read the Smartify catalog (once Smartify enables it for your organization). |
+| `catalog:read` | Read the Smartify catalog (once Smartify has approved catalog access for your organization). |
 | `catalog:submit` | Submit, change and remove your own catalog products for Smartify review. |
 
 Give a key only the scopes its job needs. `GET /me` works with any key and lists the key's scopes.
@@ -148,7 +148,7 @@ POST /leads/{leadId}/stage
 | Field | Notes |
 |---|---|
 | `to` | Required. The stage to move to. |
-| `reason` | Required when moving backwards or re-opening a closed lead (at least 3 characters), and for `LOST` and `NOT_INTERESTED` (see below). |
+| `reason` | Required for `LOST` and `NOT_INTERESTED` (one of a fixed list, see below), and when moving backwards or re-opening a closed lead (free text, at least 3 characters). |
 | `note` | Optional note, up to 2000 characters. |
 | `deal_value` | Required for `WON`. A positive number, for example `150000`. |
 | `won_at` | Optional for `WON`: an ISO 8601 time, not more than a day in the future. Defaults to now. |
@@ -195,7 +195,7 @@ A move the rules do not allow answers `422 stage_transition_not_allowed`, and te
 }
 ```
 
-`requires_reason` is `true` for moves backwards or re-opening. The `reason` that `LOST` and `NOT_INTERESTED` need is not flagged there, so send it with those moves. A missing or invalid `reason` or `deal_value` answers `400 invalid_parameter` with `detail` saying what to fix.
+`requires_reason` is `true` when the move needs a `reason`. For `LOST` and `NOT_INTERESTED` the entry also has a `reasons` array with the values you may send; for moves backwards or re-opening the reason is free text. A missing or invalid `reason` or `deal_value` answers `400 invalid_parameter` with `detail` saying what to fix.
 
 ## Notes, activities, tasks and reminders
 
@@ -241,7 +241,7 @@ curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/activ
 | `name` | Required on create, up to 200 characters. |
 | `description` | Optional text. |
 | `due_date` | Optional due date, as an ISO 8601 string. |
-| `status` | The app uses `TO_DO` (the default), `IN_PROGRESS` and `DONE`. |
+| `status` | The app uses `TO_DO` (the default), `IN_PROGRESS` and `DONE`. Setting `DONE` completes the task and sends a `lead.task.completed` event. |
 | `priority` | Defaults to `MEDIUM`. |
 
 ```bash
@@ -370,9 +370,10 @@ Send an `Idempotency-Key` header on any `POST` to make it safe to retry. It must
 - The same key while the first request is still running answers `409 idempotency_in_progress`. Wait a moment and retry.
 - Server errors (`5xx`) are not stored, so retry them with the same key. Other answers, including refusals such as `422` or `403`, are stored and replayed: after fixing the request, use a new key.
 - Keys are scoped to the API key that sent them.
-- For notes and activities, Smartify also uses the key as the item's request id. Use letters, digits, `_` and `-`, up to 80 characters, for those two.
+- This holds for notes and activities too: a retry with the same key never adds a second note or activity.
+- Catalog submissions do not take an `Idempotency-Key`; a submission is keyed by your SKU (see the [Partner Catalog API](/docs/smartify-pro/partner-catalog-api)).
 
-`PATCH` and `DELETE` are naturally safe to repeat, so they do not take the header.
+`PATCH` and `DELETE` are naturally safe to repeat, so they do not take the header. They do take `If-Match` (below).
 
 ## Conditional writes with ETag
 
@@ -384,7 +385,7 @@ curl -s -X DELETE https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/tas
   -H 'If-Match: W/"2026-11-13T10:15:02.874Z"'
 ```
 
-`If-Match` is optional. Without it a write goes ahead on whatever the lead looks like now.
+`If-Match` is optional. It works on lead edits, stage changes and on `PATCH` and `DELETE` of activities, tasks, reminders and attachments. Without it a write goes ahead on whatever the lead looks like now.
 
 ## Errors
 
@@ -400,8 +401,7 @@ Errors from the API are [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `appl
 | 403 | `lead_locked` | Unlock the lead before reading or changing its details. |
 | 403 | `not_editable` | Only your organization's own manual leads can be edited. |
 | 403 | `forbidden` | The app would refuse this action for your organization. `detail` says why. |
-| 403 | `feature_not_enabled` | The partner catalog is not enabled for your organization. |
-| 403 | `catalog_not_enabled` | Catalog submissions are not approved for your organization. |
+| 403 | `catalog_not_enabled` | Smartify has not approved catalog access for your organization. |
 | 404 | `lead_not_found` | No such lead, or not one your organization can see. The two are deliberately the same. |
 | 404 | `not_found` | No such item or endpoint. |
 | 405 | `method_not_allowed` | The path exists but not with this method. |

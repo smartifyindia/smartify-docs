@@ -5,7 +5,7 @@ description: "Read the Smartify catalog and submit your own products for Smartif
 
 The catalog endpoints are part of the [Partner API](/docs/smartify-pro/partner-api) and use the same keys, base URL, errors and rate limit. There are two separate things you can do:
 
-- **Read the Smartify catalog** (`catalog:read`), once Smartify enables it for your organization.
+- **Read the Smartify catalog** (`catalog:read`), once Smartify has approved catalog access for your organization.
 - **Submit your own products** (`catalog:submit`) to add to, change or remove from the Smartify Pro catalog. Smartify reviews every submission.
 
 <Callout type="warn">
@@ -32,7 +32,7 @@ https://api.pro.smartify.in/v1
 GET /catalog/products
 ```
 
-Needs the `catalog:read` scope, and the partner catalog must be enabled for your organization by Smartify. Otherwise the answer is `403 feature_not_enabled`.
+Needs the `catalog:read` scope, and Smartify must have approved catalog access for your organization. Otherwise the answer is `403 catalog_not_enabled`.
 
 Optional query: `search` (up to 120 characters), matched against the SKU and name.
 
@@ -41,7 +41,7 @@ curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" \
   "https://api.pro.smartify.in/v1/catalog/products?search=switch"
 ```
 
-The response is `{ "data": [product, …] }`. Each product has `sku`, `name`, `gst_rate`, `stock_quantity`, `image_url`, `hsn` and `updated_at`.
+The response is `{ "data": [product, …] }`. Each product has `sku`, `name`, `gst_rate`, `stock_quantity`, `image_url`, `hsn` and `updated_at`. Rows carry no prices: when you quote, you supply your own ex-GST unit price.
 
 ## Submit your own products
 
@@ -60,7 +60,7 @@ Submissions go through Smartify review. Nothing is published until Smartify appr
 3. A Smartify admin **approves** or **rejects** it.
 4. Only approved requests change the Pro catalog.
 
-Submitting again for the same `partner_sku` replaces the earlier submission record for that SKU with the new one, which goes back to PENDING.
+A submission is keyed by your SKU, so submissions take no `Idempotency-Key`. Sending the same `partner_sku` again replaces the earlier submission record for that SKU with the new one, which goes back to PENDING. Retries are therefore safe.
 
 ### Endpoints
 
