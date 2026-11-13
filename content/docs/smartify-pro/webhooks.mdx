@@ -200,7 +200,7 @@ URL rules are the same as in the app: HTTPS, port 443 or 8443, a public address.
 | 429 | `rate_limited` | Over 120 requests a minute for this key. |
 
 <Callout>
-`POST /webhooks` takes no `Idempotency-Key`. If a subscribe request times out and you retry it, you can end up with two endpoints and receive each event twice. List the endpoints, keep one, and delete the extras.
+Retrying a subscribe is safe: if your key already has an endpoint for the same URL, `POST /webhooks` returns that endpoint (`200`, without the secret) instead of creating a second one.
 </Callout>
 
 ## Event feed
