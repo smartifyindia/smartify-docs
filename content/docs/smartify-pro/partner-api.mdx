@@ -1,35 +1,56 @@
 ---
 title: "Partner API"
-description: "Read the leads Smartify shares with your organization, and your own leads, from your CRM with an API key."
+description: "Read and update the leads Smartify shares with your organization, and your own leads, from your CRM or automation tool with an API key."
 ---
 
-The Partner API lets your CRM or other systems read the leads your organization can see in Smartify Pro: leads you own and leads Smartify shares with you. It's read-only today. For real-time updates, add a [webhook](/docs/smartify-pro/webhooks).
+The Partner API lets your CRM, your own software or an automation tool work with the leads your organization can see in Smartify Pro: leads you own and leads Smartify shares with you. You can read them, move them through the pipeline, add notes, activities, tasks, reminders and files, unlock shared leads, and refer customers to Smartify. For real-time updates, add a [webhook](/docs/smartify-pro/webhooks).
 
 ## Base URL
 
-| | URL |
-|---|---|
-| Today | `https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1` |
-| Coming soon | `https://api.pro.smartify.in/v1` |
+```text
+https://api.pro.smartify.in/v1
+```
 
-Both reach the same API. The paths below are relative to the base URL.
+The paths below are relative to this base URL. Every request is over HTTPS and uses JSON.
 
 ## API keys
 
-1. An owner or admin of your organization opens **Settings → API** in Smartify Pro and chooses **Create key**.
+1. An owner or admin of your organization opens **Settings → Integrations** in Smartify Pro and creates a key, choosing the scopes it needs.
 2. The key (`spk_live_…`) is shown **once**. Store it in your secret manager; Smartify keeps only a hash of it.
 3. Send it on every request: `Authorization: Bearer spk_live_…`
 
+```bash
+export SMARTIFY_API_KEY="spk_live_your_key_here"
+curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" https://api.pro.smartify.in/v1/me
+```
+
 - A key belongs to your organization, not to a person, and sees exactly what your team sees in the app, never more.
-- Today's scope is `leads:read`.
-- Up to 10 active keys per organization. A revoked key stops working within a minute.
-- A key never sees partnership, dealership or support inquiries, even if one was shared with you.
+- Up to 10 active keys per organization. A revoked key stops working within about a minute.
+- A key cannot manage keys or webhook endpoints.
+- A key never sees partnership, dealership, Smartify Pro or support inquiries, even if one was shared with you.
 
 <Callout>
-Keep keys out of browsers and mobile apps. Call the API from your server.
+Keep keys out of browsers and mobile apps. Call the API from your server or from an automation tool you trust.
 </Callout>
 
+### Scopes
+
+Each key has one or more scopes. A request that needs a scope the key lacks gets `403 insufficient_scope`.
+
+| Scope | Allows |
+|---|---|
+| `leads:read` | Read leads, lead history, attachments and the event feed. |
+| `leads:write` | Edit your own manual leads, change stages, and add or change notes, activities, tasks, reminders and attachments. |
+| `leads:unlock` | Unlock a shared lead. This spends credits exactly as unlocking in the app does. |
+| `referrals:write` | Refer a customer to Smartify. |
+| `catalog:read` | Read the Smartify catalog (once Smartify enables it for your organization). |
+| `catalog:submit` | Submit, change and remove your own catalog products for Smartify review. |
+
+Give a key only the scopes its job needs. `GET /me` works with any key and lists the key's scopes.
+
 ## Endpoints
+
+### Read
 
 | Request | Returns |
 |---|---|
@@ -38,53 +59,377 @@ Keep keys out of browsers and mobile apps. Call the API from your server.
 | `GET /leads?updated_since=...` | The change feed: every lead changed at or after that ISO 8601 time, oldest first. |
 | `GET /leads/{leadId}` | One lead, as the app shows it to you, with header `ETag: W/"updated_at"`. |
 | `GET /leads/{leadId}/history` | Notes, activities and stage changes, newest first. |
+| `GET /leads/{leadId}/attachments` | The files on a lead. |
 | `GET /events` | Your organization's event feed (see [Webhooks](/docs/smartify-pro/webhooks#event-feed)). |
 
 Lists return `data`, `next_cursor` and `has_more`. Pass `next_cursor` back as `after` until `has_more` is `false` or `data` is empty. A cursor only resumes the listing that issued it.
+
+### Write
+
+| Request | Scope | What it does |
+|---|---|---|
+| `PATCH /leads/{leadId}` | `leads:write` | Edit a lead your organization created by hand. |
+| `POST /leads/{leadId}/stage` | `leads:write` | Move a lead to another stage. |
+| `POST /leads/{leadId}/notes` | `leads:write` | Add a note to the lead timeline. |
+| `POST /leads/{leadId}/activities` | `leads:write` | Log a call, email, meeting or note. |
+| `PATCH` or `DELETE /leads/{leadId}/activities/{itemId}` | `leads:write` | Change or remove an activity. |
+| `POST /leads/{leadId}/tasks` | `leads:write` | Add a task. |
+| `PATCH` or `DELETE /leads/{leadId}/tasks/{itemId}` | `leads:write` | Change or remove a task. |
+| `POST /leads/{leadId}/reminders` | `leads:write` | Add a reminder. |
+| `PATCH` or `DELETE /leads/{leadId}/reminders/{itemId}` | `leads:write` | Change or remove a reminder. |
+| `POST /leads/{leadId}/attachments/upload-url` | `leads:write` | Get a short-lived URL to upload a file to. |
+| `POST /leads/{leadId}/attachments` | `leads:write` | Record an uploaded file on the lead. |
+| `DELETE /leads/{leadId}/attachments/{itemId}` | `leads:write` | Remove a file from the lead. |
+| `POST /leads/{leadId}/unlock` | `leads:unlock` | Unlock a shared lead. |
+| `POST /referrals` | `referrals:write` | Refer a customer to Smartify. |
+
+The catalog endpoints are on [their own page](/docs/smartify-pro/partner-catalog-api).
+
+### How writes behave
+
+- **A key acts as your organization in the app, never as an admin.** A write succeeds only when the same action would succeed for your team in Smartify Pro.
+- A lead your organization cannot see answers `404 lead_not_found`, the same as a lead that does not exist. A shared lead you have not unlocked answers `403 lead_locked` to anything that touches its details.
+- Every successful write returns the lead's new `ETag` header. Create calls return `201` with the new item in `data`. Deletes return `204` with no body.
+- Writes show up in your [webhook](/docs/smartify-pro/webhooks) feed with an `origin` naming your key, so you can ignore your own echoes.
 
 ### Keep your CRM in step
 
 Store the `updated_at` of the newest lead you processed, and ask for changes from that time:
 
 ```bash
-curl -s -H "Authorization: Bearer $SPK" \
-  "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1/leads?updated_since=2026-11-13T00:00:00Z&limit=100"
+curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  "https://api.pro.smartify.in/v1/leads?updated_since=2026-11-13T00:00:00Z&limit=100"
 ```
 
 The boundary is inclusive, so you can see the same lead twice: upsert by `lead_id`. With webhooks set up, use this feed only to catch up after downtime.
 
 ### What a lead shows
 
-You get the same fields the app shows your organization. A lead shared with you but not yet unlocked is a preview (`"masked": true`, no contact details), and its history answers `403 lead_locked` until you unlock it in the app.
+You get the same fields the app shows your organization. A lead shared with you but not yet unlocked is a preview (`"masked": true`, no contact details), and its history answers `403 lead_locked` until you unlock it.
 
 In history, your own team's entries show their names. Everything else, including work Smartify's team did before sharing the lead, is credited to **Smartify** (`created_by: "smartify"`).
 
+## Edit a lead
+
+```http
+PATCH /leads/{leadId}
+```
+
+Only leads your organization added by hand can be edited. A lead Smartify shared or assigned to you answers `403 not_editable`.
+
+Send any of these fields; the rest stay as they are.
+
+| Field | Notes |
+|---|---|
+| `name` | Cannot be empty. |
+| `phone` | Cannot be empty; must be a valid phone number. |
+| `email` | A valid email address, or `""` to clear it. |
+| `city` | Cannot be empty. |
+| `address` | Text. |
+| `property_type`, `carpet_area`, `estimated_budget`, `possession_status` | Text. `possession_status` is at most 100 characters. |
+| `requirements_text` | Text, at most 2000 characters. |
+
+```bash
+curl -s -X PATCH https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123 \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H 'If-Match: W/"2026-11-13T10:15:02.874Z"' \
+  -d '{ "city": "Pune", "requirements_text": "3 BHK, wants curtain motors" }'
+```
+
+The response is `{ "data": { …the lead… } }` with the new `ETag`. A body with no editable fields is `400 invalid_parameter`.
+
+## Change a lead's stage
+
+```http
+POST /leads/{leadId}/stage
+```
+
+| Field | Notes |
+|---|---|
+| `to` | Required. The stage to move to. |
+| `reason` | Required when moving backwards or re-opening a closed lead (at least 3 characters), and for `LOST` and `NOT_INTERESTED` (see below). |
+| `note` | Optional note, up to 2000 characters. |
+| `deal_value` | Required for `WON`. A positive number, for example `150000`. |
+| `won_at` | Optional for `WON`: an ISO 8601 time, not more than a day in the future. Defaults to now. |
+| `estimate_id` | Optional for `QUOTED`: the Pro estimate you are quoting from. |
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/stage \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: crm-sync-8841" \
+  -d '{ "to": "WON", "deal_value": 150000, "note": "Signed today" }'
+```
+
+The response is `{ "data": { …the lead… } }` with the new `ETag`.
+
+Stage moves follow the same rules as the app:
+
+| From | Forward to | Back or re-open to (needs `reason`) |
+|---|---|---|
+| `NEW` | `UNLOCKED` | none |
+| `UNLOCKED` | `CONTACTED`, `NOT_INTERESTED` | none |
+| `CONTACTED` | `QUOTED`, `NOT_INTERESTED` | `UNLOCKED` |
+| `QUOTED` | `WON`, `LOST`, `NOT_INTERESTED` | `CONTACTED` |
+| `CUSTOMER_ACCEPTED` | `WON`, `LOST`, `NOT_INTERESTED` | `QUOTED` |
+| `WON` | none | `QUOTED` |
+| `LOST` | none | `QUOTED` |
+| `NOT_INTERESTED` | none | `CONTACTED`, `QUOTED` |
+
+`CUSTOMER_ACCEPTED` is set by Smartify when a customer accepts a quote on the public quote page. You cannot move a lead into it.
+
+Moving to `LOST` also needs a `reason` of `price_too_high`, `chose_competitor`, `project_postponed`, `no_response` or `other`. Moving to `NOT_INTERESTED` needs `declined_before_quote`, `wrong_contact`, `project_cancelled` or `other`.
+
+A move the rules do not allow answers `422 stage_transition_not_allowed`, and tells you what is allowed from where the lead is now:
+
+```json
+{
+  "type": "about:blank",
+  "title": "Unprocessable request",
+  "status": 422,
+  "detail": "A lead can't move from NEW to WON.",
+  "code": "stage_transition_not_allowed",
+  "from": "NEW",
+  "allowed_transitions": [{ "to": "UNLOCKED", "requires_reason": false }]
+}
+```
+
+`requires_reason` is `true` for moves backwards or re-opening. The `reason` that `LOST` and `NOT_INTERESTED` need is not flagged there, so send it with those moves. A missing or invalid `reason` or `deal_value` answers `400 invalid_parameter` with `detail` saying what to fix.
+
+## Notes, activities, tasks and reminders
+
+All four are added with a `POST` on the lead and return `201` with the new item in `data`. Tasks, reminders and activities can then be changed with `PATCH` (send only the fields to change) and removed with `DELETE`.
+
+### Notes
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/notes \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: crm-note-5521" \
+  -d '{ "note": "Customer asked for a site visit on Saturday." }'
+```
+
+`note` is required, up to 2000 characters.
+
+### Activities
+
+| Field | Notes |
+|---|---|
+| `type` | Required: `call`, `email`, `meeting` or `note`. Cannot be changed later. |
+| `content` | Required, up to 4000 characters. |
+| `title` | Optional, up to 200 characters. |
+| `occurred_at` | Optional ISO 8601 time with a timezone, for example `2026-11-13T10:00:00+05:30`. Not more than 5 minutes in the future. |
+| `source` | Optional label, up to 80 characters. |
+| `duration_seconds`, `outcome`, `direction` | Calls only. `duration_seconds` is a whole number from 0 to 86400. `outcome` is one of `connected`, `no_answer`, `busy`, `voicemail`, `failed`, `cancelled`, `completed`, `other`. `direction` is `inbound` or `outbound`. |
+
+Any other field is refused with `400 invalid_parameter`.
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/activities \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: crm-call-9917" \
+  -d '{ "type": "call", "content": "Walked through the quote.", "direction": "outbound", "outcome": "connected", "duration_seconds": 420 }'
+```
+
+### Tasks
+
+| Field | Notes |
+|---|---|
+| `name` | Required on create, up to 200 characters. |
+| `description` | Optional text. |
+| `due_date` | Optional due date, as an ISO 8601 string. |
+| `status` | The app uses `TO_DO` (the default), `IN_PROGRESS` and `DONE`. |
+| `priority` | Defaults to `MEDIUM`. |
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/tasks \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "name": "Send curtain motor quote", "due_date": "2026-11-20" }'
+```
+
+### Reminders
+
+| Field | Notes |
+|---|---|
+| `title` | Required on create, up to 200 characters. |
+| `date_time` | Required on create. ISO 8601 date-time. |
+| `description` | Optional text. |
+
+### Ids and legacy items
+
+Every item has an `id`. Items written before ids existed get ids like `legacy_<16 hex characters>`. Use them like any other id in `PATCH` and `DELETE` paths.
+
+An item that does not exist answers `404 not_found`. Editing two different items on one lead at the same time is safe: both changes land. In the rare case two writes hit the same lead at the very same instant, one can answer `409 conflict`; send it again.
+
+## Files
+
+Attaching a file takes two requests. Files can be PDFs, images (PNG, JPEG, WebP, GIF, HEIC), Word and Excel files, CSV, plain text and DWG or DXF drawings, up to 15 MB each, and a lead holds up to 50 files (the 51st answers `409`).
+
+1. Ask for an upload URL:
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/attachments/upload-url \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "file_name": "floor-plan.pdf", "file_type": "application/pdf", "file_size": 482113 }'
+```
+
+The response is `{ "data": { "upload_url": "…", "file_url": "…" } }`. The `upload_url` is valid for 15 minutes.
+
+2. `PUT` the file to `upload_url` with the same `Content-Type` and a `Content-Length` equal to `file_size`.
+
+3. Record it on the lead, using the `file_url` from step 1:
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/attachments \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{ "file_name": "floor-plan.pdf", "file_type": "application/pdf", "file_url": "FILE_URL_FROM_STEP_1", "file_size": 482113 }'
+```
+
+Smartify checks that the file exists, its type and its real size before recording it.
+
+## Unlock a shared lead
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/unlock \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Idempotency-Key: unlock-CRM-1794550000000-123"
+```
+
+The response is `{ "data": { …the unlocked lead… } }` with the new `ETag`. Unlocking needs the `leads:unlock` scope and **spends credits exactly as unlocking in the app does**. If your organization cannot pay for it, the answer is `402 payment_required` and carries a `subscription_url`, where you can unlock without credits:
+
+```json
+{
+  "type": "about:blank",
+  "title": "Payment required",
+  "status": 402,
+  "detail": "…",
+  "code": "payment_required",
+  "subscription_url": "https://pro.smartify.in/settings/billing"
+}
+```
+
+Always send an `Idempotency-Key` on unlock, so a retry after a timeout cannot spend credits twice.
+
+## Refer a customer to Smartify
+
+```http
+POST /referrals
+```
+
+Needs the `referrals:write` scope. Smartify contacts the customer on WhatsApp to confirm, and you earn the referral commission if the referral converts.
+
+| Field | Notes |
+|---|---|
+| `name`, `phone`, `city`, `reason` | Required. `reason` says what the customer wants. |
+| `email`, `notes` | Optional. |
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/referrals \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -H "Idempotency-Key: referral-2026-11-13-001" \
+  -d '{
+    "name": "Test Customer",
+    "phone": "+910000000000",
+    "city": "Pune",
+    "reason": "Wants a smart home setup for a new 3 BHK",
+    "notes": "Prefers calls after 6 pm"
+  }'
+```
+
+```json
+{
+  "data": {
+    "message": "Referral submitted. Customer will receive a WhatsApp verification.",
+    "lead_id": "REF-1794550000000-123",
+    "whatsapp_delivery": "SENT"
+  }
+}
+```
+
+`whatsapp_delivery` is `SENT` when the verification went out and `FAILED` when it could not be confirmed. The referral is created either way.
+
+A customer who is already known to Smartify answers `409 conflict`. A referral that your organization sharing has been suspended for answers `403 forbidden`.
+
+<Callout type="warn">
+The old referral endpoint that took an `x-api-key` header keeps working until **2026-12-13** and then stops. Create a partner API key with the `referrals:write` scope and move to `POST /v1/referrals` before then.
+</Callout>
+
+## Idempotency
+
+Send an `Idempotency-Key` header on any `POST` to make it safe to retry. It must be 1 to 255 printable characters, or the answer is `400 invalid_parameter`. Use a value that is unique for each thing you mean to do, such as an id from your own system.
+
+- The same key with the same request within 48 hours replays the first response, without doing the work again.
+- The same key with a different request (a different body, lead or endpoint) answers `422 idempotency_key_reused`.
+- The same key while the first request is still running answers `409 idempotency_in_progress`. Wait a moment and retry.
+- Server errors (`5xx`) are not stored, so retry them with the same key. Other answers, including refusals such as `422` or `403`, are stored and replayed: after fixing the request, use a new key.
+- Keys are scoped to the API key that sent them.
+- For notes and activities, Smartify also uses the key as the item's request id. Use letters, digits, `_` and `-`, up to 80 characters, for those two.
+
+`PATCH` and `DELETE` are naturally safe to repeat, so they do not take the header.
+
+## Conditional writes with ETag
+
+Every read and write of a lead returns `ETag: W/"<updated_at>"`. Send that value back in an `If-Match` header on a `PATCH`, a `DELETE` or a stage change to make the write conditional: if the lead changed in the meantime, the write is refused with `412 precondition_failed` and nothing changes. Fetch the lead again and decide what to do.
+
+```bash
+curl -s -X DELETE https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123/tasks/task_123 \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H 'If-Match: W/"2026-11-13T10:15:02.874Z"'
+```
+
+`If-Match` is optional. Without it a write goes ahead on whatever the lead looks like now.
+
 ## Errors
 
-Errors from the API are [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `application/problem+json` with a stable `code`:
+Errors from the API are [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457) `application/problem+json` with a stable `code`. Some add fields, such as `allowed_transitions` or `subscription_url`.
 
 | Status | `code` | Meaning |
 |---|---|---|
-| 400 | `invalid_parameter` | A query parameter is malformed. `detail` says which. |
+| 400 | `invalid_parameter` | A query parameter, header or body field is missing or malformed. `detail` says which. |
+| 400 | `invalid_json` | The body is not a JSON object. |
 | 401 | `invalid_key` | The key was revoked moments ago. |
+| 402 | `payment_required` | Unlocking needs credits you do not have. See `subscription_url`. |
 | 403 | `insufficient_scope` | The key lacks the scope the route needs. |
-| 403 | `lead_locked` | Unlock the lead in the app before reading its history. |
+| 403 | `lead_locked` | Unlock the lead before reading or changing its details. |
+| 403 | `not_editable` | Only your organization's own manual leads can be edited. |
+| 403 | `forbidden` | The app would refuse this action for your organization. `detail` says why. |
+| 403 | `feature_not_enabled` | The partner catalog is not enabled for your organization. |
+| 403 | `catalog_not_enabled` | Catalog submissions are not approved for your organization. |
 | 404 | `lead_not_found` | No such lead, or not one your organization can see. The two are deliberately the same. |
+| 404 | `not_found` | No such item or endpoint. |
+| 405 | `method_not_allowed` | The path exists but not with this method. |
+| 409 | `conflict` | Two writes hit the same lead at the same instant. Retry. |
+| 409 | `idempotency_in_progress` | The first request with this `Idempotency-Key` is still running. |
+| 412 | `precondition_failed` | The lead changed since the `ETag` you sent. Fetch it again. |
+| 422 | `stage_transition_not_allowed` | The stage move is not allowed. See `allowed_transitions`. |
+| 422 | `idempotency_key_reused` | The `Idempotency-Key` was already used for a different request. |
 | 429 | `rate_limited` | Over 120 requests a minute for this key. Wait `Retry-After` seconds. |
-| 5xx | `internal_error` | Retry with backoff. |
+| 5xx | `internal_error` or `request_failed` | Retry with backoff, with the same `Idempotency-Key` if you sent one. |
 
 Some errors come from the gateway before the API sees the request. They are plain JSON with a `message` and no `code`:
 
 | Status | `message` | Meaning |
 |---|---|---|
 | 401 | `Unauthorized` | Missing, malformed or revoked key: the usual bad-key answer. |
-| 403 | `Missing Authentication Token` | No such route, or a method the route doesn't have (every route is `GET`). |
+| 403 | `Missing Authentication Token` | No such route, or a method the route does not have. |
 
-Branch on the HTTP status, not on `code`.
+Branch on the HTTP status first, then on `code`.
 
 ## Limits
 
-- 120 requests a minute per key.
-- Read-only. Write access (status, notes, tasks) and an MCP server that accepts keys come next.
+- 120 requests a minute per key. Over the limit you get `429 rate_limited` with a `Retry-After` header; wait that many seconds.
+- Up to 10 active keys per organization, and 5 webhook endpoints.
 
 The machine-readable contract is the [OpenAPI 3.1 document](https://github.com/smartifyindia/smartify-pro-backend/blob/main/docs/api/openapi.json).
+
+## Other ways to connect
+
+- Point an AI assistant at the API with the [Smartify MCP server](/docs/smartify-pro/smartify-mcp#partner-api-key-server).
+- Connect Zapier or Make with a [webhook and an HTTP step](/docs/smartify-pro/webhooks#zapier-and-make).
