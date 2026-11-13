@@ -1,0 +1,152 @@
+---
+title: "Webhooks"
+description: "Get a signed POST whenever a lead your organization can see changes, and catch up with the event feed."
+---
+
+Smartify Pro tells your system when a lead your organization can see changes. You get the same events two ways:
+
+- **Webhooks:** a signed `POST` to your HTTPS endpoint within seconds.
+- **Event feed:** `GET /v1/events`, to catch up after downtime or as a polling alternative.
+
+Both carry the same thin events, kept for 30 days. The REST API itself is described in [Partner API](/docs/smartify-pro/partner-api).
+
+## Set up an endpoint
+
+1. An owner or admin opens **Settings → API → Webhooks** in Smartify Pro.
+2. They choose **Add endpoint**, enter an HTTPS URL, and pick either all events or the event groups to receive.
+3. The **signing secret** (`whsec_…`) is shown once. Store it next to your API key.
+4. They choose **Send test** to receive a `ping` event, and check the **Delivery log**.
+
+Limits:
+- Up to 5 endpoints per organization.
+- URLs must be HTTPS, on port 443 or 8443, and resolve to a public address. Smartify checks this when you save and
+  again before every delivery.
+- Redirects are not followed.
+
+## What a delivery looks like
+
+```http
+POST /hooks/smartify HTTP/1.1
+content-type: application/json
+user-agent: SmartifyPro-Webhooks/1.0
+webhook-id: evt_17945500031200a1b2c3d4e5f60718
+webhook-timestamp: 1794550003
+webhook-signature: v1,K5oZfzN95Z9UVu1EsfQmfVNQhnkZ2pj9o9NDN/H/pI4=
+
+{
+  "type": "lead.stage_changed",
+  "timestamp": "2026-11-13T10:15:03.120Z",
+  "data": {
+    "event_id": "evt_17945500031200a1b2c3d4e5f60718",
+    "org_id": "org_a49a5663",
+    "lead_id": "CRM-1794550000000-123",
+    "occurred_at": "2026-11-13T10:15:02.874Z",
+    "actor": { "type": "organization", "id": "smartify", "name": "Smartify" },
+    "origin": null,
+    "object": { "type": "lead", "id": "CRM-1794550000000-123" },
+    "changes": [{ "field": "stage", "from": "CONTACTED", "to": "QUOTED" }],
+    "attempt": 1,
+    "links": { "lead": "https://api.pro.smartify.in/v1/leads/CRM-1794550000000-123" }
+  }
+}
+```
+
+- **Thin events:** `changes` names the fields that changed.
+  - Values (`from`/`to`) are included only for the stage, `effective_value` (deal value) and a task's or reminder's
+    status.
+  - Names, phones, emails, addresses and note text are never in an event: fetch the lead (`links.lead`), where your
+    organization's access and masking apply.
+- **Actor:** your own people and keys appear by name. Anyone outside your organization appears as **Smartify**, the
+  same rule as lead history.
+- **Origin:** when one of your integration keys made the change, `origin` is `{"type":"integration","key_id":…}`.
+  Skip events whose `key_id` is your own, so a write you made doesn't echo back.
+- **Who receives what:** an event reaches your organization only if your API key could read that lead at that moment.
+  - A lead shared with you but still locked sends only what its preview shows (stage, city, property type).
+  - Notes and activities arrive once the lead is unlocked.
+  - Tasks and reminders reach only the organization that created them.
+  - If a lead stops being shared with you, you get `lead.unshared` and nothing after it.
+
+## Verify the signature
+
+The signature is `v1,` followed by the base64 of HMAC-SHA256 over `<webhook-id>.<webhook-timestamp>.<raw body>`. The
+key is the base64-decoded part of the secret after `whsec_`. During a secret rotation the header carries two
+signatures, separated by a space; accept the request if either matches. Reject requests whose timestamp is more than
+5 minutes from your clock.
+
+Node.js:
+
+```js
+import { createHmac, timingSafeEqual } from 'node:crypto';
+
+export function verifySmartifyWebhook({ secret, headers, rawBody }) {
+  const id = headers['webhook-id'];
+  const timestamp = headers['webhook-timestamp'];
+  if (Math.abs(Date.now() / 1000 - Number(timestamp)) > 300) return false;
+  const key = Buffer.from(secret.replace(/^whsec_/, ''), 'base64');
+  const expected = createHmac('sha256', key).update(`${id}.${timestamp}.${rawBody}`).digest();
+  return String(headers['webhook-signature']).split(' ').some((part) => {
+    const [version, signature] = part.split(',');
+    const given = Buffer.from(signature || '', 'base64');
+    return version === 'v1' && given.length === expected.length && timingSafeEqual(given, expected);
+  });
+}
+```
+
+Python:
+
+```python
+import base64, hashlib, hmac, time
+
+def verify_smartify_webhook(secret: str, headers: dict, raw_body: bytes) -> bool:
+    msg_id, timestamp = headers["webhook-id"], headers["webhook-timestamp"]
+    if abs(time.time() - int(timestamp)) > 300:
+        return False
+    key = base64.b64decode(secret.removeprefix("whsec_"))
+    expected = hmac.new(key, f"{msg_id}.{timestamp}.".encode() + raw_body, hashlib.sha256).digest()
+    for part in headers["webhook-signature"].split(" "):
+        version, _, signature = part.partition(",")
+        if version == "v1" and hmac.compare_digest(base64.b64decode(signature), expected):
+            return True
+    return False
+```
+
+The scheme is [Standard Webhooks](https://www.standardwebhooks.com), so its open-source verifier libraries work too.
+
+## Responding and retries
+
+- Any `2xx` within 10 seconds acknowledges the delivery. Do the work asynchronously and respond quickly.
+- Anything else counts as a failure: a timeout, a connection error or a `3xx`. Smartify retries after 1 min, 5 min,
+  30 min, 2 h, 5 h, 10 h, 14 h, 20 h and 24 h, about 3 days in all, then stops. Every attempt is listed in the
+  delivery log, and you can resend one from there.
+- An endpoint with no successful delivery for 3 days, while failing, is **disabled**. Re-enable it in Settings once
+  it's fixed, then catch up with `GET /v1/events`.
+- More than 20 events for one lead within a minute pauses that lead's deliveries to that endpoint for 10 minutes, to
+  stop a sync loop.
+- **Order isn't guaranteed**, and the same event can arrive twice. Dedupe on `webhook-id`, and read current state
+  through the API instead of relying on arrival order.
+
+## Event feed
+
+```bash
+curl -s -H "Authorization: Bearer $SPK" "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1/events?limit=100"
+```
+
+The response is `{ "data": [event, …], "next_cursor": "…", "has_more": true }`, oldest first. Each item is the
+`data` object of a webhook, plus `type` and without `attempt`. Pass `next_cursor` back as `after`. The cursor belongs
+to your organization's feed only. Requires the `leads:read` scope. Events are kept for 30 days.
+
+## Event catalogue
+
+| Event | When |
+|---|---|
+| `lead.created` | A lead your organization owns was created |
+| `lead.shared` / `lead.unshared` | A lead was shared with your organization, or stopped being shared |
+| `lead.unlocked` | Your organization unlocked a shared lead |
+| `lead.updated` | Profile fields changed (`changes` names them) |
+| `lead.stage_changed` | The stage changed (`from`/`to`) |
+| `lead.note.created` / `.updated` / `.deleted` | A note on the lead |
+| `lead.activity.created` / `.updated` / `.deleted` | A call, visit or other activity |
+| `lead.task.created` / `.updated` / `.completed` / `.deleted` | One of your organization's tasks |
+| `lead.reminder.created` / `.updated` / `.completed` / `.deleted` | One of your organization's reminders |
+| `lead.attachment.created` / `.deleted` | A file on the lead |
+| `ping` | Sent by **Send test** |

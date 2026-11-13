@@ -5,7 +5,6 @@
   "pages": [
     "index",
     "getting-started",
-    "smartify-mcp",
     "---Onboarding---",
     "onboarding",
     "---Estimates---",
@@ -20,7 +19,11 @@
     "---Account---",
     "billing",
     "profile-and-settings",
+    "team-management",
+    "---Developers---",
+    "partner-api",
+    "webhooks",
     "partner-catalog-api",
-    "team-management"
+    "smartify-mcp"
   ]
 }
