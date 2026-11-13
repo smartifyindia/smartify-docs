@@ -1,103 +1,105 @@
 ---
 title: "Partner Catalog API"
-description: "Use the Partner Catalog API to submit product create, update, and delete requests for admin approval."
+description: "Read the Smartify catalog and submit your own products for Smartify review, using a partner API key."
 ---
 
-Use this API when your organization needs to sync products into the Smartify Pro catalog from an external system.
+The catalog endpoints are part of the [Partner API](/docs/smartify-pro/partner-api) and use the same keys, base URL, errors and rate limit. There are two separate things you can do:
 
-## How it works
+- **Read the Smartify catalog** (`catalog:read`), once Smartify has approved catalog access for your organization.
+- **Submit your own products** (`catalog:submit`) to add to, change or remove from the Smartify Pro catalog. Smartify reviews every submission.
 
-Every partner mutation is moderated:
-
-1. Submit product request via API key.
-2. Request is stored with status **PENDING**.
-3. Smartify admin **approves** or **rejects**.
-4. Only approved requests update the Pro catalog.
-
-## Prerequisites
-
-- Partner catalog API access enabled by Smartify admin.
-- Eligible organization status (paid-active or approved co-branded partner).
-- A generated **Partner Catalog API key** from:
-  - **Settings → Apps → Partner Catalog API**
-
-<Callout>
-Partner catalog API keys are separate from affiliate lead-sharing keys.
+<Callout type="warn">
+The old `sk_live_pcat_` catalog keys and the `/api/partner-catalog/products` endpoints are retired and answer `410 Gone`. Create a partner API key in **Settings → Integrations** with the `catalog:submit` scope and use the endpoints below.
 </Callout>
 
 ## Authentication
 
-Use header:
+Use a partner API key as a Bearer token. Do not send `X-API-Key`.
 
 ```http
-X-API-Key: sk_live_pcat_...
+Authorization: Bearer spk_live_…
 ```
-
-Do not use Bearer token auth for partner submission endpoints.
-
-## Endpoints
 
 Base URL:
 
 ```text
-https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1
+https://api.pro.smartify.in/v1
 ```
 
-### Submit new product
+## Read the Smartify catalog
 
 ```http
-POST /api/partner-catalog/products
+GET /catalog/products
 ```
 
-### Submit update request
+Needs the `catalog:read` scope, and Smartify must have approved catalog access for your organization. Otherwise the answer is `403 catalog_not_enabled`.
 
-```http
-PUT /api/partner-catalog/products/{partner_sku}
+Optional query: `search` (up to 120 characters), matched against the SKU and name.
+
+```bash
+curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  "https://api.pro.smartify.in/v1/catalog/products?search=switch"
 ```
 
-### Submit delete request
+The response is `{ "data": [product, …] }`. Each product has `sku`, `name`, `gst_rate`, `stock_quantity`, `image_url`, `hsn` and `updated_at`. Rows carry no prices: when you quote, you supply your own ex-GST unit price.
 
-```http
-DELETE /api/partner-catalog/products/{partner_sku}
-```
+## Submit your own products
 
-### List your submissions
+Submissions go through Smartify review. Nothing is published until Smartify approves it.
 
-```http
-GET /api/partner-catalog/products
-```
+### Who can submit
 
-Optional query:
+- Smartify has approved catalog access for your organization. Until then, submission endpoints answer `403 catalog_not_enabled`.
+- Your organization is eligible: a paid-active partner, or an approved co-branded partner.
+- The key has the `catalog:submit` scope.
 
-- `status=PENDING|APPROVED|REJECTED`
+### How it works
 
-## Request payload examples (sample product)
+1. Submit a create, update or delete request with your key. The answer is always `202 Accepted`.
+2. The request is stored with status **PENDING**.
+3. A Smartify admin **approves** or **rejects** it.
+4. Only approved requests change the Pro catalog.
 
-The examples below use one of Smartify's own catalog products and a consistent partner SKU.
+A submission is keyed by your SKU, so submissions take no `Idempotency-Key`. Sending the same `partner_sku` again replaces the earlier submission record for that SKU with the new one, which goes back to PENDING. Retries are therefore safe.
+
+### Endpoints
+
+| Request | What it does |
+|---|---|
+| `POST /catalog/submissions` | Submit a new product. |
+| `PUT /catalog/submissions/{sku}` | Submit a change to one of your products. |
+| `DELETE /catalog/submissions/{sku}` | Ask to remove one of your products. |
+| `GET /catalog/submissions` | List your submissions. Optional query: `status=PENDING`, `APPROVED` or `REJECTED`. |
+
+`{sku}` is your own SKU, the `partner_sku`. Smartify upper-cases it and replaces spaces with hyphens.
 
 ### Create
 
+The product goes in a `product` object next to your `partner_sku`.
+
 ```bash
-curl -X POST "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products" \
+curl -s -X POST https://api.pro.smartify.in/v1/catalog/submissions \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: sk_live_pcat_xxxxx" \
   -d '{
     "partner_sku": "SMARTIFY-4GSS-001",
-    "name": "4 Gang Scene Switch",
-    "brand": "Smartify",
-    "category": ["Switches"],
-    "protocol": ["Zigbee 3.0"],
-    "technology": ["Wireless"],
-    "pricing": { "mrp": 4999, "selling_price": 4599 }
+    "product": {
+      "name": "4 Gang Scene Switch",
+      "brand": "Smartify",
+      "category": ["Switches"],
+      "protocol": ["Zigbee 3.0"],
+      "technology": ["Wireless"],
+      "pricing": { "mrp": 4999, "selling_price": 4599 }
+    }
   }'
 ```
 
 ### Update
 
 ```bash
-curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/SMARTIFY-4GSS-001" \
+curl -s -X PUT https://api.pro.smartify.in/v1/catalog/submissions/SMARTIFY-4GSS-001 \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: sk_live_pcat_xxxxx" \
   -d '{
     "product": {
       "name": "4 Gang Scene Switch (Rev B)",
@@ -113,47 +115,58 @@ curl -X PUT "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/part
 ### Delete
 
 ```bash
-curl -X DELETE "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products/SMARTIFY-4GSS-001" \
-  -H "X-API-Key: sk_live_pcat_xxxxx"
+curl -s -X DELETE https://api.pro.smartify.in/v1/catalog/submissions/SMARTIFY-4GSS-001 \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY"
 ```
 
-### List submissions
+### List your submissions
 
 ```bash
-curl -X GET "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/api/partner-catalog/products?status=PENDING" \
-  -H "X-API-Key: sk_live_pcat_xxxxx"
+curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  "https://api.pro.smartify.in/v1/catalog/submissions?status=PENDING"
 ```
 
-## Response behavior
+The response is `{ "data": [submission, …] }`, newest first.
 
-- Create/update/delete submission endpoints return `202 Accepted`.
-- Submission object includes:
-  - `status`: `PENDING`, `APPROVED`, or `REJECTED`
-  - `operation`: `CREATE`, `UPDATE`, or `DELETE`
-  - `partner_sku` and `catalog_sku`
+## Product fields
 
-## Review process (user-facing)
+Send these in the `product` object. Only `name` is required; everything else has a default.
 
-- **PENDING**
-  - Your request is received and waiting for Smartify admin review.
-  - Product changes are not visible in catalog/inventory yet.
+| Field | Notes |
+|---|---|
+| `name` | Required, up to 300 characters. |
+| `brand` | Up to 160 characters. Defaults to `Partner`. |
+| `description` | Up to 5000 characters. |
+| `category` | List of category names. Defaults to `["Partner Products"]`. |
+| `protocol` | List of protocols. Defaults to `["N/A"]`. |
+| `technology` | List of technologies. Defaults to `["Wireless"]`. |
+| `hero_image` | Image URL, up to 2048 characters. |
+| `images` | List of image URLs. Defaults to the hero image. |
+| `enabled` | `false` to submit the product as disabled. Defaults to `true`. |
+| `pricing.mrp` | Maximum retail price. Defaults to the selling price, or 0. |
+| `pricing.selling_price` | Defaults to the MRP. |
+| `pricing.dealer_price` | Optional. |
+| `gst_rate` | One of `0`, `5`, `12`, `18`, `28`. Anything else is refused. |
+| `hsn_code` | Digits only, as a string. |
 
-- **APPROVED**
-  - Your request is accepted.
-  - The product create/update/delete is applied in Pro catalog.
+A list field also accepts a comma-separated string. A bad value answers `400 invalid_parameter` with `detail` saying what to fix; a body that is not JSON answers `400 invalid_json`.
 
-- **REJECTED**
-  - Your request is not applied to Pro catalog.
-  - A rejection reason may be returned in the submission record (for example: missing required fields, invalid price data, duplicate or mismatched SKU).
+## The submission record
 
-## Approval lifecycle
+Create, update and delete return the submission as `{ "data": { … } }`. It includes:
 
-- **APPROVED**:
-  - Catalog is updated.
-  - Product record includes provenance fields such as:
-    - `source = PARTNER`
-    - `partner_org_id`
-    - `partner_sku`
-- **REJECTED**:
-  - Catalog remains unchanged.
-  - Rejection reason is stored in submission metadata.
+| Field | Meaning |
+|---|---|
+| `partner_sku` and `catalog_sku` | Your SKU, and the SKU the product gets in the Pro catalog if approved. |
+| `operation` | `CREATE`, `UPDATE` or `DELETE`. |
+| `status` | `PENDING`, `APPROVED` or `REJECTED`. |
+| `submitted_at` and `submitted_by` | When it was submitted, and by which key. |
+| `reviewed_at`, `reviewed_by`, `review_reason` | Filled in once Smartify has reviewed it. |
+
+## Review process
+
+- **PENDING**: your request is received and waiting for Smartify review. Nothing is visible in the catalog or inventory yet.
+- **APPROVED**: the create, update or delete is applied in the Pro catalog. The product records where it came from: `source = PARTNER`, your organization and your `partner_sku`.
+- **REJECTED**: the catalog is unchanged. A reason may be stored in `review_reason` (for example missing required fields, invalid price data, or a duplicate or mismatched SKU).
+
+Check progress with `GET /catalog/submissions`.

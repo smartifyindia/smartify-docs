@@ -12,13 +12,13 @@ Both carry the same thin events, kept for 30 days. The REST API itself is descri
 
 ## Set up an endpoint
 
-1. An owner or admin opens **Settings → API → Webhooks** in Smartify Pro.
+1. An owner or admin opens **Settings → Integrations** (the webhooks section) in Smartify Pro.
 2. They choose **Add endpoint**, enter an HTTPS URL, and pick either all events or the event groups to receive.
 3. The **signing secret** (`whsec_…`) is shown once. Store it next to your API key.
 4. They choose **Send test** to receive a `ping` event, and check the **Delivery log**.
 
 Limits:
-- Up to 5 endpoints per organization.
+- Up to 25 endpoints per organization, counting endpoints made in the app and by API keys together.
 - URLs must be HTTPS, on port 443 or 8443, and resolve to a public address. Smartify checks this when you save and
   again before every delivery.
 - Redirects are not followed.
@@ -59,7 +59,7 @@ webhook-signature: v1,K5oZfzN95Z9UVu1EsfQmfVNQhnkZ2pj9o9NDN/H/pI4=
 - **Actor:** your own people and keys appear by name. Anyone outside your organization appears as **Smartify**, the
   same rule as lead history.
 - **Origin:** when one of your integration keys made the change, `origin` is `{"type":"integration","key_id":…}`.
-  Skip events whose `key_id` is your own, so a write you made doesn't echo back.
+  Skip events whose `key_id` is your own, so a write you made through the [Partner API](/docs/smartify-pro/partner-api) doesn't echo back.
 - **Who receives what:** an event reaches your organization only if your API key could read that lead at that moment.
   - A lead shared with you but still locked sends only what its preview shows (stage, city, property type).
   - Notes and activities arrive once the lead is unlocked.
@@ -119,22 +119,137 @@ The scheme is [Standard Webhooks](https://www.standardwebhooks.com), so its open
   5 min, 30 min, 2 h, 5 h, 10 h, 14 h, 20 h and 24 h (retries are picked up once a minute, so each can run up to a minute
   later), about 3 days in all, then stops. Every attempt is listed in the
   delivery log, and you can resend one from there.
-- An endpoint with no successful delivery for 3 days, while failing, is **disabled**. Re-enable it in Settings once
+- An endpoint with no successful delivery for 3 days, while failing, is **disabled**. Re-enable it in Settings → Integrations once
   it's fixed, then catch up with `GET /v1/events`.
 - More than 20 events for one lead within a minute pauses that lead's deliveries to that endpoint for 10 minutes, to
   stop a sync loop.
 - **Order isn't guaranteed**, and the same event can arrive twice. Dedupe on `webhook-id`, and read current state
   through the API instead of relying on arrival order.
 
+## Manage webhook endpoints with an API key
+
+Instead of adding endpoints by hand in Settings, software can subscribe and unsubscribe itself with a partner API key that has the `webhooks:manage` scope. This is what integration platforms such as Zapier and Make need: subscribe when a user turns a workflow on, unsubscribe when they turn it off.
+
+- A key sees and manages **only the endpoints it created**. An endpoint added in Settings is invisible to keys and cannot be changed or deleted by one; asking for it answers `404 endpoint_not_found`.
+- Endpoints made by keys and endpoints made in the app count together toward the limit of 25 endpoints per organization (`409 endpoint_limit_reached`).
+- The delivery log and **Resend** stay in Smartify Pro.
+- Signatures, retries and the event shape are exactly as described above.
+
+| Request | What it does |
+|---|---|
+| `GET /webhooks` | The endpoints this key created. |
+| `POST /webhooks` | Create an endpoint. Returns `201` with the endpoint and its signing `secret` (shown only here). |
+| `GET /webhooks/{endpointId}` | One endpoint. |
+| `PATCH /webhooks/{endpointId}` | Change `url`, `enabled_events`, `description` or `status` (`active` or `disabled`). |
+| `DELETE /webhooks/{endpointId}` | Delete an endpoint. Returns `204`. |
+| `POST /webhooks/{endpointId}/rotate-secret` | Returns `{ "data": { "secret": "whsec_…" } }`. The old secret keeps signing alongside the new one for 7 days. |
+| `POST /webhooks/{endpointId}/test` | Sends a `ping` event. Returns `202` with `{ "data": { "event_id": "…" } }`. |
+
+Create an endpoint. `url` and `enabled_events` are required; `enabled_events` is `["*"]` or a list of the event types in the catalogue below (not `ping`). `description` is optional, up to 200 characters.
+
+```bash
+curl -s -X POST https://api.pro.smartify.in/v1/webhooks \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://hooks.example.com/smartify/abc123",
+    "enabled_events": ["lead.stage_changed", "lead.created"],
+    "description": "Zap 123: new leads"
+  }'
+```
+
+```json
+{
+  "data": {
+    "endpoint_id": "whe_0123456789abcdef0123456789abcdef",
+    "org_id": "org_a49a5663",
+    "url": "https://hooks.example.com/smartify/abc123",
+    "description": "Zap 123: new leads",
+    "enabled_events": ["lead.stage_changed", "lead.created"],
+    "status": "active",
+    "disabled_reason": null,
+    "created_at": "2026-11-13T10:00:00.000Z",
+    "created_by": "int_key_example",
+    "last_success_at": null,
+    "secret_rotated_at": null,
+    "secret": "whsec_…"
+  }
+}
+```
+
+Store the `secret` if you will verify signatures. It cannot be read again; use `rotate-secret` to get a new one.
+
+Delete it when the workflow is turned off:
+
+```bash
+curl -s -X DELETE https://api.pro.smartify.in/v1/webhooks/whe_0123456789abcdef0123456789abcdef \
+  -H "Authorization: Bearer $SMARTIFY_API_KEY"
+```
+
+URL rules are the same as in the app: HTTPS, port 443 or 8443, a public address. Errors are `application/problem+json`:
+
+| Status | `code` | Meaning |
+|---|---|---|
+| 400 | `invalid_url` | The URL cannot be used for webhooks. |
+| 400 | `invalid_events` | `enabled_events` must be `["*"]` or a list of event types. |
+| 400 | `invalid_status` | `status` must be `active` or `disabled`. |
+| 400 | `invalid_json` | The body is not valid JSON. |
+| 403 | `insufficient_scope` | The key lacks `webhooks:manage`. |
+| 404 | `endpoint_not_found` | No such endpoint, or it was not created by this key. |
+| 409 | `endpoint_limit_reached` | The organization already has 25 endpoints. |
+| 429 | `rate_limited` | Over 120 requests a minute for this key. |
+
+<Callout>
+`POST /webhooks` takes no `Idempotency-Key`. If a subscribe request times out and you retry it, you can end up with two endpoints and receive each event twice. List the endpoints, keep one, and delete the extras.
+</Callout>
+
 ## Event feed
 
 ```bash
-curl -s -H "Authorization: Bearer $SPK" "https://s6m3hrufxk.execute-api.ap-south-1.amazonaws.com/v1/v1/events?limit=100"
+curl -s -H "Authorization: Bearer $SMARTIFY_API_KEY" "https://api.pro.smartify.in/v1/events?limit=100"
 ```
 
 The response is `{ "data": [event, …], "next_cursor": "…", "has_more": true }`, oldest first. Each item is the
 `data` object of a webhook, plus `type` and without `attempt`. Pass `next_cursor` back as `after`. The cursor belongs
 to your organization's feed only. Requires the `leads:read` scope. Events are kept for 30 days.
+
+## Zapier and Make
+
+There is no listed Smartify app in Zapier or Make yet. Until there is, you connect them with a webhook for the trigger and an HTTP step for the action.
+
+### Trigger: a Smartify event starts a Zap or scenario
+
+Software that manages its own hooks can subscribe through the API instead: see [Manage webhook endpoints with an API key](#manage-webhook-endpoints-with-an-api-key). The steps below are for building a Zap or scenario by hand.
+
+1. In Zapier, create a Zap whose trigger is **Webhooks by Zapier → Catch Hook**. In Make, add a **Webhooks → Custom webhook** module. Copy the URL it gives you.
+2. In Smartify Pro, add that URL as a webhook endpoint (**Settings → Integrations**) and choose the events you want. Choose **Send test** to send a `ping`, so the tool can learn the shape of the data.
+3. Build the rest of the Zap or scenario from the event fields: `type`, `data.lead_id`, `data.changes`, `data.actor` and `data.links.lead`.
+
+Things to know:
+
+- Events are thin. They name the fields that changed; values are included only for the stage, the effective (deal) value and a task's or reminder's status. A name, phone number or note text is never in an event.
+- To use lead details in a later step, add a step that fetches the lead (see below).
+- Zapier and Make do not check the signature for you. Their catch URLs are hard to guess, which is the protection you get; if you need the signature checked, receive the webhook on your own server instead and use the verifier above.
+- The same event can arrive twice. If a duplicate would do harm, filter on `data.event_id`.
+- If a Zap or scenario writes back to Smartify with an API key, add a filter that stops when `data.origin.key_id` is that key's id.
+
+### Action: fetch the lead, or change it
+
+Use **Webhooks by Zapier → Custom Request** (or Zapier's **API Request** step), or Make's **HTTP → Make a request** module. Create a [partner API key](/docs/smartify-pro/partner-api#api-keys) with only the scopes the step needs, and send it in a header:
+
+```text
+Authorization: Bearer spk_live_…
+```
+
+To get the lead behind an event, call `GET` on the event's own link:
+
+```text
+GET https://api.pro.smartify.in/v1/leads/{data.lead_id}
+```
+
+To change something, call the matching [Partner API](/docs/smartify-pro/partner-api) endpoint. For example, to add a note, `POST https://api.pro.smartify.in/v1/leads/{lead_id}/notes` with the header `Content-Type: application/json`, the body `{ "note": "…" }` and an `Idempotency-Key` set to the Zap run id or scenario execution id, so a replayed run adds the note once.
+
+If you cannot receive webhooks, poll `GET /v1/events` on a schedule instead (Zapier **Schedule**, Make **Scheduler**) and keep the last `next_cursor` between runs.
 
 ## Event catalogue
 
