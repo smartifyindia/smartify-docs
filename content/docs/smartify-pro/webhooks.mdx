@@ -115,8 +115,9 @@ The scheme is [Standard Webhooks](https://www.standardwebhooks.com), so its open
 ## Responding and retries
 
 - Any `2xx` within 10 seconds acknowledges the delivery. Do the work asynchronously and respond quickly.
-- Anything else counts as a failure: a timeout, a connection error or a `3xx`. Smartify retries after 1 min, 5 min,
-  30 min, 2 h, 5 h, 10 h, 14 h, 20 h and 24 h, about 3 days in all, then stops. Every attempt is listed in the
+- Anything else counts as a failure: a timeout, a connection error or a `3xx`. Smartify retries after at least 1 min,
+  5 min, 30 min, 2 h, 5 h, 10 h, 14 h, 20 h and 24 h (retries are picked up once a minute, so each can run up to a minute
+  later), about 3 days in all, then stops. Every attempt is listed in the
   delivery log, and you can resend one from there.
 - An endpoint with no successful delivery for 3 days, while failing, is **disabled**. Re-enable it in Settings once
   it's fixed, then catch up with `GET /v1/events`.
